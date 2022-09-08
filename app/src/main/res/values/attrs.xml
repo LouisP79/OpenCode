@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="IncreaseQuantityProductDetailComponent">
+        <attr name="quantity" format="float" />
+        <attr name="price" format="float" />
+        <attr name="subTotal" format="float" />
+        <attr name="decimal" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="ItemCartComponent">
+        <attr name="name" format="string" />
+        <attr name="description" format="string" />
+        <attr name="quantityCart" format="float" />
+        <attr name="priceCart" format="float" />
+        <attr name="subTotalCart" format="float" />
+        <attr name="decimalCart" format="boolean" />
+    </declare-styleable>
+</resources>

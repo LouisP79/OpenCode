@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="@dimen/img_medium_width_height"
+            android:layout_height="@dimen/img_medium_width_height"
+            android:layout_marginTop="@dimen/default_margin_top_textInputLayout"
+            android:src="@drawable/img_address"
+            android:contentDescription="@string/app_name" />
+
+        <RadioGroup
+            android:id="@+id/options"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/default_margin_top_textInputLayout"
+            android:layout_marginStart="@dimen/default_margin_start_end_textInputLayout"
+            android:layout_marginEnd="@dimen/default_margin_start_end_textInputLayout">
+
+            <RadioButton
+                android:id="@+id/office"
+                android:layout_width="@dimen/profile_radio_button_width"
+                android:layout_height="wrap_content"
+                android:text="@string/office"
+                android:checked="true"
+                tools:checked="false"/>
+
+            <RadioButton
+                android:id="@+id/home"
+                android:layout_width="@dimen/profile_radio_button_width"
+                android:layout_height="wrap_content"
+                android:text="@string/home"/>
+
+            <RadioButton
+                android:id="@+id/other"
+                android:layout_width="@dimen/profile_radio_button_width"
+                android:layout_height="wrap_content"
+                android:text="@string/other"
+                tools:checked="true"/>
+
+        </RadioGroup>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/addressTagTextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_margin_top_textInputLayout"
+            android:layout_marginStart="@dimen/default_margin_start_end_textInputLayout"
+            android:layout_marginEnd="@dimen/default_margin_start_end_textInputLayout"
+            android:theme="@style/TextInputLayoutTheme"
+            android:visibility="gone"
+            tools:visibility="visible"
+            style="@style/TextInputLayoutStyle">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/addressTag"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textCapWords"
+                android:hint="@string/hint_tag"
+                android:nextFocusDown="@id/lastName"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_margin_top_textInputLayout"
+            android:layout_marginStart="@dimen/default_margin_start_end_textInputLayout"
+            android:layout_marginEnd="@dimen/default_margin_start_end_textInputLayout"
+            android:theme="@style/TextInputLayoutTheme"
+            style="@style/TextInputLayoutStyle">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textCapWords"
+                android:hint="@string/hint_address"
+                android:nextFocusDown="@id/phone"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_margin_top_textInputLayout"
+            android:layout_marginStart="@dimen/default_margin_start_end_textInputLayout"
+            android:layout_marginEnd="@dimen/default_margin_start_end_textInputLayout"
+            android:theme="@style/TextInputLayoutTheme"
+            style="@style/TextInputLayoutStyle">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/reference"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textCapWords"
+                android:hint="@string/hint_reference"
+                android:nextFocusDown="@id/email"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/districts"
+            android:layout_width="match_parent"
+            android:spinnerMode="dialog"
+            android:layout_height="50dp"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:background="@drawable/shape_spinner"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="@dimen/default_margin_start_end_textInputLayout"
+            android:layout_marginEnd="@dimen/default_margin_start_end_textInputLayout" />
+
+        <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
+            android:id="@+id/send"
+            style="?borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_button_blue"
+            android:layout_marginStart="@dimen/default_margin_start_end_button"
+            android:layout_marginEnd="@dimen/default_margin_start_end_button"
+            android:layout_marginTop="@dimen/default_margin_top_button"
+            android:layout_marginBottom="@dimen/default_margin_bottom_button"
+            android:text="@string/save"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/default_text_size_button"
+            android:elevation="@dimen/default_elevation_button"
+            app:finalCornerAngle="@dimen/circular_progress_button_dialog_signing_final_initial_angle"
+            app:initialCornerAngle="@dimen/circular_progress_button_dialog_signing_final_initial_angle"
+            app:spinning_bar_color="@color/colorPrimary"
+            app:spinning_bar_padding="@dimen/circular_progress_button_dialog_signing_final_bar_padding"
+            app:spinning_bar_width="@dimen/circular_progress_button_dialog_signing_final_bar_width"/>
+
+    </LinearLayout>
+
+</ScrollView>

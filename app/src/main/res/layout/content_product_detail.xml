@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/product_detail_cardView_margin"
+            app:cardCornerRadius="@dimen/cardView_corner_radius">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/img"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/product_detail_img_height"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="fitXY"
+                    tools:src="@tools:sample/avatars"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/colorDivider"/>
+
+                <TextView
+                    android:id="@+id/price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/item_product_text_margin_start_end"
+                    android:gravity="center"
+                    android:textSize="@dimen/product_detail_text_size"
+                    android:textColor="@color/colorText"
+                    android:textStyle="bold"
+                    tools:text="S/18.00" />
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/colorText"
+                    android:textSize="@dimen/product_detail_text_size"
+                    android:paddingStart="@dimen/item_product_text_margin_start_end"
+                    android:paddingEnd="@dimen/item_product_text_margin_start_end"
+                    android:layout_marginTop="@dimen/item_product_text_margin_start_top"
+                    tools:text="Gloria Niños Sixpack" />
+
+                <TextView
+                    android:id="@+id/description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/colorTextSecondary"
+                    android:textSize="@dimen/product_detail_text_size"
+                    android:paddingStart="@dimen/item_product_text_margin_start_end"
+                    android:paddingEnd="@dimen/item_product_text_margin_start_end"
+                    android:layout_marginTop="@dimen/item_product_text_margin_start_top"
+                    android:layout_marginBottom="@dimen/item_product_text_add_margin_top"
+                    tools:text="400g" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <com.quickstore.ui.useCase.main.component.IncreaseQuantityProductDetailComponent
+            android:id="@+id/increase"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
+            android:id="@+id/send2Cart"
+            style="?borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_button_blue"
+            android:layout_marginStart="@dimen/default_margin_start_end_button"
+            android:layout_marginEnd="@dimen/default_margin_start_end_button"
+            android:layout_marginTop="@dimen/default_margin_top_button"
+            android:layout_marginBottom="@dimen/default_margin_bottom_button"
+            android:text="@string/add"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/default_text_size_button"
+            android:elevation="@dimen/default_elevation_button"
+            app:finalCornerAngle="@dimen/circular_progress_button_dialog_signing_final_initial_angle"
+            app:initialCornerAngle="@dimen/circular_progress_button_dialog_signing_final_initial_angle"
+            app:spinning_bar_color="@color/colorPrimary"
+            app:spinning_bar_padding="@dimen/circular_progress_button_dialog_signing_final_bar_padding"
+            app:spinning_bar_width="@dimen/circular_progress_button_dialog_signing_final_bar_width"/>
+
+    </LinearLayout>
+
+</ScrollView>

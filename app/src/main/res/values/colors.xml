@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FFFFFF</color>
+    <color name="colorPrimaryDark">#1A000000</color>
+    <color name="colorAccent">#0345F9</color>
+    <color name="colorAccentDark">#022a96</color>
+
+    <color name="colorText">#242424</color>
+    <color name="colorIndicatorSelected">#494949</color>
+    <color name="colorIndicator">#52494949</color>
+    <color name="colorItemBottomNavigationView">#555555</color>
+    <color name="colorShapeSpinner">#919191</color>
+    <color name="colorTextSecondary">#B6B6B6</color>
+    <color name="colorDivider">#F0F0F0</color>
+    <color name="colorBackgroundView">#fafafa</color>
+</resources>

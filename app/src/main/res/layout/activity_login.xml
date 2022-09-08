@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context=".ui.useCase.login.activity.LoginActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="@dimen/login_width_height_logo"
+            android:layout_height="@dimen/login_width_height_logo"
+            android:contentDescription="@string/app_name"
+            android:layout_marginTop="@dimen/default_margin_top_textInputLayout"
+            android:src="@drawable/img_logo"/>
+
+        <ImageView
+            android:layout_width="@dimen/img_width_height"
+            android:layout_height="@dimen/img_width_height"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/img_login"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_margin_top_textInputLayout"
+            android:layout_marginStart="@dimen/default_margin_start_end_textInputLayout"
+            android:layout_marginEnd="@dimen/default_margin_start_end_textInputLayout"
+            android:theme="@style/TextInputLayoutTheme"
+            style="@style/TextInputLayoutStyle">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:hint="@string/email"
+                android:lines="1"
+                android:nextFocusDown="@id/pass"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_margin_top_textInputLayout"
+            android:layout_marginStart="@dimen/default_margin_start_end_textInputLayout"
+            android:layout_marginEnd="@dimen/default_margin_start_end_textInputLayout"
+            app:passwordToggleEnabled="true"
+            android:theme="@style/TextInputLayoutTheme"
+            style="@style/TextInputLayoutStyle">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/pass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_password"
+                android:imeOptions="actionSend"
+                android:inputType="textPassword"
+                android:lines="1"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
+            android:id="@+id/next"
+            style="?borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_button_blue"
+            android:layout_marginStart="@dimen/default_margin_start_end_button"
+            android:layout_marginEnd="@dimen/default_margin_start_end_button"
+            android:layout_marginTop="@dimen/default_margin_top_button"
+            android:text="@string/login"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/default_text_size_button"
+            android:elevation="@dimen/default_elevation_button"
+            app:finalCornerAngle="@dimen/circular_progress_button_dialog_signing_final_initial_angle"
+            app:initialCornerAngle="@dimen/circular_progress_button_dialog_signing_final_initial_angle"
+            app:spinning_bar_color="@color/colorPrimary"
+            app:spinning_bar_padding="@dimen/circular_progress_button_dialog_signing_final_bar_padding"
+            app:spinning_bar_width="@dimen/circular_progress_button_dialog_signing_final_bar_width"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="100dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="@string/if_not_acount"/>
+
+        <Button
+            android:id="@+id/register"
+            style="?borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_margin_start_end_button"
+            android:layout_marginEnd="@dimen/default_margin_start_end_button"
+            android:layout_marginTop="@dimen/register_margin_top"
+            android:background="@drawable/selector_button_white"
+            android:text="@string/register"
+            android:textStyle="bold"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/default_text_size_button"
+            android:elevation="@dimen/default_elevation_button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/forgotPassword"
+            style="?borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_margin_start_end_button"
+            android:layout_marginEnd="@dimen/default_margin_start_end_button"
+            android:layout_marginTop="@dimen/register_margin_top"
+            android:layout_marginBottom="@dimen/default_margin_bottom_button"
+            android:background="@drawable/selector_button_white"
+            android:text="@string/forgot_password"
+            android:textStyle="bold"
+            android:textAllCaps="false"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/default_text_size_button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </LinearLayout>
+
+</ScrollView>

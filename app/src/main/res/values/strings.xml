@@ -1,0 +1,125 @@
+<resources>
+    <string name="app_name">QUICKSTORE</string>
+
+    <string name="title_home">Home</string>
+    <string name="title_categories">Categories</string>
+    <string name="title_edit_profile">Edit Profile</string>
+    <string name="title_shopping">Shopping</string>
+    <string name="title_shopping_address">Delivery address</string>
+    <string name="title_history">Record</string>
+    <string name="title_profile">Profile</string>
+
+    <string name="next">Next</string>
+    <string name="lets_begin">Let\'s Start</string>
+
+    <string name="search_hint">Search a product…</string>
+    <string name="add">Add</string>
+    <string name="subtotal_label">SUBTOTAL:</string>
+
+    <string name="alredy">OK</string>
+    <string name="ok">OK</string>
+    <string name="process_purchase">Process Purchase</string>
+    <string name="login">Login</string>
+    <string name="save">Save</string>
+    <string name="change">Change</string>
+    <string name="forgot_password">I forgot my password</string>
+    <string name="register">Register</string>
+    <string name="product">Product</string>
+    <string name="categories">Categories</string>
+    <string name="profile">Profile</string>
+    <string name="if_not_acount">If you don\'t have an account yet</string>
+    <string name="cancel">Cancel</string>
+    <string name="create_address">Create address</string>
+    <string name="select_address">Select address</string>
+
+    <string name="warning">Warning</string>
+    <string name="logout_alert_msg">Are you sure you want to log out?</string>
+    <string name="delete_address_alert_title">Are you sure you want to delete this address?</string>
+    <string name="delete_product_cart_alert_title">Are you sure you want to delete this product?</string>
+    <string name="delete_address_alert_msg">If you do it, you\'ll not be able to order again at that address</string>
+    <string name="delete_product_cart_alert_msg">If you do it, you\'ll be able to add again at home</string>
+
+    <string name="add_cart_success">Product was added to cart successfully</string>
+
+    <string name="update_user_info_success">User info was updated successfully</string>
+    <string name="change_password_success">Password was updated successfully</string>
+
+    <string name="phone">Mobile</string>
+    <string name="delivery_time">Delivery time</string>
+    <string name="address_selected">Address selected</string>
+    <string name="all_your_addresses">All your addresses</string>
+    <string name="addresses">Addresses</string>
+    <string name="new_address">+ Create new address</string>
+    <string name="change_password">Change Password</string>
+    <string name="view_all_address">View all address</string>
+    <string name="logout">Logout</string>
+
+    <string name="cart_items_zero">You must add at least one product to cart</string>
+
+
+    <string name="create_address_success">Address was created successfully</string>
+
+    <string name="send_forgot_password">We will send a temporary password to your email</string>
+    <string name="send_forgot_password_message">We will send you a provisional password to your email, check it and log in again</string>
+
+    <string name="email">Email</string>
+    <string name="hint_name">Name</string>
+    <string name="hint_tag">Tag</string>
+    <string name="hint_last_name">Last Name</string>
+    <string name="hint_address">Address</string>
+    <string name="hint_phone">Phone</string>
+    <string name="hint_reference">Reference</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_new_password">New Password</string>
+    <string name="hint_old_password">Old Password</string>
+    <string name="hint_password_again">Repeat Password</string>
+    <string name="hint_new_password_again">Repeat New Password</string>
+
+    <string name="office">Office</string>
+    <string name="home">Home</string>
+    <string name="other">Other</string>
+
+    <string name="error_refresh_token">Your session expired, please login again</string>
+    <string name="error_unknow">An unknown error occurred while trying to refresh your session</string>
+
+    <string name="error_conection">There is not any internet connection, check your Wifi or Mobile Net</string>
+    <string name="error_internet">Server connection Error, try again later, if problem persist call us</string>
+
+    <string name="user_error">Bad Credentials</string>
+    <string name="unauthorized_error">Unauthorized</string>
+    <string name="bad_method_error">Bad Method</string>
+    <string name="unknown_error">Unknown Error</string>
+    <string name="empty_product_list">No products yet</string>
+    <string name="empty_category_list">No categories yet</string>
+    <string name="empty_shopping_list">Your shopping cart is empty</string>
+    <string name="empty_shopping_list_sub_msg">Start adding products from the store and view them here</string>
+    <string name="loading_products">Loading products…</string>
+    <string name="loading_addresses">Loading addresses…</string>
+    <string name="loading_delivery_time">Loading delivery time…</string>
+    <string name="loading_categories">Loading categories…</string>
+
+    <string name="str_register_validate_name">Enter your name</string>
+    <string name="str_register_validate_tag">Enter a address tag</string>
+    <string name="str_register_validate_address">Enter a address</string>
+    <string name="str_register_validate_reference">Enter a address reference</string>
+    <string name="str_register_validate_last_name">Enter your last name</string>
+    <string name="str_validate_name_last_name">It must not be less than 2 characters</string>
+    <string name="str_register_validate_phone">Enter your phone number</string>
+    <string name="str_validate_phone">It must not be less than 9 characters</string>
+    <string name="str_validate_pass">It must not be less than 6 characters</string>
+    <string name="str_register_validate_password">Enter your password</string>
+    <string name="str_register_validate_email_not_empty">Enter your email</string>
+    <string name="str_register_validate_email_valid">Enter a valid email</string>
+    <string name="str_register_validate_same_pass">Passwords do not match</string>
+    <string name="str_register_validate_same_old_pass">New password must be different to new password</string>
+    <string name="str_unknow_rest_error">Unknown communication error</string>
+    <string name="srt_exist_email">Email already exists</string>
+    <string name="str_login_failed">The email or password are incorrect</string>
+    <string name="str_login_failed_pass">The password are incorrect</string>
+
+    <string name="blank_soles" translatable="false">S/%,.2f</string>
+    <string name="blank_double" translatable="false">%,.2f</string>
+    <string name="blank_ss" translatable="false">%s %s</string>
+    <string name="blank_sgs" translatable="false">%s - %s</string>
+
+</resources>

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:textStyle="bold"
+            android:text="@string/address_selected"/>
+
+        <Button
+            android:id="@+id/viewAllAddress"
+            style="?borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/default_button_small_height"
+            android:text="@string/view_all_address"
+            android:layout_marginEnd="15dp"
+            android:textStyle="bold"
+            android:textAllCaps="false"
+            android:padding="3dp"
+            android:textColor="@color/colorAccent"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:textSize="@dimen/default_text_size_button" />
+
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/loadingAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"/>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/selectedAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/item_address_cardView_margin"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        app:cardCornerRadius="@dimen/cardView_corner_radius">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/item_address_label_margin"
+            android:layout_marginEnd="@dimen/item_address_label_margin"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/addressTag"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorText"
+                android:layout_marginTop="@dimen/item_address_label_margin"
+                android:lines="1"
+                android:ellipsize="end"
+                tools:text="Oficina" />
+
+            <TextView
+                android:id="@+id/addressReference"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorTextSecondary"
+                android:layout_marginTop="@dimen/item_address_label_margin"
+                android:layout_marginBottom="@dimen/item_address_label_margin"
+                tools:text="Av. Los Tulipanes 147, Santiago de Surco - Frente al centro comercial el Polo" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/newAddress"
+        style="?borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/default_button_small_height"
+        android:text="@string/new_address"
+        android:layout_marginStart="15dp"
+        android:textStyle="bold"
+        android:textAllCaps="false"
+        android:padding="3dp"
+        android:textColor="@color/colorAccent"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:textSize="@dimen/default_text_size_button" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/profile_text_view_label_margin_top"
+        android:layout_marginStart="15dp"
+        android:textStyle="bold"
+        android:text="@string/delivery_time"/>
+
+    <LinearLayout
+        android:id="@+id/loadingDeliveryTime"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:visibility="gone"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/loading_delivery_time"/>
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/deliveryTime"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_delivery_time"
+        tools:itemCount="3"/>
+
+    <Button
+        android:id="@+id/next"
+        style="?borderlessButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_button_blue"
+        android:layout_marginStart="@dimen/default_margin_start_end_button"
+        android:layout_marginEnd="@dimen/default_margin_start_end_button"
+        android:layout_marginTop="@dimen/default_margin_top_textInputLayout"
+        android:layout_marginBottom="@dimen/default_text_size_button"
+        android:text="@string/next"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/default_text_size_button"
+        android:elevation="@dimen/default_elevation_button"/>
+
+</LinearLayout>

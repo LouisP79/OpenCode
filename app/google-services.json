@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "518494509880",
+    "firebase_url": "https://quickstore-c3288.firebaseio.com",
+    "project_id": "quickstore-c3288",
+    "storage_bucket": "quickstore-c3288.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:518494509880:android:0cfb7ed643012361287fcd",
+        "android_client_info": {
+          "package_name": "com.quickstore"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "518494509880-vj3e5bhjic98g8qimiq9snkoqagesltf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUtrzTnL5XRDCV3sdnVvp2qtI3CS6WABU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "518494509880-vj3e5bhjic98g8qimiq9snkoqagesltf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

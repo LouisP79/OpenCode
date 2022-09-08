@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/profile_margin_view_top"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/img_profile"/>
+
+        <TextView
+            android:id="@+id/completeName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/profile_default_element_margin_top"
+            android:gravity="center"
+            android:textStyle="bold"
+            tools:text="María Fernanda Mendoza Revilla"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="@dimen/profile_default_element_margin_top"
+            android:layout_marginStart="@dimen/profile_divider_text_view_margin_start"
+            android:background="@color/colorDivider"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/profile_default_element_margin_top"
+            android:layout_marginStart="@dimen/profile_divider_text_view_margin_start"
+            android:text="@string/phone"/>
+
+        <TextView
+            android:id="@+id/phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_marginTop="@dimen/profile_default_element_margin_top"
+            android:layout_marginStart="@dimen/profile_divider_text_view_margin_start"
+            tools:text="922685791"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="@dimen/profile_default_element_margin_top"
+            android:layout_marginStart="@dimen/profile_divider_text_view_margin_start"
+            android:background="@color/colorDivider"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/profile_default_element_margin_top"
+            android:layout_marginStart="@dimen/profile_divider_text_view_margin_start"
+            android:text="@string/email"/>
+
+        <TextView
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_marginTop="@dimen/profile_default_element_margin_top"
+            android:layout_marginStart="@dimen/profile_divider_text_view_margin_start"
+            tools:text="louis.perdomo79@gmail.com"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="@dimen/profile_default_element_margin_top"
+            android:layout_marginStart="@dimen/profile_divider_text_view_margin_start"
+            android:background="@color/colorDivider"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/colorBackgroundView">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/profile_text_view_label_margin_top"
+                android:layout_marginStart="@dimen/profile_divider_text_view_margin_start"
+                android:textStyle="bold"
+                android:text="@string/addresses"/>
+
+            <ProgressBar
+                android:id="@+id/loadingAddresses"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/addresses"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/profile_divider_text_view_margin_start"
+                android:layout_marginTop="@dimen/profile_default_element_margin_top"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_address"
+                tools:itemCount="2"/>
+
+            <Button
+                android:id="@+id/newAddress"
+                style="?borderlessButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin_start_end_button"
+                android:layout_marginEnd="@dimen/default_margin_start_end_button"
+                android:layout_marginTop="@dimen/register_margin_top"
+                android:layout_marginBottom="@dimen/register_margin_top"
+                android:background="@drawable/selector_button_white"
+                android:text="@string/new_address"
+                android:textStyle="bold"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/default_text_size_button"
+                android:elevation="@dimen/default_elevation_button"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/changePassword"
+            style="?borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/profile_divider_text_view_margin_start"
+            android:paddingEnd="@dimen/profile_divider_text_view_margin_start"
+            android:background="@drawable/selector_button_white_square"
+            android:text="@string/change_password"
+            android:gravity="center_vertical"
+            android:textStyle="bold"
+            android:textAllCaps="false"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/default_text_size_button" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginStart="@dimen/profile_divider_text_view_margin_start"
+            android:background="@color/colorDivider"/>
+
+        <Button
+            android:id="@+id/logout"
+            style="?borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/profile_divider_text_view_margin_start"
+            android:paddingEnd="@dimen/profile_divider_text_view_margin_start"            android:background="@drawable/selector_button_white_square"
+            android:text="@string/logout"
+            android:gravity="center_vertical"
+            android:textStyle="bold"
+            android:textAllCaps="false"
+            android:textColor="@color/colorItemBottomNavigationView"
+            android:textSize="@dimen/default_text_size_button" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginStart="@dimen/profile_divider_text_view_margin_start"
+            android:background="@color/colorDivider"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/img_powered_by_quickdev_logo"/>
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

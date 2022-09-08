@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.quickstore.ui.useCase.main.component.ItemCartComponent
+        android:id="@+id/itemCart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:name="Naranja para realizar Jugo"
+        tools:description="1 Kg"
+        tools:quantityCart="2"
+        tools:priceCart="6.00"
+        tools:subTotalCart="12.00"/>
+
+</LinearLayout>
