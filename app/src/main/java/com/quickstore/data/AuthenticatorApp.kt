@@ -45,8 +45,7 @@ class AuthenticatorApp(private val applicationPreferences: ApplicationPreference
         if (responseCount(response) > 2) return null
 
         val refreshReponse = oAuthService.refreshToken(RestConstant.Credentials().authCredentials,
-                refreshToken,
-                RestConstant.REFRESH_TOKEN).execute()
+                refreshToken).execute()
 
         return when {
             refreshReponse.isSuccessful -> {

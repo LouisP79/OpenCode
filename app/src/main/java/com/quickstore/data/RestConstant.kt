@@ -4,9 +4,6 @@ import android.util.Base64
 import com.quickstore.BuildConfig
 
 object RestConstant {
-
-    const val PASSWORD = "password"
-    const val REFRESH_TOKEN = "refresh_token"
     const val BEARER = "Bearer "
     private const val BASIC = "Basic "
     private const val FORMAT = "%s:%s"
@@ -23,9 +20,11 @@ object RestConstant {
 
     const val ENDPOINT_CTEGORY = "/category"
 
-    const val ENDPOINT_TOKEN = "/oauth/token"
+    const val ENDPOINT_TOKEN = "/token"
+    const val ENDPOINT_REFRESH_TOKEN = "/refreshtoken"
+
     const val ENDPOINT_USER = "/user"
-    const val ENDPOINT_USER_INFO = "/me"
+    const val ENDPOINT_USER_INFO = "/userinfo"
     const val ENDPOINT_USER_CHANGE_PASS = "/changepass"
     const val ENDPOINT_USER_PUBLIC = "/user"
     const val ENDPOINT_USER_RECOVER_PASS = "/recoverpass"

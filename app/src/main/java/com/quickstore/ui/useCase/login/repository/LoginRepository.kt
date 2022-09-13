@@ -20,8 +20,7 @@ class LoginRepository constructor(private val tokenWebServices: TokenWebServices
         repo.disposable = tokenWebServices.requestAccessToken(
             RestConstant.Credentials().authCredentials,
             email,
-            password,
-            RestConstant.PASSWORD)
+            password)
             .subscribeOn(Schedulers.io())
             .flatMap { response ->
                 repo.flatMapResponse = response

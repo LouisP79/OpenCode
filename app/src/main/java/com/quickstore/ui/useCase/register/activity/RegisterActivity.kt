@@ -6,15 +6,20 @@ import com.quickstore.R
 import com.quickstore.data.user.request.RegisterRequest
 import com.quickstore.ui.base.activity.BaseActivity
 import com.quickstore.ui.useCase.register.viewModel.RegisterViewModel
+import com.quickstore.util.core.hashString
 import com.quickstore.util.extencions.validateEmail
 import com.quickstore.util.extencions.validateEmpty
 import com.quickstore.util.extencions.validateLength
 import io.reactivex.rxkotlin.addTo
+import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.android.synthetic.main.content_register.*
+import kotlinx.android.synthetic.main.content_register.email
+import kotlinx.android.synthetic.main.content_register.pass
 import org.koin.android.viewmodel.ext.android.viewModel
 import retrofit2.HttpException
 import java.net.HttpURLConnection
+import java.util.*
 
 class RegisterActivity : BaseActivity() {
 
@@ -44,33 +49,37 @@ class RegisterActivity : BaseActivity() {
     private fun restCreateUser() {
         send.startAnimation()
         val request = RegisterRequest(email.text.toString(),
-            pass.text.toString(),
+            hashString("SHA-1", pass.text.toString()).toLowerCase(Locale.ROOT),
             name.text.toString(),
             lastName.text.toString(),
             phone.text.toString())
 
         viewModel.register(request)
-            .observe(this,
-                { response ->
-                    when(response){
-                        null -> unknownError(null)
-                        else ->{
-                            if(response.flatMapResponse != null && response.subscribeResponse != null){
-                                successLoginRegister(response.subscribeResponse!!, response.flatMapResponse!!)
-                            }else{
-                                when(val it = response.throwable!!){
-                                    is HttpException ->{
-                                        if(it.code() == HttpURLConnection.HTTP_CONFLICT)
-                                            validateMessage(getString(R.string.srt_exist_email))
-                                        else errorCode(it.code())
-                                    }else -> errorConnection(it)
+            .observe(this
+            ) { response ->
+                when (response) {
+                    null -> unknownError(null)
+                    else -> {
+                        if (response.flatMapResponse != null && response.subscribeResponse != null) {
+                            successLoginRegister(
+                                response.subscribeResponse!!,
+                                response.flatMapResponse!!
+                            )
+                        } else {
+                            when (val it = response.throwable!!) {
+                                is HttpException -> {
+                                    if (it.code() == HttpURLConnection.HTTP_CONFLICT)
+                                        validateMessage(getString(R.string.srt_exist_email))
+                                    else errorCode(it.code())
                                 }
+                                else -> errorConnection(it)
                             }
-                            response.disposable?.addTo(compositeDisposable)
                         }
+                        response.disposable?.addTo(compositeDisposable)
                     }
-                    send.revertAnimation()
-                })
+                }
+                send.revertAnimation()
+            }
     }
 
     private fun validate(): Boolean{

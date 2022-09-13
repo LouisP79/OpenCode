@@ -11,12 +11,6 @@ class TokenModel {
     var accessToken: String = ""
         get() = RestConstant.BEARER + field
 
-    @JsonProperty("token_type")
-    var tokenType: String = ""
-
     @JsonProperty("refresh_token")
     var refreshToken: String = ""
-
-    @JsonProperty
-    var scope: String = ""
 }

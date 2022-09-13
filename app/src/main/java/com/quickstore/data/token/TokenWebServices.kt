@@ -13,15 +13,13 @@ import retrofit2.http.POST
 interface TokenWebServices {
 
     @FormUrlEncoded
-    @POST(RestConstant.ENDPOINT_TOKEN)
+    @POST(RestConstant.ENDPOINT_REFRESH_TOKEN)
     fun refreshToken(@Header("Authorization") authCredentials: String,
-                     @Field("refresh_token") refreshToken: String,
-                     @Field("grant_type") grantType: String): Call<TokenModel>
+                     @Field("refresh_token") refreshToken: String): Call<TokenModel>
 
     @FormUrlEncoded
     @POST(RestConstant.ENDPOINT_TOKEN)
     fun requestAccessToken(@Header("Authorization") authCredentials: String,
                            @Field("username") userName: String,
-                           @Field("password") password: String,
-                           @Field("grant_type") grantType: String): Observable<TokenModel>
+                           @Field("password") password: String): Observable<TokenModel>
 }

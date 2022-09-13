@@ -26,8 +26,7 @@ class RegisterRepository constructor(private val userWebServices: UserWebService
                 tokenWebServices.requestAccessToken(
                     RestConstant.Credentials().authCredentials,
                     registerRequest.email,
-                    registerRequest.password,
-                    RestConstant.PASSWORD)
+                    registerRequest.password)
                     .subscribeOn(Schedulers.io())
             }
             .observeOn(Schedulers.computation())

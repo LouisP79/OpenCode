@@ -18,7 +18,7 @@ class UserModel{
     @JsonProperty
     var name: String = ""
 
-    @JsonProperty
+    @JsonProperty("last_name")
     var lastName: String? = ""
 
     @JsonProperty

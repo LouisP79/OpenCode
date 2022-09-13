@@ -8,6 +8,7 @@ import com.quickstore.ui.base.activity.BaseActivity
 import com.quickstore.ui.useCase.login.viewModel.LoginViewModel
 import com.quickstore.ui.useCase.recoverPassword.activity.RecoverPasswordActivity
 import com.quickstore.ui.useCase.register.activity.RegisterActivity
+import com.quickstore.util.core.hashString
 import com.quickstore.util.extencions.validateEmail
 import com.quickstore.util.extencions.validateEmpty
 import com.quickstore.util.extencions.validateLength
@@ -16,6 +17,7 @@ import kotlinx.android.synthetic.main.activity_login.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import retrofit2.HttpException
 import java.net.HttpURLConnection
+import java.util.*
 
 
 class LoginActivity : BaseActivity() {
@@ -50,42 +52,42 @@ class LoginActivity : BaseActivity() {
 
     private fun restLogin() {
         next.startAnimation()
-        viewModel.login(email.text.toString(), pass.text.toString())
-            .observe(this,
-                { response ->
-                    when (response) {
-                        null -> unknownError(null)
-                        else -> {
-                            if (response.flatMapResponse != null && response.subscribeResponse != null) {
-                                successLoginRegister(
-                                    response.flatMapResponse!!,
-                                    response.subscribeResponse!!
-                                )
-                            } else {
-                                when (val it = response.throwable!!) {
-                                    is HttpException -> {
-                                        when {
-                                            it.code() == HttpURLConnection.HTTP_UNAUTHORIZED -> validateMessage(
-                                                getString(
-                                                    R.string.str_login_failed
-                                                )
+        viewModel.login(email.text.toString(), hashString("SHA-1", pass.text.toString()).toLowerCase(Locale.ROOT))
+            .observe(this
+            ) { response ->
+                when (response) {
+                    null -> unknownError(null)
+                    else -> {
+                        if (response.flatMapResponse != null && response.subscribeResponse != null) {
+                            successLoginRegister(
+                                response.flatMapResponse!!,
+                                response.subscribeResponse!!
+                            )
+                        } else {
+                            when (val it = response.throwable!!) {
+                                is HttpException -> {
+                                    when {
+                                        it.code() == HttpURLConnection.HTTP_UNAUTHORIZED -> validateMessage(
+                                            getString(
+                                                R.string.str_login_failed
                                             )
-                                            it.code() == HttpURLConnection.HTTP_BAD_REQUEST -> validateMessage(
-                                                getString(
-                                                    R.string.str_login_failed_pass
-                                                )
+                                        )
+                                        it.code() == HttpURLConnection.HTTP_BAD_REQUEST -> validateMessage(
+                                            getString(
+                                                R.string.str_login_failed_pass
                                             )
-                                            else -> errorCode(it.code())
-                                        }
+                                        )
+                                        else -> errorCode(it.code())
                                     }
-                                    else -> errorConnection(it)
                                 }
+                                else -> errorConnection(it)
                             }
-                            response.disposable?.addTo(compositeDisposable)
                         }
+                        response.disposable?.addTo(compositeDisposable)
                     }
-                    next.revertAnimation()
-                })
+                }
+                next.revertAnimation()
+            }
     }
 
     private fun validate(): Boolean{
