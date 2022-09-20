@@ -15,8 +15,9 @@ import retrofit2.http.*
  */
 interface UserWebServices {
 
-    @POST(RestConstant.ENDPOINT_USER_PUBLIC)
-    fun register(@Body request: RegisterRequest): Observable<UserModel>
+    @POST(RestConstant.ENDPOINT_REGISTER_USER)
+    fun register(@Header("Authorization") authCredentials: String,
+                 @Body request: RegisterRequest): Observable<UserModel>
 
     @GET(RestConstant.ENDPOINT_USER_INFO)
     fun userInfo(@Header("Authorization") token:  String): Observable<UserModel>

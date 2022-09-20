@@ -18,7 +18,9 @@ class RegisterRepository constructor(private val userWebServices: UserWebService
         val data = MutableLiveData<RepoRxResponse<UserModel, TokenModel>>()
         val repo = RepoRxResponse<UserModel, TokenModel>()
 
-        repo.disposable = userWebServices.register(registerRequest)
+        repo.disposable = userWebServices.register(
+            RestConstant.Credentials().authCredentials,
+            registerRequest)
             .subscribeOn(Schedulers.io())
             .flatMap { response ->
                 repo.flatMapResponse = response
