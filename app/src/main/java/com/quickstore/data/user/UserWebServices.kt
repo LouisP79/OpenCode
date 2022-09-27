@@ -23,7 +23,8 @@ interface UserWebServices {
     fun userInfo(@Header("Authorization") token:  String): Observable<UserModel>
 
     @POST(RestConstant.ENDPOINT_USER_RECOVER_PASS)
-    fun recoverPwd(@Body request: RecoverPwdRequest): Call<Void>
+    fun recoverPwd(@Header("Authorization") authCredentials: String,
+                   @Body request: RecoverPwdRequest): Call<Void>
 
     @POST(RestConstant.ENDPOINT_USER_CHANGE_PASS)
     fun changePwd(@Header("Authorization") token: String,

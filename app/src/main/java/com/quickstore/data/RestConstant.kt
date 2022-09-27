@@ -27,7 +27,7 @@ object RestConstant {
     const val ENDPOINT_USER_INFO = "/userinfo"
     const val ENDPOINT_REGISTER_USER = "/registeruser"
     const val ENDPOINT_USER_CHANGE_PASS = "/changepass"
-    const val ENDPOINT_USER_RECOVER_PASS = "/recoverpass"
+    const val ENDPOINT_USER_RECOVER_PASS = "/recoverpassword"
 
     const val ENDPOINT_ADDRESS = "/address"
     const val ENDPOINT_DISTRICT = "/district"

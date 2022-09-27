@@ -2,6 +2,7 @@ package com.quickstore.ui.useCase.recoverPassword.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.quickstore.data.RestConstant
 import com.quickstore.data.user.UserWebServices
 import com.quickstore.data.user.request.RecoverPwdRequest
 import com.quickstore.util.repository.RepoResponse
@@ -14,7 +15,8 @@ class RecoverPasswordRepository constructor(private val userWebServices: UserWeb
     fun recoverPassword(recoverPwdRequest: RecoverPwdRequest): LiveData<RepoResponse<Void>>{
         val data = MutableLiveData<RepoResponse<Void>>()
 
-        userWebServices.recoverPwd(recoverPwdRequest)
+        userWebServices.recoverPwd(RestConstant.Credentials().authCredentials,
+            recoverPwdRequest)
             .enqueue(object: Callback<Void>{
                 override fun onResponse(call: Call<Void>, response: Response<Void>) {
                     data.value = RepoResponse.respond(response, null)

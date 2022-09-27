@@ -40,21 +40,21 @@ class RecoverPasswordActivity : BaseActivity() {
     private fun restRecoverPass(){
         send.startAnimation()
         viewModel.recoverPassword(RecoverPwdRequest(email.text.toString()))
-            .observe(this,
-                { response ->
-                    when(response){
-                        null -> unknownError(null)
-                        else ->{
-                            if(response.dataResponse != null){
-                                if(response.dataResponse.isSuccessful){
-                                    showToast(R.string.send_forgot_password_message)
-                                    finish()
-                                }else errorCode(response.dataResponse.code())
-                            }else errorConnection(response.throwable!!)
-                        }
+            .observe(this
+            ) { response ->
+                when (response) {
+                    null -> unknownError(null)
+                    else -> {
+                        if (response.dataResponse != null) {
+                            if (response.dataResponse.isSuccessful) {
+                                showToast(R.string.send_forgot_password_message)
+                                finish()
+                            } else errorCode(response.dataResponse.code())
+                        } else errorConnection(response.throwable!!)
                     }
-                    send.revertAnimation()
-                })
+                }
+                send.revertAnimation()
+            }
     }
 
     private fun validate(): Boolean{
