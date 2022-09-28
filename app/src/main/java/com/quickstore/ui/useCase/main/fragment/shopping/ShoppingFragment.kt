@@ -69,82 +69,82 @@ class ShoppingFragment : BaseFragment() {
 
     private fun restShopping() {
         viewModel.listCart(applicationPreferences.token!!.accessToken)
-            .observe(viewLifecycleOwner,
-                { response ->
-                    when(response){
-                        null -> unknownError(null)
-                        else ->{
-                            if(response.dataResponse != null){
-                                if(response.dataResponse.isSuccessful){
-                                    successResponse(response.dataResponse.body()!!)
-                                }else errorCode(response.dataResponse.code())
-                            }else errorConnection(response.throwable!!)
-                        }
+            .observe(viewLifecycleOwner
+            ) { response ->
+                when (response) {
+                    null -> unknownError(null)
+                    else -> {
+                        if (response.dataResponse != null) {
+                            if (response.dataResponse.isSuccessful) {
+                                successResponse(response.dataResponse.body()!!)
+                            } else errorCode(response.dataResponse.code())
+                        } else errorConnection(response.throwable!!)
                     }
-                    loadingProducts.visibility = View.GONE
-                    swipeRefresh.isRefreshing = false
-                })
+                }
+                loadingProducts.visibility = View.GONE
+                swipeRefresh.isRefreshing = false
+            }
     }
 
     private fun restDeleteProductCart(productId: Long, position: Int) {
         viewModel.deleteProductCart(applicationPreferences.token!!.accessToken, productId)
-            .observe(viewLifecycleOwner,
-                { response ->
-                    when(response){
-                        null -> unknownError(null)
-                        else ->{
-                            if(response.dataResponse != null){
-                                if(response.dataResponse.isSuccessful){
-                                    if(adapter.deleteItem(position))
-                                        emptyList.visibility = View.VISIBLE
-                                }else errorCode(response.dataResponse.code())
-                            }else errorConnection(response.throwable!!)
-                        }
+            .observe(viewLifecycleOwner
+            ) { response ->
+                when (response) {
+                    null -> unknownError(null)
+                    else -> {
+                        if (response.dataResponse != null) {
+                            if (response.dataResponse.isSuccessful) {
+                                if (adapter.deleteItem(position))
+                                    emptyList.visibility = View.VISIBLE
+                            } else errorCode(response.dataResponse.code())
+                        } else errorConnection(response.throwable!!)
                     }
-                    loadingProducts.visibility = View.GONE
-                })
+                }
+                loadingProducts.visibility = View.GONE
+            }
     }
 
     private fun restAddProductCart(productId: Long, quantityAdded: Double, position: Int) {
         viewModel.addCart(applicationPreferences.token!!.accessToken, AddCartRequest(productId, quantityAdded))
-            .observe(viewLifecycleOwner,
-                { response ->
-                    when(response){
-                        null -> unknownError(null)
-                        else ->{
-                            if(response.dataResponse != null){
-                                if(response.dataResponse.isSuccessful){
-                                    adapter.confirmAddSubtract(quantityAdded, position, true)
-                                    recalculateSubTotal()
-                                }else errorCode(response.dataResponse.code())
-                            }else errorConnection(response.throwable!!)
-                        }
+            .observe(viewLifecycleOwner
+            ) { response ->
+                when (response) {
+                    null -> unknownError(null)
+                    else -> {
+                        if (response.dataResponse != null) {
+                            if (response.dataResponse.isSuccessful) {
+                                adapter.confirmAddSubtract(quantityAdded, position, true)
+                                recalculateSubTotal()
+                            } else errorCode(response.dataResponse.code())
+                        } else errorConnection(response.throwable!!)
                     }
-                    loadingProducts.visibility = View.GONE
-                })
+                }
+                loadingProducts.visibility = View.GONE
+            }
     }
 
     private fun restDecreaseProductCart(productId: Long, quantitySubtracted: Double, position: Int) {
         viewModel.decreaseCart(applicationPreferences.token!!.accessToken, productId)
-            .observe(viewLifecycleOwner,
-                { response ->
-                    when(response){
-                        null -> unknownError(null)
-                        else ->{
-                            if(response.dataResponse != null){
-                                if(response.dataResponse.isSuccessful){
-                                    adapter.confirmAddSubtract(quantitySubtracted, position, false)
-                                    recalculateSubTotal()
-                                }else errorCode(response.dataResponse.code())
-                            }else errorConnection(response.throwable!!)
-                        }
+            .observe(viewLifecycleOwner
+            ) { response ->
+                when (response) {
+                    null -> unknownError(null)
+                    else -> {
+                        if (response.dataResponse != null) {
+                            if (response.dataResponse.isSuccessful) {
+                                adapter.confirmAddSubtract(quantitySubtracted, position, false)
+                                recalculateSubTotal()
+                            } else errorCode(response.dataResponse.code())
+                        } else errorConnection(response.throwable!!)
                     }
-                    loadingProducts.visibility = View.GONE
-                })
+                }
+                loadingProducts.visibility = View.GONE
+            }
     }
 
     private fun successResponse(response: CartModel) {
-        if(response.items.isNullOrEmpty())
+        if(response.items.isEmpty())
             emptyList.visibility = View.VISIBLE
         else{
             subTotal.text = getString(R.string.blank_soles, response.subtotal)

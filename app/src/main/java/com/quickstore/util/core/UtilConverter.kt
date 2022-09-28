@@ -21,7 +21,7 @@ import java.security.MessageDigest
  */
 
 fun hashString(type: String, input: String): String {
-    val HEX_CHARS = "0123456789ABCDEF"
+    val hexChars = "0123456789ABCDEF"
     val bytes = MessageDigest
         .getInstance(type)
         .digest(input.toByteArray())
@@ -29,8 +29,8 @@ fun hashString(type: String, input: String): String {
 
     bytes.forEach {
         val i = it.toInt()
-        result.append(HEX_CHARS[i shr 4 and 0x0f])
-        result.append(HEX_CHARS[i and 0x0f])
+        result.append(hexChars[i shr 4 and 0x0f])
+        result.append(hexChars[i and 0x0f])
     }
 
     return result.toString()

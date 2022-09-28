@@ -48,27 +48,27 @@ class EditProfileFragment : BaseCardFragment() {
         viewModel.updateUserInfo(applicationPreferences.user!!.id,
             applicationPreferences.getBearerToken()!!,
             UpdateUserInfoRequest(lastName.text.toString(), name.text.toString(), phone.text.toString()))
-            .observe(viewLifecycleOwner,
-                { response ->
-                    when(response){
-                        null -> unknownError(null)
-                        else ->{
-                            if(response.dataResponse != null){
-                                if(response.dataResponse.isSuccessful){
-                                    val userModel = applicationPreferences.user!!
-                                    userModel.name = name.text.toString()
-                                    userModel.lastName = lastName.text.toString()
-                                    userModel.phone = phone.text.toString()
-                                    applicationPreferences.user = userModel
-                                    showToast(R.string.update_user_info_success)
-                                    listener?.invoke()
-                                    back()
-                                }else errorCode(response.dataResponse.code())
-                            }else errorConnection(response.throwable!!)
-                        }
+            .observe(viewLifecycleOwner
+            ) { response ->
+                when (response) {
+                    null -> unknownError(null)
+                    else -> {
+                        if (response.dataResponse != null) {
+                            if (response.dataResponse.isSuccessful) {
+                                val userModel = applicationPreferences.user!!
+                                userModel.name = name.text.toString()
+                                userModel.lastName = lastName.text.toString()
+                                userModel.phone = phone.text.toString()
+                                applicationPreferences.user = userModel
+                                showToast(R.string.update_user_info_success)
+                                listener?.invoke()
+                                back()
+                            } else errorCode(response.dataResponse.code())
+                        } else errorConnection(response.throwable!!)
                     }
-                    send.revertAnimation()
-                })
+                }
+                send.revertAnimation()
+            }
     }
 
     private fun validate(): Boolean{

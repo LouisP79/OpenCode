@@ -52,7 +52,7 @@ class LoginActivity : BaseActivity() {
 
     private fun restLogin() {
         next.startAnimation()
-        viewModel.login(email.text.toString(), hashString("SHA-1", pass.text.toString()).toLowerCase(Locale.ROOT))
+        viewModel.login(email.text.toString(), hashString("SHA-1", pass.text.toString()).lowercase(Locale.ROOT))
             .observe(this
             ) { response ->
                 when (response) {

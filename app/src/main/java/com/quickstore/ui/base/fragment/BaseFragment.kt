@@ -8,10 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import com.quickstore.R
-import com.quickstore.data.address.model.AddressModel
 import com.quickstore.preferences.ApplicationPreferences
 import com.quickstore.ui.base.activity.BaseActivity
-import com.quickstore.ui.useCase.main.fragment.address.CreateAddressFragment
 import kotlinx.android.synthetic.main.fragment_home.*
 import org.koin.android.ext.android.inject
 

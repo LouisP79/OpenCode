@@ -38,21 +38,21 @@ class ChangePasswordFragment : BaseCardFragment() {
         send.startAnimation()
         viewModel.changePwd(applicationPreferences.getBearerToken()!!,
             ChangePwdRequest(oldPass.text.toString(), newPass.text.toString()))
-            .observe(viewLifecycleOwner,
-                { response ->
-                    when(response){
-                        null -> unknownError(null)
-                        else ->{
-                            if(response.dataResponse != null){
-                                if(response.dataResponse.isSuccessful){
-                                    showToast(R.string.change_password_success)
-                                    back()
-                                }else errorCode(response.dataResponse.code())
-                            }else errorConnection(response.throwable!!)
-                        }
+            .observe(viewLifecycleOwner
+            ) { response ->
+                when (response) {
+                    null -> unknownError(null)
+                    else -> {
+                        if (response.dataResponse != null) {
+                            if (response.dataResponse.isSuccessful) {
+                                showToast(R.string.change_password_success)
+                                back()
+                            } else errorCode(response.dataResponse.code())
+                        } else errorConnection(response.throwable!!)
                     }
-                    send.revertAnimation()
-                })
+                }
+                send.revertAnimation()
+            }
     }
 
     private fun validate(): Boolean{

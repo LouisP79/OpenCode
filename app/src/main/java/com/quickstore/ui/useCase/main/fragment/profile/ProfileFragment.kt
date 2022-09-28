@@ -60,7 +60,7 @@ class ProfileFragment : BaseFragment() {
         }
 
         logout.setOnClickListener {
-            showAlertDialogControl(context!!,
+            showAlertDialogControl(requireContext(),
                 R.string.warning, R.string.logout_alert_msg
             ) { kickUser() }
         }
@@ -82,40 +82,45 @@ class ProfileFragment : BaseFragment() {
     private fun restAddresses() {
         loadingAddresses.visibility = View.VISIBLE
         viewModel.getAddressList(applicationPreferences.getBearerToken()!!
-        ).observe(viewLifecycleOwner,
-            { response ->
-                when(response){
-                    null -> unknownError(null)
-                    else ->{
-                        if(response.dataResponse != null){
-                            if(response.dataResponse.isSuccessful){
-                                adapter.setItemsVisibility(response.dataResponse.body() as MutableList<AddressModel>, radioVisibility = false, deleteVisibility = true)
-                            }else errorCode(response.dataResponse.code())
-                        }else errorConnection(response.throwable!!)
-                    }
+        ).observe(viewLifecycleOwner
+        ) { response ->
+            when (response) {
+                null -> unknownError(null)
+                else -> {
+                    if (response.dataResponse != null) {
+                        if (response.dataResponse.isSuccessful) {
+                            adapter.setItemsVisibility(
+                                response.dataResponse.body() as MutableList<AddressModel>,
+                                radioVisibility = false,
+                                deleteVisibility = true
+                            )
+                        } else errorCode(response.dataResponse.code())
+                    } else errorConnection(response.throwable!!)
                 }
-                loadingAddresses.visibility = View.GONE
-            })
+            }
+            loadingAddresses.visibility = View.GONE
+        }
     }
 
     private fun restDeleteAddress(idAddress: Long, posi: Int) {
-        showAlertDialogControl(context!!,
+        showAlertDialogControl(requireContext(),
             R.string.delete_address_alert_title, R.string.delete_address_alert_msg
         ) { viewModel.deleteAddress(applicationPreferences.getBearerToken()!!,
             idAddress
-        ).observe(viewLifecycleOwner,
-            { response ->
-                when(response){
-                    null -> unknownError(null)
-                    else ->{
-                        if(response.dataResponse != null){
-                            if(response.dataResponse.isSuccessful){
-                                adapter.deleteItem(posi)
-                            }else errorCode(response.dataResponse.code())
-                        }else errorConnection(response.throwable!!)
-                    }
+        ).observe(viewLifecycleOwner
+        ) { response ->
+            when (response) {
+                null -> unknownError(null)
+                else -> {
+                    if (response.dataResponse != null) {
+                        if (response.dataResponse.isSuccessful) {
+                            adapter.deleteItem(posi)
+                        } else errorCode(response.dataResponse.code())
+                    } else errorConnection(response.throwable!!)
                 }
-            }) }
+            }
+        }
+        }
     }
 
 }

@@ -1,5 +1,6 @@
 package com.quickstore.ui.useCase.main.fragment.home
 
+import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
 import android.view.View
 import androidx.core.os.bundleOf
@@ -45,7 +46,11 @@ class ProductDetailFragment : BaseCardFragment() {
     }
 
     private fun setup() {
-        val product = arguments?.getParcelable<ProductModel>(PRODUCT)!!
+        val product = when {
+            SDK_INT >= 33 -> arguments?.getParcelable(PRODUCT, ProductModel::class.java)!!
+            else -> @Suppress("DEPRECATION") arguments?.getParcelable(PRODUCT)!!
+        }
+
         productId = product.id
 
         glide(requireContext(), img,
@@ -65,22 +70,22 @@ class ProductDetailFragment : BaseCardFragment() {
     private fun restAddCart() {
         send2Cart.startAnimation()
         viewModel.addCart(applicationPreferences.token!!.accessToken, AddCartRequest(productId, increase.quantity))
-            .observe(viewLifecycleOwner,
-                { response ->
-                    when(response){
-                        null -> unknownError(null)
-                        else ->{
-                            if(response.dataResponse != null){
-                                if(response.dataResponse.isSuccessful){
-                                    listener?.invoke()
-                                    showToast(R.string.add_cart_success)
-                                    back()
-                                }else errorCode(response.dataResponse.code())
-                            }else errorConnection(response.throwable!!)
-                        }
+            .observe(viewLifecycleOwner
+            ) { response ->
+                when (response) {
+                    null -> unknownError(null)
+                    else -> {
+                        if (response.dataResponse != null) {
+                            if (response.dataResponse.isSuccessful) {
+                                listener?.invoke()
+                                showToast(R.string.add_cart_success)
+                                back()
+                            } else errorCode(response.dataResponse.code())
+                        } else errorConnection(response.throwable!!)
                     }
-                    send2Cart.revertAnimation()
-                })
+                }
+                send2Cart.revertAnimation()
+            }
     }
 
     fun setOnAddProductListener(listener: ()->Unit){

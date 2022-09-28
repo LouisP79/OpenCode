@@ -71,26 +71,26 @@ class CategoriesFragment : BaseCardFragment() {
     private fun restCategory() {
         if(page>0) loadingMoreCategories.visibility = View.VISIBLE
         viewModel.getCategoryList(page)
-            .observe(viewLifecycleOwner,
-                { response ->
-                    when(response){
-                        null -> unknownError(null)
-                        else ->{
-                            if(response.dataResponse != null){
-                                if(response.dataResponse.isSuccessful){
-                                    successResponse(response.dataResponse.body()!!)
-                                }else errorCode(response.dataResponse.code())
-                            }else errorConnection(response.throwable!!)
-                        }
+            .observe(viewLifecycleOwner
+            ) { response ->
+                when (response) {
+                    null -> unknownError(null)
+                    else -> {
+                        if (response.dataResponse != null) {
+                            if (response.dataResponse.isSuccessful) {
+                                successResponse(response.dataResponse.body()!!)
+                            } else errorCode(response.dataResponse.code())
+                        } else errorConnection(response.throwable!!)
                     }
-                    loadingCategories.visibility = View.GONE
-                    loadingMoreCategories.visibility = View.GONE
-                    swipeRefresh.isRefreshing = false
-                })
+                }
+                loadingCategories.visibility = View.GONE
+                loadingMoreCategories.visibility = View.GONE
+                swipeRefresh.isRefreshing = false
+            }
     }
 
     private fun successResponse(response: Pageable<CategoryModel>) {
-        if(response.items.isNullOrEmpty())
+        if(response.items.isEmpty())
             emptyList.visibility = View.VISIBLE
         else{
             page = response.page

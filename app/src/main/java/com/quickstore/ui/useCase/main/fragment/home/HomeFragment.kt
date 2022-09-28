@@ -2,13 +2,11 @@ package com.quickstore.ui.useCase.main.fragment.home
 
 import android.os.Bundle
 import android.view.View
-import androidx.activity.OnBackPressedCallback
 import androidx.recyclerview.widget.GridLayoutManager
 import com.arlib.floatingsearchview.FloatingSearchView.OnSearchListener
 import com.arlib.floatingsearchview.suggestions.model.SearchSuggestion
 import com.quickstore.R
 import com.quickstore.data.Pageable
-import com.quickstore.data.address.model.AddressModel
 import com.quickstore.data.product.model.ProductModel
 import com.quickstore.ui.base.fragment.BaseFragment
 import com.quickstore.ui.useCase.main.activity.MainActivity
@@ -161,7 +159,7 @@ class HomeFragment : BaseFragment() {
     private fun showSuggestions(search: String): MutableList<Suggestion>{
         val aux = mutableListOf<Suggestion>()
         for(suggestion in suggestions){
-            if (suggestion.value.toUpperCase(Locale.ROOT).contains(search.toUpperCase(Locale.ROOT)))
+            if (suggestion.value.uppercase(Locale.ROOT).contains(search.uppercase(Locale.ROOT)))
             aux.add(suggestion)
         }
         return aux
@@ -180,27 +178,27 @@ class HomeFragment : BaseFragment() {
     private fun restProduct() {
         if(page>0) loadingMoreProducts.visibility = View.VISIBLE
         viewModel.getProductList(page, searchQuery, categoryId)
-            .observe(viewLifecycleOwner,
-                { response ->
-                    when (response) {
-                        null -> unknownError(null)
-                        else -> {
-                            if (response.dataResponse != null) {
-                                if (response.dataResponse.isSuccessful) {
-                                    successResponse(response.dataResponse.body()!!)
-                                } else errorCode(response.dataResponse.code())
-                            } else errorConnection(response.throwable!!)
-                        }
+            .observe(viewLifecycleOwner
+            ) { response ->
+                when (response) {
+                    null -> unknownError(null)
+                    else -> {
+                        if (response.dataResponse != null) {
+                            if (response.dataResponse.isSuccessful) {
+                                successResponse(response.dataResponse.body()!!)
+                            } else errorCode(response.dataResponse.code())
+                        } else errorConnection(response.throwable!!)
                     }
-                    loadingProducts.visibility = View.GONE
-                    loadingMoreProducts.visibility = View.GONE
-                    swipeRefresh.isRefreshing = false
-                })
+                }
+                loadingProducts.visibility = View.GONE
+                loadingMoreProducts.visibility = View.GONE
+                swipeRefresh.isRefreshing = false
+            }
     }
 
 
     private fun successResponse(response: Pageable<ProductModel>) {
-        if(response.items.isNullOrEmpty())
+        if(response.items.isEmpty())
             emptyList.visibility = View.VISIBLE
         else{
             page = response.page

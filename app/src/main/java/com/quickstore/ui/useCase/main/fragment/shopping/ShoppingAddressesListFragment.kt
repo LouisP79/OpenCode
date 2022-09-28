@@ -48,20 +48,24 @@ class ShoppingAddressesListFragment : BaseCardFragment() {
     private fun restAddresses() {
         loadingAddresses.visibility = View.VISIBLE
         viewModel.getAddressList(applicationPreferences.getBearerToken()!!
-        ).observe(viewLifecycleOwner,
-            { response ->
-                when(response){
-                    null -> unknownError(null)
-                    else ->{
-                        if(response.dataResponse != null){
-                            if(response.dataResponse.isSuccessful){
-                                adapter.setItemsVisibility(response.dataResponse.body() as MutableList<AddressModel>, radioVisibility = true, deleteVisibility = false)
-                            }else errorCode(response.dataResponse.code())
-                        }else errorConnection(response.throwable!!)
-                    }
+        ).observe(viewLifecycleOwner
+        ) { response ->
+            when (response) {
+                null -> unknownError(null)
+                else -> {
+                    if (response.dataResponse != null) {
+                        if (response.dataResponse.isSuccessful) {
+                            adapter.setItemsVisibility(
+                                response.dataResponse.body() as MutableList<AddressModel>,
+                                radioVisibility = true,
+                                deleteVisibility = false
+                            )
+                        } else errorCode(response.dataResponse.code())
+                    } else errorConnection(response.throwable!!)
                 }
-                loadingAddresses.visibility = View.GONE
-            })
+            }
+            loadingAddresses.visibility = View.GONE
+        }
     }
 
     fun setOnSelectedClickListener(listener: (address: AddressModel)->Unit){

@@ -73,21 +73,21 @@ class ShoppingAddressScheduleFragment : BaseCardFragment() {
         loadingAddress.visibility = View.VISIBLE
         selectedAddress.visibility = View.GONE
         viewModel.getAddressList(applicationPreferences.getBearerToken()!!
-        ).observe(viewLifecycleOwner,
-            { response ->
-                when(response){
-                    null -> unknownError(null)
-                    else ->{
-                        if(response.dataResponse != null){
-                            if(response.dataResponse.isSuccessful){
-                                addressSelected(response.dataResponse.body()!![0])
-                            }else errorCode(response.dataResponse.code())
-                        }else errorConnection(response.throwable!!)
-                    }
+        ).observe(viewLifecycleOwner
+        ) { response ->
+            when (response) {
+                null -> unknownError(null)
+                else -> {
+                    if (response.dataResponse != null) {
+                        if (response.dataResponse.isSuccessful) {
+                            addressSelected(response.dataResponse.body()!![0])
+                        } else errorCode(response.dataResponse.code())
+                    } else errorConnection(response.throwable!!)
                 }
-                selectedAddress.visibility = View.VISIBLE
-                loadingAddress.visibility = View.GONE
-            })
+            }
+            selectedAddress.visibility = View.VISIBLE
+            loadingAddress.visibility = View.GONE
+        }
     }
 
     private fun addressSelected(address: AddressModel){

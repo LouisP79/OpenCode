@@ -41,26 +41,26 @@ class CreateAddressFragment : BaseCardFragment() {
         addressTag.setText(getString(R.string.office))
         send.startAnimation()
         viewModel.getDistrictList()
-            .observe(viewLifecycleOwner,
-                { response ->
-                    when (response) {
-                        null -> unknownError(null)
-                        else -> {
-                            if (response.dataResponse != null) {
-                                if (response.dataResponse.isSuccessful) {
-                                    listDistrict = response.dataResponse.body()!!
-                                    loadDistrict()
-                                } else errorCode(response.dataResponse.code())
-                            } else errorConnection(response.throwable!!)
-                        }
+            .observe(viewLifecycleOwner
+            ) { response ->
+                when (response) {
+                    null -> unknownError(null)
+                    else -> {
+                        if (response.dataResponse != null) {
+                            if (response.dataResponse.isSuccessful) {
+                                listDistrict = response.dataResponse.body()!!
+                                loadDistrict()
+                            } else errorCode(response.dataResponse.code())
+                        } else errorConnection(response.throwable!!)
                     }
-                })
+                }
+            }
     }
 
     private fun loadDistrict() {
         val items = mutableListOf<String>()
         for(i in listDistrict){ items.add(i.name) }
-        districts.adapter = ArrayAdapter(context!!, android.R.layout.simple_spinner_dropdown_item, items)
+        districts.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, items)
         send.revertAnimation()
     }
 
@@ -91,21 +91,21 @@ class CreateAddressFragment : BaseCardFragment() {
                 address.text.toString(),
                 reference.text.toString(),
                 listDistrict[districts.selectedItemPosition].id))
-            .observe(viewLifecycleOwner,
-                { response ->
-                    when (response) {
-                        null -> unknownError(null)
-                        else -> {
-                            if (response.dataResponse != null) {
-                                if (response.dataResponse.isSuccessful) {
-                                    showToast(R.string.create_address_success)
-                                    listener?.invoke(response.dataResponse.body()!!)
-                                    back()
-                                } else errorCode(response.dataResponse.code())
-                            } else errorConnection(response.throwable!!)
-                        }
+            .observe(viewLifecycleOwner
+            ) { response ->
+                when (response) {
+                    null -> unknownError(null)
+                    else -> {
+                        if (response.dataResponse != null) {
+                            if (response.dataResponse.isSuccessful) {
+                                showToast(R.string.create_address_success)
+                                listener?.invoke(response.dataResponse.body()!!)
+                                back()
+                            } else errorCode(response.dataResponse.code())
+                        } else errorConnection(response.throwable!!)
                     }
-                })
+                }
+            }
     }
 
     private fun validate(): Boolean{

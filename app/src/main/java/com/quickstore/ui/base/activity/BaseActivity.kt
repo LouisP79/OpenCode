@@ -6,7 +6,6 @@ import android.util.Log
 import android.widget.Toast
 
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.JobIntentService.enqueueWork
 
 import com.quickstore.R
 import com.quickstore.data.AuthenticatorApp
