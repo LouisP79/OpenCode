@@ -7,7 +7,7 @@ import com.quickstore.data.firebaseToken.request.FirebaseTokenRequest
 import com.quickstore.preferences.ApplicationPreferences
 import org.koin.android.ext.android.inject
 
-class FirebaseTokenJobIntentService : JobIntentService() {
+class FirebaseTokenJobIntentService : JobIntentService() { //cambiar por workManager
 
     private val firebaseTokenWebServices: FirebaseTokenWebServices by inject()
     private val applicationPreferences: ApplicationPreferences by inject()

@@ -57,12 +57,14 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
     fun errorConnection(t: Throwable) {
-        if(t is UtilConnectionInterceptor.NoConnectivityException)
-            showToast(t.message)
-        else if(t is AuthenticatorApp.RefreshTokenException || t is AuthenticatorApp.UnknownException) {
-            showToast(t.localizedMessage!!)
-            kickUser()
-        } else unknownError(t)
+        when (t) {
+            is UtilConnectionInterceptor.NoConnectivityException -> showToast(t.message)
+            is AuthenticatorApp.RefreshTokenException, is AuthenticatorApp.UnknownException -> {
+                showToast(t.localizedMessage!!)
+                kickUser()
+            }
+            else -> unknownError(t)
+        }
     }
 
     fun kickUser() {
