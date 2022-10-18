@@ -6,11 +6,13 @@ import com.quickstore.R
 import com.quickstore.data.user.request.ChangePwdRequest
 import com.quickstore.ui.base.fragment.BaseCardFragment
 import com.quickstore.ui.useCase.main.viewModel.MainViewModel
+import com.quickstore.util.core.hashString
 import com.quickstore.util.extencions.validateEmpty
 import com.quickstore.util.extencions.validateLength
 import kotlinx.android.synthetic.main.content_change_password.*
 import kotlinx.android.synthetic.main.fragment_change_password.*
 import org.koin.android.viewmodel.ext.android.viewModel
+import java.util.*
 
 class ChangePasswordFragment : BaseCardFragment() {
 
@@ -37,7 +39,8 @@ class ChangePasswordFragment : BaseCardFragment() {
     private fun restChangePassword() {
         send.startAnimation()
         viewModel.changePwd(applicationPreferences.getBearerToken()!!,
-            ChangePwdRequest(oldPass.text.toString(), newPass.text.toString()))
+            ChangePwdRequest(hashString("SHA-1", oldPass.text.toString()).lowercase(Locale.ROOT),
+                hashString("SHA-1", newPass.text.toString()).lowercase(Locale.ROOT)))
             .observe(viewLifecycleOwner
             ) { response ->
                 when (response) {
