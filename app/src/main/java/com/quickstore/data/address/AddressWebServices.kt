@@ -12,14 +12,14 @@ import retrofit2.http.*
  */
 interface AddressWebServices {
 
-    @GET(RestConstant.ENDPOINT_ADDRESS)
+    @GET(RestConstant.ENDPOINT_ADDRESS_LIST)
     fun addressesList(@Header("Authorization") token: String): Call<List<AddressModel>>
 
-    @POST(RestConstant.ENDPOINT_ADDRESS)
+    @POST(RestConstant.ENDPOINT_CREATE_ADDRESS)
     fun createAddress(@Header("Authorization") token:  String,
                       @Body request: AddressRequest): Call<AddressModel>
 
-    @DELETE(RestConstant.ENDPOINT_ADDRESS + "/{id}")
+    @DELETE(RestConstant.ENDPOINT_DELETE_ADDRESS + "/{id}")
     fun deleteAddress(@Header("Authorization") token:  String,
                       @Path("id") idAddress: Long): Call<Void>
 }

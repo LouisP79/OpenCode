@@ -30,7 +30,7 @@ interface UserWebServices {
     fun changePwd(@Header("Authorization") token: String,
                   @Body request: ChangePwdRequest): Call<Void>
 
-    @POST(RestConstant.ENDPOINT_USER + "/{id}")
+    @POST(RestConstant.ENDPOINT_UPDATE_USER_INFO + "/{id}")
     fun updateUserInfo(@Path("id") id: Long,
                   @Header("Authorization") token: String,
                   @Body userInfoRequest: UpdateUserInfoRequest): Call<Void>

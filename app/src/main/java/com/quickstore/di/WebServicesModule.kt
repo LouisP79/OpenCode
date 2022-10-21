@@ -3,7 +3,7 @@ package com.quickstore.di
 import com.quickstore.data.address.AddressWebServices
 import com.quickstore.data.cart.CartWebServices
 import com.quickstore.data.category.CategoryWebServices
-import com.quickstore.data.district.DistrictWebServices
+import com.quickstore.data.country.CountryWebServices
 import com.quickstore.data.firebaseToken.FirebaseTokenWebServices
 import com.quickstore.data.onBoarding.OnBoardingWebServices
 import com.quickstore.data.product.ProductWebServices
@@ -19,9 +19,9 @@ val webServiceModule = module {
     single { provideProductServices(get()) }
     single { provideCartServices(get()) }
     single { provideCategoryServices(get()) }
-    single { provideDistrictServices(get()) }
     single { provideAddressServices(get()) }
     single { provideFirebaseTokenServices(get()) }
+    single { provideCountryServices(get()) }
 }
 
 fun provideTokenServices(retrofit: Retrofit): TokenWebServices = retrofit.create(TokenWebServices::class.java)
@@ -30,7 +30,7 @@ fun provideOnBoardingServices(retrofit: Retrofit): OnBoardingWebServices = retro
 fun provideProductServices(retrofit: Retrofit): ProductWebServices = retrofit.create(ProductWebServices::class.java)
 fun provideCartServices(retrofit: Retrofit): CartWebServices = retrofit.create(CartWebServices::class.java)
 fun provideCategoryServices(retrofit: Retrofit): CategoryWebServices = retrofit.create(CategoryWebServices::class.java)
-fun provideDistrictServices(retrofit: Retrofit): DistrictWebServices = retrofit.create(DistrictWebServices::class.java)
 fun provideAddressServices(retrofit: Retrofit): AddressWebServices = retrofit.create(AddressWebServices::class.java)
 fun provideFirebaseTokenServices(retrofit: Retrofit): FirebaseTokenWebServices = retrofit.create(FirebaseTokenWebServices::class.java)
+fun provideCountryServices(retrofit: Retrofit): CountryWebServices = retrofit.create(CountryWebServices::class.java)
 

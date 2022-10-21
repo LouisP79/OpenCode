@@ -1,7 +1,9 @@
 package com.quickstore.ui.useCase.register.activity
 
 import android.os.Bundle
+import android.telephony.TelephonyManager
 import android.view.inputmethod.EditorInfo
+import android.widget.ArrayAdapter
 import com.quickstore.R
 import com.quickstore.data.user.request.RegisterRequest
 import com.quickstore.ui.base.activity.BaseActivity
@@ -11,11 +13,8 @@ import com.quickstore.util.extencions.validateEmail
 import com.quickstore.util.extencions.validateEmpty
 import com.quickstore.util.extencions.validateLength
 import io.reactivex.rxkotlin.addTo
-import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.android.synthetic.main.content_register.*
-import kotlinx.android.synthetic.main.content_register.email
-import kotlinx.android.synthetic.main.content_register.pass
 import org.koin.android.viewmodel.ext.android.viewModel
 import retrofit2.HttpException
 import java.net.HttpURLConnection
@@ -33,7 +32,45 @@ class RegisterActivity : BaseActivity() {
         setSupportActionBar(toolbar)
         toolbar.setNavigationOnClickListener { finish() }
 
+        setup()
         addListener()
+    }
+
+    private fun setup() {
+        if(applicationPreferences.countries.isEmpty()){
+            send.startAnimation()
+            viewModel.getCountries()
+                .observe(this
+                ) { response ->
+                    when (response) {
+                        null -> unknownError(null)
+                        else -> {
+                            if (response.dataResponse != null) {
+                                if (response.dataResponse.isSuccessful) {
+                                    applicationPreferences.countries = response.dataResponse.body()!!
+                                    loadCountries()
+                                } else errorCode(response.dataResponse.code())
+                            } else errorConnection(response.throwable!!)
+                        }
+                    }
+                }
+        }else loadCountries()
+    }
+
+    private fun loadCountries() {
+        val items = mutableListOf<String>()
+        var cuntryCode = (this.getSystemService(TELEPHONY_SERVICE) as TelephonyManager).networkCountryIso
+        if(cuntryCode == "") cuntryCode = resources.configuration.locales[0].country
+        var selectedPosition = -1
+        for((posi, i) in applicationPreferences.countries.withIndex()){
+            items.add(getString(R.string.blank_countries, i.name, i.phoneCode))
+            if(i.iso.lowercase() == cuntryCode.lowercase()){
+                selectedPosition = posi
+            }
+        }
+        countries.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, items)
+        if(selectedPosition != -1) countries.setSelection(selectedPosition)
+        send.revertAnimation()
     }
 
     private fun addListener() {
@@ -49,7 +86,7 @@ class RegisterActivity : BaseActivity() {
     private fun restCreateUser() {
         send.startAnimation()
         val request = RegisterRequest(email.text.toString(),
-            hashString("SHA-1", pass.text.toString()).toLowerCase(Locale.ROOT),
+            hashString("SHA-1", pass.text.toString()).lowercase(Locale.ROOT),
             name.text.toString(),
             lastName.text.toString(),
             phone.text.toString())

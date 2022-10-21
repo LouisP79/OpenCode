@@ -114,6 +114,7 @@
     <string name="str_register_validate_same_old_pass">New password must be different to new password</string>
     <string name="str_unknow_rest_error">Unknown communication error</string>
     <string name="srt_exist_email">Email already exists</string>
+    <string name="srt_exist_address">Address already exists</string>
     <string name="str_login_failed">The email or password are incorrect</string>
     <string name="str_login_failed_pass">The password are incorrect</string>
 
@@ -121,5 +122,6 @@
     <string name="blank_double" translatable="false">%,.2f</string>
     <string name="blank_ss" translatable="false">%s %s</string>
     <string name="blank_sgs" translatable="false">%s - %s</string>
+    <string name="blank_countries" translatable="false">%s - (+%s)</string>
 
 </resources>

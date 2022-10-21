@@ -8,7 +8,6 @@ import com.quickstore.data.address.request.AddressRequest
 import com.quickstore.data.cart.model.CartModel
 import com.quickstore.data.cart.request.AddCartRequest
 import com.quickstore.data.category.model.CategoryModel
-import com.quickstore.data.district.model.DistrictModel
 import com.quickstore.data.product.model.ProductModel
 import com.quickstore.data.user.request.ChangePwdRequest
 import com.quickstore.data.user.request.UpdateUserInfoRequest
@@ -47,10 +46,6 @@ class MainViewModel constructor(private val mainRepository: MainRepository): Vie
 
     fun updateUserInfo(idUser: Long, token: String, updateUserInfoRequest: UpdateUserInfoRequest): LiveData<RepoResponse<Void>>{
         return mainRepository.updateUserInfo(idUser, token, updateUserInfoRequest)
-    }
-
-    fun getDistrictList(): LiveData<RepoResponse<List<DistrictModel>>>{
-        return mainRepository.getDistrictList()
     }
 
     fun getAddressList(token: String): LiveData<RepoResponse<List<AddressModel>>>{

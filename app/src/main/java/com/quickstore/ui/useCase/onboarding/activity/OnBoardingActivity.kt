@@ -62,22 +62,22 @@ class OnBoardingActivity : BaseActivity() {
 
     private fun restOnBoarding(){
         viewModel.getSlider()
-            .observe(this,
-                { response ->
-                    when(response){
-                        null -> unknownError(null)
-                        else ->{
-                            if(response.dataResponse != null){
-                                if(response.dataResponse.isSuccessful){
-                                    pagerAdapter.items = response.dataResponse.body()!!
-                                    init()
-                                    next.visibility = View.VISIBLE
-                                    loading.visibility = View.GONE
-                                }else errorCode(response.dataResponse.code())
-                            }else errorConnection(response.throwable!!)
-                        }
+            .observe(this
+            ) { response ->
+                when (response) {
+                    null -> unknownError(null)
+                    else -> {
+                        if (response.dataResponse != null) {
+                            if (response.dataResponse.isSuccessful) {
+                                pagerAdapter.items = response.dataResponse.body()!!
+                                init()
+                                next.visibility = View.VISIBLE
+                                loading.visibility = View.GONE
+                            } else errorCode(response.dataResponse.code())
+                        } else errorConnection(response.throwable!!)
                     }
-                })
+                }
+            }
     }
 
     private fun init() {

@@ -160,7 +160,7 @@ class HomeFragment : BaseFragment() {
         val aux = mutableListOf<Suggestion>()
         for(suggestion in suggestions){
             if (suggestion.value.uppercase(Locale.ROOT).contains(search.uppercase(Locale.ROOT)))
-            aux.add(suggestion)
+                aux.add(suggestion)
         }
         return aux
     }

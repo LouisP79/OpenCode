@@ -47,7 +47,7 @@ class AddressAdapter: RecyclerView.Adapter<AddressAdapter.ViewHolder>() {
         fun bind(item: AddressModel, posi: Int) = with(itemView) {
 
             addressTag.text = item.tag
-            addressReference.text = context.getString(R.string.blank_sgs, item.address, item.reference)
+            addressReference.text = item.address
             radio.isChecked = item.selected
 
             if(radioVisibility){

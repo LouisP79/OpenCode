@@ -11,8 +11,6 @@ import com.quickstore.data.cart.model.CartModel
 import com.quickstore.data.cart.request.AddCartRequest
 import com.quickstore.data.category.CategoryWebServices
 import com.quickstore.data.category.model.CategoryModel
-import com.quickstore.data.district.DistrictWebServices
-import com.quickstore.data.district.model.DistrictModel
 import com.quickstore.data.product.ProductWebServices
 import com.quickstore.data.product.model.ProductModel
 import com.quickstore.data.user.UserWebServices
@@ -25,7 +23,7 @@ import retrofit2.Response
 
 class MainRepository constructor(private val productWebServices: ProductWebServices, private val cartWebServices: CartWebServices,
                                  private val categoryWebServices: CategoryWebServices, private val userWebServices: UserWebServices,
-                                 private val addressWebServices: AddressWebServices, private val districtWebServices: DistrictWebServices) {
+                                 private val addressWebServices: AddressWebServices) {
 
     fun getProductList(page: Int, searchQuery: String = "", categoryId: Long = 0L): LiveData<RepoResponse<Pageable<ProductModel>>>{
         val data = MutableLiveData<RepoResponse<Pageable<ProductModel>>>()
@@ -191,23 +189,6 @@ class MainRepository constructor(private val productWebServices: ProductWebServi
                 }
 
                 override fun onFailure(call: Call<Void>, t: Throwable) {
-                    data.value = RepoResponse.respond(null, t)
-                }
-            })
-
-        return data
-    }
-
-    fun getDistrictList(): LiveData<RepoResponse<List<DistrictModel>>>{
-        val data = MutableLiveData<RepoResponse<List<DistrictModel>>>()
-
-        districtWebServices.districtsList()
-            .enqueue(object: Callback<List<DistrictModel>>{
-                override fun onResponse(call: Call<List<DistrictModel>>, response: Response<List<DistrictModel>>) {
-                    data.value = RepoResponse.respond(response, null)
-                }
-
-                override fun onFailure(call: Call<List<DistrictModel>>, t: Throwable) {
                     data.value = RepoResponse.respond(null, t)
                 }
             })

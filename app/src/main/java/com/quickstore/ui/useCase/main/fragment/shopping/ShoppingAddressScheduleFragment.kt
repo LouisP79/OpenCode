@@ -93,7 +93,7 @@ class ShoppingAddressScheduleFragment : BaseCardFragment() {
     private fun addressSelected(address: AddressModel){
         idAddressSelected = address.id
         addressTag.text = address.tag
-        addressReference.text = getString(R.string.blank_sgs, address.address, address.reference)
+        addressReference.text = address.address
     }
 
 }

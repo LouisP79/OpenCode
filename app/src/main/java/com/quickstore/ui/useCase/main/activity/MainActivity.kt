@@ -52,7 +52,7 @@ class MainActivity : BaseActivity() {
     }
 
     private fun addListener() {
-        navView.setOnNavigationItemSelectedListener { item ->
+        navView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_home -> {
                     supportFragmentManager.beginTransaction()

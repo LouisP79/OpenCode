@@ -37,6 +37,7 @@
     <string name="unauthorized_error">No autorizado</string>
     <string name="str_unknow_rest_error">Error de comunicación desconocido</string>
     <string name="srt_exist_email">El correo ingresado ya existe</string>
+    <string name="srt_exist_address">La dirección ingresada ya existe</string>
     <string name="str_login_failed">El correo o contraseña son incorrectos</string>
     <string name="str_login_failed_pass">La contraseña es incorrecta</string>
     <string name="title_home">Inicio</string>
