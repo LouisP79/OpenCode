@@ -28,6 +28,7 @@
     <string name="str_register_validate_last_name">Ingrese su apellido</string>
     <string name="str_validate_name_last_name">No debe ser menor de 2 caracteres</string>
     <string name="str_register_validate_phone">Ingrese su teléfono</string>
+    <string name="str_nothing_to_change">No hay cambios en los datos</string>
     <string name="str_validate_phone">No debe ser menor de 9 caracteres</string>
     <string name="str_validate_pass">No debe ser menor de 6 caracteres</string>
     <string name="str_register_validate_password">Ingrese su Contraseña</string>

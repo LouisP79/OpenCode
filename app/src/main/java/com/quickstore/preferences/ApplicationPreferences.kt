@@ -62,7 +62,7 @@ class ApplicationPreferences(context: Context, private val gson: Gson, masterKey
 
     fun getBearerToken(): String?{
         if(token == null) return null
-        return "Bearer $token"
+        return token!!.accessToken
     }
 
     fun clearAll() {

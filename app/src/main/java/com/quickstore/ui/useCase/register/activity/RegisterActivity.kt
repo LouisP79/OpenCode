@@ -85,11 +85,12 @@ class RegisterActivity : BaseActivity() {
 
     private fun restCreateUser() {
         send.startAnimation()
+        val phoneCode = countries.selectedItem.toString().split("+")[1]
         val request = RegisterRequest(email.text.toString(),
             hashString("SHA-1", pass.text.toString()).lowercase(Locale.ROOT),
             name.text.toString(),
             lastName.text.toString(),
-            phone.text.toString())
+            getString(R.string.blank_phone_number,phoneCode.substring(0,phoneCode.length-1),phone.text.toString()))
 
         viewModel.register(request)
             .observe(this
@@ -129,7 +130,6 @@ class RegisterActivity : BaseActivity() {
         if(!lastName.validateLength(2, R.string.str_validate_name_last_name)) evaluate = false
 
         if(!phone.validateEmpty(R.string.str_register_validate_phone)) evaluate = false
-        if(!phone.validateLength(9, R.string.str_validate_phone)) evaluate = false
 
         if(!pass.validateEmpty(R.string.str_register_validate_password)) evaluate = false
         if(!pass.validateLength(6, R.string.str_validate_pass)) evaluate = false

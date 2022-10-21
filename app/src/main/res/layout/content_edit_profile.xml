@@ -59,6 +59,18 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/countries"
+            android:layout_width="match_parent"
+            android:spinnerMode="dialog"
+            android:layout_height="50dp"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:background="@drawable/shape_spinner"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="@dimen/default_margin_start_end_textInputLayout"
+            android:layout_marginEnd="@dimen/default_margin_start_end_textInputLayout" />
+
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -73,7 +85,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="numberSigned"
-                android:maxLength="9"
                 android:hint="@string/hint_phone"
                 android:lines="1"
                 android:nextFocusDown="@id/email"/>

@@ -11,6 +11,8 @@ import com.quickstore.data.cart.model.CartModel
 import com.quickstore.data.cart.request.AddCartRequest
 import com.quickstore.data.category.CategoryWebServices
 import com.quickstore.data.category.model.CategoryModel
+import com.quickstore.data.country.CountryWebServices
+import com.quickstore.data.country.model.CountryModel
 import com.quickstore.data.product.ProductWebServices
 import com.quickstore.data.product.model.ProductModel
 import com.quickstore.data.user.UserWebServices
@@ -23,7 +25,7 @@ import retrofit2.Response
 
 class MainRepository constructor(private val productWebServices: ProductWebServices, private val cartWebServices: CartWebServices,
                                  private val categoryWebServices: CategoryWebServices, private val userWebServices: UserWebServices,
-                                 private val addressWebServices: AddressWebServices) {
+                                 private val addressWebServices: AddressWebServices, private val countryWebServices: CountryWebServices) {
 
     fun getProductList(page: Int, searchQuery: String = "", categoryId: Long = 0L): LiveData<RepoResponse<Pageable<ProductModel>>>{
         val data = MutableLiveData<RepoResponse<Pageable<ProductModel>>>()
@@ -240,6 +242,23 @@ class MainRepository constructor(private val productWebServices: ProductWebServi
                 }
 
                 override fun onFailure(call: Call<Void>, t: Throwable) {
+                    data.value = RepoResponse.respond(null, t)
+                }
+            })
+
+        return data
+    }
+
+    fun getCountries(): LiveData<RepoResponse<List<CountryModel>>>{
+        val data = MutableLiveData<RepoResponse<List<CountryModel>>>()
+
+        countryWebServices.countryList()
+            .enqueue(object: Callback<List<CountryModel>> {
+                override fun onResponse(call: Call<List<CountryModel>>, response: Response<List<CountryModel>>) {
+                    data.value = RepoResponse.respond(response, null)
+                }
+
+                override fun onFailure(call: Call<List<CountryModel>>, t: Throwable) {
                     data.value = RepoResponse.respond(null, t)
                 }
             })

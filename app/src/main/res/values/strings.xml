@@ -105,6 +105,7 @@
     <string name="str_register_validate_last_name">Enter your last name</string>
     <string name="str_validate_name_last_name">It must not be less than 2 characters</string>
     <string name="str_register_validate_phone">Enter your phone number</string>
+    <string name="str_nothing_to_change">No data changes</string>
     <string name="str_validate_phone">It must not be less than 9 characters</string>
     <string name="str_validate_pass">It must not be less than 6 characters</string>
     <string name="str_register_validate_password">Enter your password</string>
@@ -123,5 +124,6 @@
     <string name="blank_ss" translatable="false">%s %s</string>
     <string name="blank_sgs" translatable="false">%s - %s</string>
     <string name="blank_countries" translatable="false">%s - (+%s)</string>
+    <string name="blank_phone_number" translatable="false">+%s%s</string>
 
 </resources>

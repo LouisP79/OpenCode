@@ -8,6 +8,7 @@ import com.quickstore.data.address.request.AddressRequest
 import com.quickstore.data.cart.model.CartModel
 import com.quickstore.data.cart.request.AddCartRequest
 import com.quickstore.data.category.model.CategoryModel
+import com.quickstore.data.country.model.CountryModel
 import com.quickstore.data.product.model.ProductModel
 import com.quickstore.data.user.request.ChangePwdRequest
 import com.quickstore.data.user.request.UpdateUserInfoRequest
@@ -58,5 +59,9 @@ class MainViewModel constructor(private val mainRepository: MainRepository): Vie
 
     fun deleteAddress(token: String, idAddress: Long): LiveData<RepoResponse<Void>>{
         return mainRepository.deleteAddress(token, idAddress)
+    }
+
+    fun getCountries(): LiveData<RepoResponse<List<CountryModel>>>{
+        return mainRepository.getCountries()
     }
 }
