@@ -28,7 +28,7 @@ class CategoriesFragment : BaseCardFragment() {
     private val viewModel: MainViewModel by viewModel()
     private lateinit var adapter: CategoryAdapter
     private var isLast = true
-    private var page = 0
+    private var page = 1
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -49,7 +49,7 @@ class CategoriesFragment : BaseCardFragment() {
     }
 
     private fun resetCategoryList(){
-        page = 0
+        page = 1
         isLast = true
         adapter.cleanItems()
         restCategory()
@@ -69,7 +69,7 @@ class CategoriesFragment : BaseCardFragment() {
     private fun loadMoreCategories() {if (!isLast){ page++; restCategory() }}
 
     private fun restCategory() {
-        if(page>0) loadingMoreCategories.visibility = View.VISIBLE
+        if(page>1) loadingMoreCategories.visibility = View.VISIBLE
         viewModel.getCategoryList(page)
             .observe(viewLifecycleOwner
             ) { response ->

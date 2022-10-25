@@ -19,7 +19,7 @@ object RestConstant {
     const val ENDPOINT_CART = "/cart"
     const val ENDPOINT_CART_DECREASE = "/decrease"
 
-    const val ENDPOINT_CTEGORY = "/category"
+    const val ENDPOINT_CATEGORY_LIST = "/categorylist"
 
     const val ENDPOINT_TOKEN = "/token"
     const val ENDPOINT_REFRESH_TOKEN = "/refreshtoken"

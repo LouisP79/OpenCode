@@ -8,9 +8,11 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 const val PAGE = "page"
+const val SIZE = "size"
 interface CategoryWebServices {
 
-    @GET(RestConstant.ENDPOINT_CTEGORY)
-    fun categoryList(@Query(PAGE) page: Int): Call<Pageable<CategoryModel>>
+    @GET(RestConstant.ENDPOINT_CATEGORY_LIST)
+    fun categoryList(@Query(PAGE) page: Int,
+                     @Query(SIZE) size: Int = 20): Call<Pageable<CategoryModel>>
 
 }

@@ -8,10 +8,10 @@ import com.fasterxml.jackson.annotation.JsonProperty
 @JsonIgnoreProperties(ignoreUnknown = true)
 open class Pageable<T>{
 
-    @JsonProperty("content")
+    @JsonProperty
     var items: MutableList<T> = mutableListOf()
 
-    @JsonProperty("number")
+    @JsonProperty
     var page: Int = 0
 
     @JsonProperty("last")
