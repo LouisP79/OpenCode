@@ -34,7 +34,8 @@ object RestConstant {
     const val ENDPOINT_ADDRESS_LIST = "/addresslist"
     const val ENDPOINT_DELETE_ADDRESS = "/deleteaddress"
 
-    const val ENDPOINT_FIREBASE_TOKEN = "/user_token"
+    const val ENDPOINT_CREATE_FIREBASE_TOKEN = "/createfirebasetoken"
+    const val ENDPOINT_DELETE_FIREBASE_TOKEN = "/deletefirebasetoken"
 
     const val ENDPOINT_PRODUCT = "/product"
 

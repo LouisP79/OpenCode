@@ -79,7 +79,7 @@ android {
 }
 
 project.ext {
-    koin_version = "2.0.1"
+    koin_version = "2.2.0"
     retrofit_version = "2.6.0"
     glide_version = "4.12.0"
     lifecycle_version = "2.2.0"
@@ -140,6 +140,8 @@ dependencies {
     //LiveData & ViewModel
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     implementation 'androidx.lifecycle:lifecycle-common-java8:2.5.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
+
 
     //Security Crypto
     implementation "androidx.security:security-crypto:1.1.0-alpha03"

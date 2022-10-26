@@ -6,16 +6,20 @@ import android.util.Log
 import android.widget.Toast
 
 import androidx.appcompat.app.AppCompatActivity
+import androidx.work.Data
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
+import androidx.work.WorkRequest
 
 import com.quickstore.R
 import com.quickstore.data.AuthenticatorApp
 import com.quickstore.data.token.model.TokenModel
 import com.quickstore.data.user.model.UserModel
-import com.quickstore.jobIntentService.FirebaseTokenJobIntentService
 import com.quickstore.preferences.ApplicationPreferences
 import com.quickstore.ui.useCase.login.activity.LoginActivity
 import com.quickstore.ui.useCase.main.activity.MainActivity
 import com.quickstore.util.core.UtilConnectionInterceptor
+import com.quickstore.workManager.*
 import io.reactivex.disposables.CompositeDisposable
 import org.koin.android.ext.android.inject
 import java.net.HttpURLConnection
@@ -68,9 +72,27 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
     fun kickUser() {
+        if(!applicationPreferences.firebaseToken.isNullOrBlank() && applicationPreferences.token != null) {
+            runDeleteFirebaseTokenWM()
+        }
         applicationPreferences.clearAll()
         finishAffinity()
         startActivity(Intent(this, LoginActivity::class.java))
+    }
+
+    private fun runDeleteFirebaseTokenWM() {
+        val data = Data.Builder()
+        data.putString(ACCESS_TOKEN, applicationPreferences.token!!.accessToken)
+        data.putString(FIREBASE_TOKEN, applicationPreferences.firebaseToken)
+
+        val deleteFirebaseTokenWorkRequest: WorkRequest =
+            OneTimeWorkRequestBuilder<DeleteFirebaseTokenWorkManager>()
+                .addTag(DFTAG)
+                .setInputData(data.build())
+                .build()
+        WorkManager
+            .getInstance(this)
+            .enqueue(deleteFirebaseTokenWorkRequest)
     }
 
     fun validateMessage(message: String?, errorMessage: Int = R.string.str_unknow_rest_error) {
@@ -92,8 +114,18 @@ abstract class BaseActivity : AppCompatActivity() {
     fun successLoginRegister(tokenModel: TokenModel, userModel: UserModel) {
         applicationPreferences.token = tokenModel
         applicationPreferences.user = userModel
-        startService(Intent(this, FirebaseTokenJobIntentService::class.java))
+        runCreateFirebaseTokenWM()
         startActivity(Intent(this, MainActivity::class.java))
         finishAffinity()
+    }
+
+    private fun runCreateFirebaseTokenWM() {
+        val createFirebaseTokenWorkRequest: WorkRequest =
+            OneTimeWorkRequestBuilder<CreateFirebaseTokenWorkManager>()
+                .addTag(CFTAG)
+                .build()
+        WorkManager
+            .getInstance(this)
+            .enqueue(createFirebaseTokenWorkRequest)
     }
 }

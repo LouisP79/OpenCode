@@ -7,11 +7,11 @@ import retrofit2.http.*
 
 interface FirebaseTokenWebServices {
 
-    @POST(RestConstant.ENDPOINT_FIREBASE_TOKEN)
+    @POST(RestConstant.ENDPOINT_CREATE_FIREBASE_TOKEN)
     fun create(@Header("Authorization") token: String,
                @Body request: FirebaseTokenRequest): Call<Void>
 
-    @DELETE(RestConstant.ENDPOINT_FIREBASE_TOKEN)
+    @HTTP(method = "DELETE", path = RestConstant.ENDPOINT_DELETE_FIREBASE_TOKEN, hasBody = true)
     fun delete(@Header("Authorization") token: String,
                @Body request: FirebaseTokenRequest): Call<Void>
 
