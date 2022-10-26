@@ -79,10 +79,10 @@ class MainRepository constructor(private val productWebServices: ProductWebServi
         return data
     }
 
-    fun getCategoryList(page: Int): LiveData<RepoResponse<Pageable<CategoryModel>>>{
+    fun getCategoryList(token: String, page: Int): LiveData<RepoResponse<Pageable<CategoryModel>>>{
         val data = MutableLiveData<RepoResponse<Pageable<CategoryModel>>>()
 
-        categoryWebServices.categoryList(page)
+        categoryWebServices.categoryList(token, page)
             .enqueue(object: Callback<Pageable<CategoryModel>>{
                 override fun onResponse(call: Call<Pageable<CategoryModel>>, response: Response<Pageable<CategoryModel>>) {
                     data.value = RepoResponse.respond(response, null)

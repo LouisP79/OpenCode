@@ -39,7 +39,6 @@ class EditProfileFragment : BaseCardFragment() {
     private fun setup() {
         name.setText(applicationPreferences.user!!.name)
         lastName.setText(applicationPreferences.user!!.lastName)
-        phone.setText(applicationPreferences.user!!.phone)
 
         if(applicationPreferences.countries.isEmpty()){
             send.startAnimation()
@@ -74,6 +73,19 @@ class EditProfileFragment : BaseCardFragment() {
         }
         countries.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, items)
         if(selectedPosition != -1) countries.setSelection(selectedPosition)
+
+        var phoneVal = applicationPreferences.user!!.phone
+        if(phoneVal.contains("+")){
+            val phoneCode = countries.selectedItem.toString().split("+")[1]
+            val phoneValAux = phoneVal.split(phoneCode.substring(0,phoneCode.length-1))
+            phoneVal = if(phoneVal.length > 1){
+                phoneValAux[1]
+            }else{
+                phoneValAux[0].substring(1)
+            }
+
+        }
+        phone.setText(phoneVal)
         send.revertAnimation()
     }
 
@@ -84,11 +96,12 @@ class EditProfileFragment : BaseCardFragment() {
     private fun restUpdateUserInfo() {
         send.startAnimation()
         val phoneCode = countries.selectedItem.toString().split("+")[1]
+        val phoneVal = getString(R.string.blank_phone_number,phoneCode.substring(0,phoneCode.length-1),phone.text.toString())
         viewModel.updateUserInfo(applicationPreferences.user!!.id,
             applicationPreferences.getBearerToken()!!,
             UpdateUserInfoRequest(lastName.text.toString(),
                 name.text.toString(),
-                getString(R.string.blank_phone_number,phoneCode.substring(0,phoneCode.length-1),phone.text.toString())))
+                phoneVal))
             .observe(viewLifecycleOwner
             ) { response ->
                 when (response) {
@@ -99,7 +112,7 @@ class EditProfileFragment : BaseCardFragment() {
                                 val userModel = applicationPreferences.user!!
                                 userModel.name = name.text.toString()
                                 userModel.lastName = lastName.text.toString()
-                                userModel.phone = phone.text.toString()
+                                userModel.phone = phoneVal
                                 applicationPreferences.user = userModel
                                 showToast(R.string.update_user_info_success)
                                 listener?.invoke()
@@ -124,9 +137,10 @@ class EditProfileFragment : BaseCardFragment() {
         if(!phone.validateEmpty(R.string.str_register_validate_phone)) evaluate = false
 
         val phoneCode = countries.selectedItem.toString().split("+")[1]
-        if(applicationPreferences.user!!.name == name.text.toString() ||
-            applicationPreferences.user!!.lastName == lastName.text.toString() ||
-            applicationPreferences.user!!.phone == getString(R.string.blank_phone_number,phoneCode.substring(0,phoneCode.length-1),phone.text.toString())) {
+        val phoneVal = getString(R.string.blank_phone_number,phoneCode.substring(0,phoneCode.length-1),phone.text.toString())
+        if(applicationPreferences.user!!.name == name.text.toString() &&
+            applicationPreferences.user!!.lastName == lastName.text.toString() &&
+            applicationPreferences.user!!.phone == phoneVal) {
             evaluate = false
             showToast(R.string.str_nothing_to_change)
         }

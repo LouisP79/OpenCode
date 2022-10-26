@@ -21,8 +21,8 @@ class MainViewModel constructor(private val mainRepository: MainRepository): Vie
         return mainRepository.getProductList(page, searchQuery, categoryId)
     }
 
-    fun getCategoryList(page: Int): LiveData<RepoResponse<Pageable<CategoryModel>>>{
-        return mainRepository.getCategoryList(page)
+    fun getCategoryList(token: String, page: Int): LiveData<RepoResponse<Pageable<CategoryModel>>>{
+        return mainRepository.getCategoryList(token, page)
     }
 
     fun addCart(token: String, addCartRequest: AddCartRequest): LiveData<RepoResponse<Void>>{

@@ -45,7 +45,7 @@ class CategoriesFragment : BaseCardFragment() {
         adapter = CategoryAdapter()
         categories.adapter = adapter
 
-        restCategory()
+        resetCategoryList()
     }
 
     private fun resetCategoryList(){
@@ -66,11 +66,16 @@ class CategoriesFragment : BaseCardFragment() {
         }
     }
 
-    private fun loadMoreCategories() {if (!isLast){ page++; restCategory() }}
+    private fun loadMoreCategories() {
+        if (!isLast){
+            page++
+            restCategory()
+        }
+    }
 
     private fun restCategory() {
         if(page>1) loadingMoreCategories.visibility = View.VISIBLE
-        viewModel.getCategoryList(page)
+        viewModel.getCategoryList(applicationPreferences.token!!.accessToken, page)
             .observe(viewLifecycleOwner
             ) { response ->
                 when (response) {
