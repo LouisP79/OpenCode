@@ -73,26 +73,15 @@ abstract class BaseActivity : AppCompatActivity() {
 
     fun kickUser() {
         if(!applicationPreferences.firebaseToken.isNullOrBlank() && applicationPreferences.token != null) {
-            runDeleteFirebaseTokenWM()
+            val data = Data.Builder()
+            data.putString(ACTION, ACTION_DELETE)
+            data.putString(ACCESS_TOKEN, applicationPreferences.token!!.accessToken)
+            data.putString(FIREBASE_TOKEN, applicationPreferences.firebaseToken)
+            runFirebaseTokenWM(data.build())
         }
         applicationPreferences.clearAll()
         finishAffinity()
         startActivity(Intent(this, LoginActivity::class.java))
-    }
-
-    private fun runDeleteFirebaseTokenWM() {
-        val data = Data.Builder()
-        data.putString(ACCESS_TOKEN, applicationPreferences.token!!.accessToken)
-        data.putString(FIREBASE_TOKEN, applicationPreferences.firebaseToken)
-
-        val deleteFirebaseTokenWorkRequest: WorkRequest =
-            OneTimeWorkRequestBuilder<DeleteFirebaseTokenWorkManager>()
-                .addTag(DFTAG)
-                .setInputData(data.build())
-                .build()
-        WorkManager
-            .getInstance(this)
-            .enqueue(deleteFirebaseTokenWorkRequest)
     }
 
     fun validateMessage(message: String?, errorMessage: Int = R.string.str_unknow_rest_error) {
@@ -114,18 +103,25 @@ abstract class BaseActivity : AppCompatActivity() {
     fun successLoginRegister(tokenModel: TokenModel, userModel: UserModel) {
         applicationPreferences.token = tokenModel
         applicationPreferences.user = userModel
-        runCreateFirebaseTokenWM()
+
+        val data = Data.Builder()
+        data.putString(ACTION, ACTION_CREATE)
+        data.putString(ACCESS_TOKEN, applicationPreferences.token!!.accessToken)
+        data.putString(FIREBASE_TOKEN, applicationPreferences.firebaseToken)
+        runFirebaseTokenWM(data.build())
+
         startActivity(Intent(this, MainActivity::class.java))
         finishAffinity()
     }
 
-    private fun runCreateFirebaseTokenWM() {
-        val createFirebaseTokenWorkRequest: WorkRequest =
-            OneTimeWorkRequestBuilder<CreateFirebaseTokenWorkManager>()
-                .addTag(CFTAG)
+    private fun runFirebaseTokenWM(data: Data) {
+        val deleteFirebaseTokenWorkRequest: WorkRequest =
+            OneTimeWorkRequestBuilder<FirebaseTokenWorkManager>()
+                .addTag(FTAG)
+                .setInputData(data)
                 .build()
         WorkManager
             .getInstance(this)
-            .enqueue(createFirebaseTokenWorkRequest)
+            .enqueue(deleteFirebaseTokenWorkRequest)
     }
 }
