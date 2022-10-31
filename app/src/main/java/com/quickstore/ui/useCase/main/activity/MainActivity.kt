@@ -1,8 +1,12 @@
 package com.quickstore.ui.useCase.main.activity
 
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import com.quickstore.R
+import com.quickstore.firebaseCloudMessaging.ACTION_KICK_USER
 import com.quickstore.ui.base.activity.BaseActivity
 import com.quickstore.ui.useCase.login.activity.LoginActivity
 import com.quickstore.ui.useCase.main.fragment.home.HomeFragment
@@ -24,6 +28,8 @@ class MainActivity : BaseActivity() {
     private lateinit var homeFragment: HomeFragment
     private lateinit var shoppingFragment: ShoppingFragment
     private lateinit var profileFragment: ProfileFragment
+    private var broadcast: BroadcastNotifierMain? = null
+
 
     private var listener = mutableListOf<(()->Unit)>()
     private var onBackListener = mutableListOf<(()->Unit)>()
@@ -38,6 +44,13 @@ class MainActivity : BaseActivity() {
             onBackListener[onBackListener.size - 1].invoke()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        //unregisterBroadcast
+        if(broadcast!=null)
+            unregisterReceiver(broadcast)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme_NoActionBar)
         super.onCreate(savedInstanceState)
@@ -49,6 +62,12 @@ class MainActivity : BaseActivity() {
 
         setup()
         addListener()
+
+        //registerBroadcast
+        val filter = IntentFilter()
+        filter.addAction(ACTION_KICK_USER)
+        broadcast = BroadcastNotifierMain()
+        registerReceiver(broadcast, filter)
     }
 
     private fun addListener() {
@@ -142,5 +161,14 @@ class MainActivity : BaseActivity() {
 
     fun setOnSearchBackListener(listener: ((eval: Boolean)->Unit)?){
         this.onSearchBackListener = listener
+    }
+
+    inner class BroadcastNotifierMain : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            if (ACTION_KICK_USER == intent.action) {
+                showToast(R.string.you_logued_other_device)
+                kickUser()
+            }
+        }
     }
 }

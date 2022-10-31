@@ -22,6 +22,7 @@
     <string name="login">Login</string>
     <string name="save">Save</string>
     <string name="change">Change</string>
+    <string name="you_logued_other_device">You just signed in on another device</string>
     <string name="forgot_password">I forgot my password</string>
     <string name="register">Register</string>
     <string name="product">Product</string>

@@ -70,6 +70,7 @@
     <string name="warning">Advertencia</string>
     <string name="logout_alert_msg">¿Seguro que quieres cerrar sesión?</string>
     <string name="change">Cambiar</string>
+    <string name="you_logued_other_device">Acabas de iniciar sesión en otro dispositivo</string>
     <string name="hint_old_password">Antigua Contraseña</string>
     <string name="old_password_error">Contraseña Incorrecta</string>
     <string name="hint_new_password">Nueva Contraseña</string>

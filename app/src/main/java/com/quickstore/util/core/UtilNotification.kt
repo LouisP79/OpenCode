@@ -1,5 +1,6 @@
 package com.quickstore.util.core
 
+import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -15,9 +16,10 @@ import com.quickstore.ui.useCase.main.activity.MainActivity
 private const val CHANEL_ID = "quick_store_chanel"
 private const val NAME = "quick_store"
 
+@SuppressLint("InlinedApi")
 fun showNotification(context: Context, title: String, body: String){
     val intent = Intent(context, MainActivity::class.java)
-    val pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_ONE_SHOT)
+    val pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_ONE_SHOT or PendingIntent.FLAG_MUTABLE)
     val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
 
     val notification = NotificationCompat.Builder(context, CHANEL_ID)

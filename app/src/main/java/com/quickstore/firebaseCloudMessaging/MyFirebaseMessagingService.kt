@@ -1,9 +1,8 @@
 package com.quickstore.firebaseCloudMessaging
 
+import android.content.Intent
 import android.util.Log
-
 import com.google.firebase.messaging.FirebaseMessaging
-
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.quickstore.data.firebaseToken.FirebaseTokenWebServices
@@ -12,8 +11,10 @@ import com.quickstore.preferences.ApplicationPreferences
 import com.quickstore.util.core.showNotification
 import org.koin.android.ext.android.inject
 
+
 private val TAG = MyFirebaseMessagingService::class.java.simpleName
 private const val TOPIC = "quick_store"
+const val ACTION_KICK_USER = "com.quickstore.firebaseCloudMessaging.action.KICK_USER"
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
 
@@ -35,7 +36,24 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         Log.e(TAG, "Refreshed token: $refreshedToken")
     }
 
-    override fun onMessageReceived(remoteMessage: RemoteMessage) = showNotification(this, remoteMessage.notification!!.title!!, remoteMessage.notification!!.body!!)
+    override fun onMessageReceived(remoteMessage: RemoteMessage) {
+        if(remoteMessage.data.containsKey("logout")){
+            kickUser()
+        }else if(remoteMessage.data.containsKey("title") && remoteMessage.data.containsKey("message")){
+            showNotification(
+                this,
+                remoteMessage.data["title"]!!,
+                remoteMessage.data["message"]!!
+            )
+        }
+    }
+
+    private fun kickUser() {
+        val broadcast = Intent()
+        broadcast.action = ACTION_KICK_USER
+        sendBroadcast(broadcast)
+    }
+
     private fun restDeleteFirebaseToken(firebaseToken: String) = firebaseTokenWebServices.delete(applicationPreferences.token!!.accessToken, FirebaseTokenRequest(firebaseToken)).execute()
     private fun restCreateFirebaseToken(firebaseToken: String) = firebaseTokenWebServices.create(applicationPreferences.token!!.accessToken, FirebaseTokenRequest(firebaseToken)).execute()
 }
