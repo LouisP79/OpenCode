@@ -4,11 +4,11 @@
     <item>
         <bitmap
             android:gravity="center"
-            android:src="@drawable/img_quickstore_logo"/>
+            android:src="@mipmap/ic_launcher_foreground"/>
     </item>
     <item>
         <bitmap
             android:gravity="bottom"
-            android:src="@drawable/img_powered_by_quickdev_logo"/>
+            android:src="@drawable/brand_logo"/>
     </item>
 </layer-list>

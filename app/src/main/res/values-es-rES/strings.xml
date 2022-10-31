@@ -38,6 +38,7 @@
     <string name="unauthorized_error">No autorizado</string>
     <string name="str_unknow_rest_error">Error de comunicación desconocido</string>
     <string name="srt_exist_email">El correo ingresado ya existe</string>
+    <string name="srt_no_exist_email">El correo ingresado es incorrecto</string>
     <string name="srt_exist_address">La dirección ingresada ya existe</string>
     <string name="str_login_failed">El correo o contraseña son incorrectos</string>
     <string name="str_login_failed_pass">La contraseña es incorrecta</string>
@@ -70,6 +71,7 @@
     <string name="logout_alert_msg">¿Seguro que quieres cerrar sesión?</string>
     <string name="change">Cambiar</string>
     <string name="hint_old_password">Antigua Contraseña</string>
+    <string name="old_password_error">Contraseña Incorrecta</string>
     <string name="hint_new_password">Nueva Contraseña</string>
     <string name="hint_new_password_again">Repetir la Nueva Contraseña</string>
     <string name="str_register_validate_same_old_pass">La nueva contraseña debe ser diferente a la nueva</string>

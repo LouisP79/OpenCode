@@ -11,6 +11,7 @@ import com.quickstore.util.extencions.validateEmpty
 import kotlinx.android.synthetic.main.activity_recover_password.*
 import kotlinx.android.synthetic.main.content_recover_password.*
 import org.koin.android.viewmodel.ext.android.viewModel
+import java.net.HttpURLConnection
 
 class RecoverPasswordActivity : BaseActivity() {
 
@@ -49,7 +50,12 @@ class RecoverPasswordActivity : BaseActivity() {
                             if (response.dataResponse.isSuccessful) {
                                 showToast(R.string.send_forgot_password_message)
                                 finish()
-                            } else errorCode(response.dataResponse.code())
+                            } else {
+                                when(response.dataResponse.code()){
+                                    HttpURLConnection.HTTP_BAD_REQUEST -> showToast(R.string.srt_no_exist_email)
+                                }
+                                errorCode(response.dataResponse.code())
+                            }
                         } else errorConnection(response.throwable!!)
                     }
                 }

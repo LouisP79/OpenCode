@@ -12,6 +12,7 @@ import com.quickstore.util.extencions.validateLength
 import kotlinx.android.synthetic.main.content_change_password.*
 import kotlinx.android.synthetic.main.fragment_change_password.*
 import org.koin.android.viewmodel.ext.android.viewModel
+import java.net.HttpURLConnection
 import java.util.*
 
 class ChangePasswordFragment : BaseCardFragment() {
@@ -50,7 +51,12 @@ class ChangePasswordFragment : BaseCardFragment() {
                             if (response.dataResponse.isSuccessful) {
                                 showToast(R.string.change_password_success)
                                 back()
-                            } else errorCode(response.dataResponse.code())
+                            } else{
+                                when(response.dataResponse.code()){
+                                    HttpURLConnection.HTTP_BAD_REQUEST -> showToast(R.string.old_password_error)
+                                }
+                                errorCode(response.dataResponse.code())
+                            }
                         } else errorConnection(response.throwable!!)
                     }
                 }
