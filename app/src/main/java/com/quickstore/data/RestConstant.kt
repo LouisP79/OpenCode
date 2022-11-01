@@ -37,7 +37,7 @@ object RestConstant {
     const val ENDPOINT_CREATE_FIREBASE_TOKEN = "/createfirebasetoken"
     const val ENDPOINT_DELETE_FIREBASE_TOKEN = "/deletefirebasetoken"
 
-    const val ENDPOINT_PRODUCT = "/product"
+    const val ENDPOINT_PRODUCT_LIST = "/productlist"
 
     class Credentials {
         var authCredentials: String = BASIC + Base64.encodeToString(

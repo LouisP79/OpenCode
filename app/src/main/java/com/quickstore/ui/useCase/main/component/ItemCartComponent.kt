@@ -54,14 +54,14 @@ class ItemCartComponent : LinearLayout {
     var priceCart: Double = 1.0
         set(value) {
             field = value
-            priceTv.text = context.getString(R.string.blank_soles, field)
-            subTotalTv.text = context.getString(R.string.blank_soles, field * quantityCart)
+            priceTv.text = context.getString(R.string.blank_coin, field)
+            subTotalTv.text = context.getString(R.string.blank_coin, field * quantityCart)
         }
 
     var subTotalCart: Double = 1.0
         set(value) {
             field = value
-            subTotalTv.text = context.getString(R.string.blank_soles, field)
+            subTotalTv.text = context.getString(R.string.blank_coin, field)
         }
 
     var decimalCart: Boolean = false

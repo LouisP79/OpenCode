@@ -54,9 +54,9 @@ class ProductDetailFragment : BaseCardFragment() {
         productId = product.id
 
         glide(requireContext(), img,
-            BuildConfig.URL_IMAGES + RestConstant.PRODUCT + product.images + RestConstant.ALT)
+            BuildConfig.URL_IMAGES + RestConstant.PRODUCT + product.image + RestConstant.ALT)
 
-        price.text = requireContext().getString(R.string.blank_soles, product.price)
+        price.text = requireContext().getString(R.string.blank_coin, product.price)
         name.text = product.name
         description.text = product.description
 

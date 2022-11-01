@@ -123,7 +123,7 @@
     <string name="str_login_failed">The email or password are incorrect</string>
     <string name="str_login_failed_pass">The password are incorrect</string>
 
-    <string name="blank_soles" translatable="false">S/%,.2f</string>
+    <string name="blank_coin" translatable="false">$%,.2f</string>
     <string name="blank_double" translatable="false">%,.2f</string>
     <string name="blank_ss" translatable="false">%s %s</string>
     <string name="blank_sgs" translatable="false">%s - %s</string>

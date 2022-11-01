@@ -147,7 +147,7 @@ class ShoppingFragment : BaseFragment() {
         if(response.items.isEmpty())
             emptyList.visibility = View.VISIBLE
         else{
-            subTotal.text = getString(R.string.blank_soles, response.subtotal)
+            subTotal.text = getString(R.string.blank_coin, response.subtotal)
             adapter.items = response.items as MutableList<CartItemsModel>
             emptyList.visibility = View.GONE
         }
@@ -158,6 +158,6 @@ class ShoppingFragment : BaseFragment() {
         for (item in adapter.items){
             subTotalValue += item.total
         }
-        subTotal.text = getString(R.string.blank_soles, subTotalValue)
+        subTotal.text = getString(R.string.blank_coin, subTotalValue)
     }
 }

@@ -33,7 +33,7 @@ class HomeFragment : BaseFragment() {
     private val viewModel: MainViewModel by viewModel()
     private lateinit var adapter: ProductAdapter
     private var isLast = true
-    private var page = 0
+    private var page = 1
     private var categoryId = 0L
     private var searchQuery = ""
     private val categoriesFragment = CategoriesFragment.newInstance()
@@ -84,7 +84,7 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun resetProductList(){
-        page = 0
+        page = 1
         categoryId = 0L
         searchQuery = ""
         isLast = true
@@ -176,8 +176,8 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun restProduct() {
-        if(page>0) loadingMoreProducts.visibility = View.VISIBLE
-        viewModel.getProductList(page, searchQuery, categoryId)
+        if(page>1) loadingMoreProducts.visibility = View.VISIBLE
+        viewModel.getProductList(applicationPreferences.token!!.accessToken, page, searchQuery, categoryId)
             .observe(viewLifecycleOwner
             ) { response ->
                 when (response) {

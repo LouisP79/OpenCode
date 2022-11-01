@@ -48,7 +48,7 @@ class ShoppingCartAdapter: RecyclerView.Adapter<ShoppingCartAdapter.ViewHolder>(
     inner class ViewHolder (view: View) : RecyclerView.ViewHolder(view) {
         fun bind(item: CartItemsModel, position: Int) = with(itemView) {
 
-            itemCart.imgSrc = if(item.product.images.isNotEmpty()) item.product.images[0] else ""
+            itemCart.imgSrc = item.product.image
             itemCart.name = item.product.name
             itemCart.description = item.product.description
             itemCart.priceCart = item.product.price

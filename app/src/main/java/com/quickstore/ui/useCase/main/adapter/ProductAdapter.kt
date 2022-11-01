@@ -70,9 +70,9 @@ class ProductAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
             glide(context, img,
-                BuildConfig.URL_IMAGES + RestConstant.PRODUCT + if(item.images.isNotEmpty()) item.images[0] else "" + RestConstant.ALT)
+                BuildConfig.URL_IMAGES + RestConstant.PRODUCT + item.image + RestConstant.ALT)
 
-            price.text = context.getString(R.string.blank_soles, item.price)
+            price.text = context.getString(R.string.blank_coin, item.price)
             name.text = item.name
             description.text = item.description
 

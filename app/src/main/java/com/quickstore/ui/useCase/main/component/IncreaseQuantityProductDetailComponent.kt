@@ -23,13 +23,13 @@ class IncreaseQuantityProductDetailComponent : LinearLayout {
     var subTotal: Double = 1.0
         set(value) {
             field = value
-            subTotalTv.text = context.getString(R.string.blank_soles, field)
+            subTotalTv.text = context.getString(R.string.blank_coin, field)
         }
 
     var price: Double = 1.0
         set(value) {
             field = value
-            subTotalTv.text = context.getString(R.string.blank_soles, field * quantity)
+            subTotalTv.text = context.getString(R.string.blank_coin, field * quantity)
         }
 
     var decimal: Boolean = false
