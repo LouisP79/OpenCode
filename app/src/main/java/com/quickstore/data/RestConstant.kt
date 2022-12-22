@@ -16,8 +16,10 @@ object RestConstant {
     const val ENDPOINT_ON_BOARDING = "/onboarding"
     const val ENDPOINT_COUNTRY_LIST = "/countrylist"
 
-    const val ENDPOINT_CART = "/cart"
-    const val ENDPOINT_CART_DECREASE = "/decrease"
+    const val ENDPOINT_ADD_CART = "/addcart"
+    const val ENDPOINT_DECREASE_CART = "/decreasecart"
+    const val ENDPOINT_LIST_CART = "/listcart"
+    const val ENDPOINT_DELETE_PRODUCT_CART = "/deleteproductcart"
 
     const val ENDPOINT_CATEGORY_LIST = "/categorylist"
 
