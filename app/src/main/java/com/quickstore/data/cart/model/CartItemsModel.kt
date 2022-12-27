@@ -16,8 +16,8 @@ class CartItemsModel {
     @field:JsonProperty
     var quantity: Double = 0.0
 
-    @field:JsonProperty
-    var total: Double = 0.0
+    @field:JsonProperty("sub_total_per_product")
+    var subTotalPerProduct: Double = 0.0
 
     var loading: Boolean = false
 
