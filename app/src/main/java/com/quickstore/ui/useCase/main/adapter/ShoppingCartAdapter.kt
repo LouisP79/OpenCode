@@ -36,7 +36,7 @@ class ShoppingCartAdapter: RecyclerView.Adapter<ShoppingCartAdapter.ViewHolder>(
     fun confirmAddSubtract(quantityAddedSubtracted: Double, position: Int, ejecution: Boolean){
         if(ejecution) items[position].quantity += quantityAddedSubtracted
         else items[position].quantity -= quantityAddedSubtracted
-        items[position].total = items[position].quantity * items[position].product.price
+        items[position].subTotalPerProduct = items[position].quantity * items[position].product.price
         items[position].loading = false
         notifyItemChanged(position)
     }
@@ -53,7 +53,7 @@ class ShoppingCartAdapter: RecyclerView.Adapter<ShoppingCartAdapter.ViewHolder>(
             itemCart.description = item.product.description
             itemCart.priceCart = item.product.price
             itemCart.quantityCart = item.quantity
-            itemCart.subTotalCart = item.total
+            itemCart.subTotalCart = item.subTotalPerProduct
 
             itemCart.itemCartListener = object: ItemCartComponent.ItemCartListener{
                 override fun onDelete() {cartListener?.onDelete(item.product.id, position)}
