@@ -215,6 +215,23 @@ class MainRepository constructor(private val productWebServices: ProductWebServi
         return data
     }
 
+    fun getAddressListMeetingPoints(token: String): LiveData<RepoResponse<List<AddressModel>>>{
+        val data = MutableLiveData<RepoResponse<List<AddressModel>>>()
+
+        addressWebServices.addressesListMeetingPoints(token)
+            .enqueue(object: Callback<List<AddressModel>>{
+                override fun onResponse(call: Call<List<AddressModel>>, response: Response<List<AddressModel>>) {
+                    data.value = RepoResponse.respond(response, null)
+                }
+
+                override fun onFailure(call: Call<List<AddressModel>>, t: Throwable) {
+                    data.value = RepoResponse.respond(null, t)
+                }
+            })
+
+        return data
+    }
+
     fun createAddress(token: String, addressRequest: AddressRequest): LiveData<RepoResponse<AddressModel>>{
         val data = MutableLiveData<RepoResponse<AddressModel>>()
 

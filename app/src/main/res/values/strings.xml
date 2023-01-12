@@ -48,8 +48,8 @@
     <string name="phone">Mobile</string>
     <string name="delivery_time">Delivery time</string>
     <string name="address_selected">Address selected</string>
-    <string name="all_your_addresses">All your addresses</string>
-    <string name="addresses">Addresses</string>
+    <string name="all_your_addresses">Meeting points and approved addresses</string>
+    <string name="addresses">Approved Addresses</string>
     <string name="new_address">+ Create new address</string>
     <string name="change_password">Change Password</string>
     <string name="view_all_address">View all address</string>
@@ -58,7 +58,7 @@
     <string name="cart_items_zero">You must add at least one product to cart</string>
 
 
-    <string name="create_address_success">Address was created successfully</string>
+    <string name="create_address_success">Address is pending approval</string>
 
     <string name="send_forgot_password">We will send a temporary password to your email</string>
     <string name="send_forgot_password_message">We will send you a provisional password to your email, check it and log in again</string>

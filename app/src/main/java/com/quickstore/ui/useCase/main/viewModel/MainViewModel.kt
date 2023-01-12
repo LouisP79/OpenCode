@@ -53,6 +53,10 @@ class MainViewModel constructor(private val mainRepository: MainRepository): Vie
         return mainRepository.getAddressList(token)
     }
 
+    fun getAddressListMeetingPoints(token: String): LiveData<RepoResponse<List<AddressModel>>>{
+        return mainRepository.getAddressListMeetingPoints(token)
+    }
+
     fun createAddress(token: String, addressRequest: AddressRequest): LiveData<RepoResponse<AddressModel>>{
         return mainRepository.createAddress(token, addressRequest)
     }

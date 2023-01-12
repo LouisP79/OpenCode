@@ -46,10 +46,6 @@ class ShoppingAddressScheduleFragment : BaseCardFragment() {
         newAddress.setOnClickListener {
             val fragment = CreateAddressFragment.newInstance()
             addFragmentWithEffect(fragment)
-            fragment.setOnUserInfoUpdateListener {
-                addressSelected(it)
-                updateAddressInProfile(it)
-            }
         }
         viewAllAddress.setOnClickListener {
             val shoppingAddressesListFragment = ShoppingAddressesListFragment.newInstance()
@@ -72,7 +68,7 @@ class ShoppingAddressScheduleFragment : BaseCardFragment() {
     private fun restAddresses() {
         loadingAddress.visibility = View.VISIBLE
         selectedAddress.visibility = View.GONE
-        viewModel.getAddressList(applicationPreferences.getBearerToken()!!
+        viewModel.getAddressListMeetingPoints(applicationPreferences.getBearerToken()!!
         ).observe(viewLifecycleOwner
         ) { response ->
             when (response) {

@@ -24,7 +24,6 @@ class CreateAddressFragment : BaseCardFragment() {
     override val layoutResourceId: Int
         get() = R.layout.fragment_create_address
 
-    private var listener: ((addressModel: AddressModel)->Unit)? = null
     private val viewModel: MainViewModel by viewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -72,12 +71,17 @@ class CreateAddressFragment : BaseCardFragment() {
                         if (response.dataResponse != null) {
                             if (response.dataResponse.isSuccessful) {
                                 showToast(R.string.create_address_success)
-                                listener?.invoke(response.dataResponse.body()!!)
                                 back()
                             } else {
                                 when(response.dataResponse.code()){
-                                    HttpURLConnection.HTTP_CONFLICT -> showToast(getString(R.string.srt_exist_address))
-                                    else -> errorCode(response.dataResponse.code())
+                                    HttpURLConnection.HTTP_CONFLICT -> {
+                                        showToast(getString(R.string.srt_exist_address))
+                                        send.revertAnimation()
+                                    }
+                                    else -> {
+                                        errorCode(response.dataResponse.code())
+                                        send.revertAnimation()
+                                    }
                                 }
                             }
                         } else errorConnection(response.throwable!!)
@@ -98,9 +102,5 @@ class CreateAddressFragment : BaseCardFragment() {
         if(!address.validateLength(2, R.string.str_validate_name_last_name)) evaluate = false
 
         return evaluate
-    }
-
-    fun setOnUserInfoUpdateListener(listener: (addressModel: AddressModel) -> Unit){
-        this.listener = listener
     }
 }

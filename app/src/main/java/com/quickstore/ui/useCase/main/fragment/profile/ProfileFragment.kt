@@ -69,9 +69,6 @@ class ProfileFragment : BaseFragment() {
         newAddress.setOnClickListener {
             val fragment = CreateAddressFragment.newInstance()
             addFragmentWithEffect(fragment)
-            fragment.setOnUserInfoUpdateListener {
-                updateNewAddress(it)
-            }
         }
     }
 

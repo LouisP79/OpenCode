@@ -47,7 +47,7 @@ class ShoppingAddressesListFragment : BaseCardFragment() {
 
     private fun restAddresses() {
         loadingAddresses.visibility = View.VISIBLE
-        viewModel.getAddressList(applicationPreferences.getBearerToken()!!
+        viewModel.getAddressListMeetingPoints(applicationPreferences.getBearerToken()!!
         ).observe(viewLifecycleOwner
         ) { response ->
             when (response) {
