@@ -47,6 +47,7 @@
 
     <string name="phone">Mobile</string>
     <string name="delivery_time">Delivery time</string>
+    <string name="delivery_day">Delivery day</string>
     <string name="address_selected">Address selected</string>
     <string name="all_your_addresses">Meeting points and approved addresses</string>
     <string name="addresses">Approved Addresses</string>
@@ -81,6 +82,8 @@
     <string name="office">Office</string>
     <string name="home">Home</string>
     <string name="other">Other</string>
+    <string name="order">Order</string>
+    <string name="create_order_error">You must select a valid address, day and time</string>
 
     <string name="error_refresh_token">Your session expired, please login again</string>
     <string name="error_unknow">An unknown error occurred while trying to refresh your session</string>
@@ -99,6 +102,7 @@
     <string name="loading_products">Loading products…</string>
     <string name="loading_addresses">Loading addresses…</string>
     <string name="loading_delivery_time">Loading delivery time…</string>
+    <string name="loading_delivery_day">Loading delivery day…</string>
     <string name="loading_categories">Loading categories…</string>
 
     <string name="str_register_validate_name">Enter your name</string>

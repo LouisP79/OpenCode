@@ -11,7 +11,7 @@ import com.quickstore.data.product.model.ProductModel
 import com.quickstore.ui.base.fragment.BaseFragment
 import com.quickstore.ui.useCase.main.activity.MainActivity
 import com.quickstore.ui.useCase.main.adapter.ProductAdapter
-import com.quickstore.ui.useCase.main.model.Suggestion
+import com.quickstore.ui.useCase.main.model.SuggestionModel
 import com.quickstore.ui.useCase.main.viewModel.MainViewModel
 import com.quickstore.util.listener.EndlessRecyclerViewScrollListener
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -37,7 +37,7 @@ class HomeFragment : BaseFragment() {
     private var categoryId = 0L
     private var searchQuery = ""
     private val categoriesFragment = CategoriesFragment.newInstance()
-    private val suggestions = mutableListOf<Suggestion>()
+    private val suggestionModels = mutableListOf<SuggestionModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -103,7 +103,7 @@ class HomeFragment : BaseFragment() {
 
     private fun cleanList(){
         adapter.cleanItems()
-        suggestions.clear()
+        suggestionModels.clear()
         restProduct()
     }
 
@@ -156,9 +156,9 @@ class HomeFragment : BaseFragment() {
         reloadList()
     }
 
-    private fun showSuggestions(search: String): MutableList<Suggestion>{
-        val aux = mutableListOf<Suggestion>()
-        for(suggestion in suggestions){
+    private fun showSuggestions(search: String): MutableList<SuggestionModel>{
+        val aux = mutableListOf<SuggestionModel>()
+        for(suggestion in suggestionModels){
             if (suggestion.value.uppercase(Locale.ROOT).contains(search.uppercase(Locale.ROOT)))
                 aux.add(suggestion)
         }
@@ -216,7 +216,7 @@ class HomeFragment : BaseFragment() {
 
     private fun addSuggestions(items: MutableList<ProductModel>){
         for(item in items){
-            suggestions.add(Suggestion(item.name))
+            suggestionModels.add(SuggestionModel(item.name))
         }
     }
 

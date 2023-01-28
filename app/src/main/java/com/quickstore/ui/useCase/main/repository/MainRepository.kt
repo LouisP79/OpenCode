@@ -15,9 +15,13 @@ import com.quickstore.data.country.CountryWebServices
 import com.quickstore.data.country.model.CountryModel
 import com.quickstore.data.product.ProductWebServices
 import com.quickstore.data.product.model.ProductModel
+import com.quickstore.data.timeDelivery.TimeDeliveryWebServices
+import com.quickstore.data.timeDelivery.model.TimeDeliveryModel
 import com.quickstore.data.user.UserWebServices
 import com.quickstore.data.user.request.ChangePwdRequest
 import com.quickstore.data.user.request.UpdateUserInfoRequest
+import com.quickstore.data.weekDayDelivery.WeekDayDeliveryWebServices
+import com.quickstore.data.weekDayDelivery.model.WeekDayDeliveryModel
 import com.quickstore.util.repository.RepoResponse
 import retrofit2.Call
 import retrofit2.Callback
@@ -25,7 +29,8 @@ import retrofit2.Response
 
 class MainRepository constructor(private val productWebServices: ProductWebServices, private val cartWebServices: CartWebServices,
                                  private val categoryWebServices: CategoryWebServices, private val userWebServices: UserWebServices,
-                                 private val addressWebServices: AddressWebServices, private val countryWebServices: CountryWebServices) {
+                                 private val addressWebServices: AddressWebServices, private val countryWebServices: CountryWebServices,
+                                 private val timeDeliveryWebServices: TimeDeliveryWebServices, private val weekDayDeliveryWebServices: WeekDayDeliveryWebServices) {
 
     fun getProductList(token: String, page: Int, searchQuery: String = "", categoryId: Long = 0L): LiveData<RepoResponse<Pageable<ProductModel>>>{
         val data = MutableLiveData<RepoResponse<Pageable<ProductModel>>>()
@@ -225,6 +230,40 @@ class MainRepository constructor(private val productWebServices: ProductWebServi
                 }
 
                 override fun onFailure(call: Call<List<AddressModel>>, t: Throwable) {
+                    data.value = RepoResponse.respond(null, t)
+                }
+            })
+
+        return data
+    }
+
+    fun getDeliveryTimes(token: String): LiveData<RepoResponse<List<TimeDeliveryModel>>>{
+        val data = MutableLiveData<RepoResponse<List<TimeDeliveryModel>>>()
+
+        timeDeliveryWebServices.timeDeliveryList(token)
+            .enqueue(object: Callback<List<TimeDeliveryModel>>{
+                override fun onResponse(call: Call<List<TimeDeliveryModel>>, response: Response<List<TimeDeliveryModel>>) {
+                    data.value = RepoResponse.respond(response, null)
+                }
+
+                override fun onFailure(call: Call<List<TimeDeliveryModel>>, t: Throwable) {
+                    data.value = RepoResponse.respond(null, t)
+                }
+            })
+
+        return data
+    }
+
+    fun getDeliveryWeekDays(token: String): LiveData<RepoResponse<List<WeekDayDeliveryModel>>>{
+        val data = MutableLiveData<RepoResponse<List<WeekDayDeliveryModel>>>()
+
+        weekDayDeliveryWebServices.weekDayDeliveryList(token)
+            .enqueue(object: Callback<List<WeekDayDeliveryModel>>{
+                override fun onResponse(call: Call<List<WeekDayDeliveryModel>>, response: Response<List<WeekDayDeliveryModel>>) {
+                    data.value = RepoResponse.respond(response, null)
+                }
+
+                override fun onFailure(call: Call<List<WeekDayDeliveryModel>>, t: Throwable) {
                     data.value = RepoResponse.respond(null, t)
                 }
             })

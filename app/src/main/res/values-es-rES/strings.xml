@@ -87,6 +87,8 @@
     <string name="office">Oficina</string>
     <string name="home">Casa</string>
     <string name="other">Otro</string>
+    <string name="order">Pedir</string>
+    <string name="create_order_error">Debe seleccionar una dirección, un día y un horario válido</string>
     <string name="str_register_validate_tag">Ingrese una etiqueta para la dirección</string>
     <string name="str_register_validate_address">Ingrese la dirección</string>
     <string name="str_register_validate_reference">Ingrese una referencia</string>
@@ -97,7 +99,9 @@
     <string name="process_purchase">Procesar Compra</string>
     <string name="title_shopping_address">Dirección de entrega</string>
     <string name="loading_delivery_time">Cargando tiempo de entrega…</string>
+    <string name="loading_delivery_day">Cargando día de entrega…</string>
     <string name="delivery_time">Horario de entrega</string>
+    <string name="delivery_day">Día de entrega</string>
     <string name="address_selected">Dirección seleccionada</string>
     <string name="view_all_address">Ver todas las direcciones</string>
     <string name="cart_items_zero">Debe agregar al menos un producto al carrito</string>

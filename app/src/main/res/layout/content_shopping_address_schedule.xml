@@ -103,6 +103,42 @@
         android:layout_marginTop="@dimen/profile_text_view_label_margin_top"
         android:layout_marginStart="15dp"
         android:textStyle="bold"
+        android:text="@string/delivery_day"/>
+
+    <LinearLayout
+        android:id="@+id/loadingDeliveryDay"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/loading_delivery_day"/>
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/deliveryDay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_delivery_date"
+        tools:itemCount="2"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/profile_text_view_label_margin_top"
+        android:layout_marginStart="15dp"
+        android:textStyle="bold"
         android:text="@string/delivery_time"/>
 
     <LinearLayout
@@ -110,7 +146,6 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:visibility="gone"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -133,7 +168,7 @@
         android:layout_weight="1"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_delivery_time"
-        tools:itemCount="3"/>
+        tools:itemCount="2"/>
 
     <Button
         android:id="@+id/next"
@@ -145,7 +180,7 @@
         android:layout_marginEnd="@dimen/default_margin_start_end_button"
         android:layout_marginTop="@dimen/default_margin_top_textInputLayout"
         android:layout_marginBottom="@dimen/default_text_size_button"
-        android:text="@string/next"
+        android:text="@string/order"
         android:textStyle="bold"
         android:textColor="@color/colorPrimary"
         android:textSize="@dimen/default_text_size_button"

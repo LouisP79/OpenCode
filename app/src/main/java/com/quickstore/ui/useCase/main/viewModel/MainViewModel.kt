@@ -10,8 +10,10 @@ import com.quickstore.data.cart.request.AddCartRequest
 import com.quickstore.data.category.model.CategoryModel
 import com.quickstore.data.country.model.CountryModel
 import com.quickstore.data.product.model.ProductModel
+import com.quickstore.data.timeDelivery.model.TimeDeliveryModel
 import com.quickstore.data.user.request.ChangePwdRequest
 import com.quickstore.data.user.request.UpdateUserInfoRequest
+import com.quickstore.data.weekDayDelivery.model.WeekDayDeliveryModel
 import com.quickstore.ui.useCase.main.repository.MainRepository
 import com.quickstore.util.repository.RepoResponse
 
@@ -55,6 +57,14 @@ class MainViewModel constructor(private val mainRepository: MainRepository): Vie
 
     fun getAddressListMeetingPoints(token: String): LiveData<RepoResponse<List<AddressModel>>>{
         return mainRepository.getAddressListMeetingPoints(token)
+    }
+
+    fun getDeliveryTimes(token: String): LiveData<RepoResponse<List<TimeDeliveryModel>>>{
+        return mainRepository.getDeliveryTimes(token)
+    }
+
+    fun getDeliveryWeekDays(token: String): LiveData<RepoResponse<List<WeekDayDeliveryModel>>>{
+        return mainRepository.getDeliveryWeekDays(token)
     }
 
     fun createAddress(token: String, addressRequest: AddressRequest): LiveData<RepoResponse<AddressModel>>{

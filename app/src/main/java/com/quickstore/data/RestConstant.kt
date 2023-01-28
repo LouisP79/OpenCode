@@ -42,6 +42,9 @@ object RestConstant {
 
     const val ENDPOINT_PRODUCT_LIST = "/productlist"
 
+    const val ENDPOINT_TIME_DELIVERY_LIST = "/timedeliverylist"
+    const val ENDPOINT_WEEK_DAY_DELIVERY_LIST = "/weekdaydeliverylist"
+
     class Credentials {
         var authCredentials: String = BASIC + Base64.encodeToString(
                 String.format(FORMAT,
