@@ -84,6 +84,8 @@
     <string name="other">Other</string>
     <string name="order">Order</string>
     <string name="create_order_error">You must select a valid address, day and time</string>
+    <string name="shipping_data_error">For now we are closed, try again later</string>
+
 
     <string name="error_refresh_token">Your session expired, please login again</string>
     <string name="error_unknow">An unknown error occurred while trying to refresh your session</string>

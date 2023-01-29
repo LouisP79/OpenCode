@@ -89,6 +89,7 @@
     <string name="other">Otro</string>
     <string name="order">Pedir</string>
     <string name="create_order_error">Debe seleccionar una dirección, un día y un horario válido</string>
+    <string name="shipping_data_error">Por ahora nos encontramos cerrados, intente más tarde</string>
     <string name="str_register_validate_tag">Ingrese una etiqueta para la dirección</string>
     <string name="str_register_validate_address">Ingrese la dirección</string>
     <string name="str_register_validate_reference">Ingrese una referencia</string>

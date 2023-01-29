@@ -101,6 +101,11 @@ class ShoppingAddressScheduleFragment : BaseCardFragment() {
                 else -> {
                     if (response.dataResponse != null) {
                         if (response.dataResponse.isSuccessful) {
+                            if(response.dataResponse.body()!!.isEmpty()){
+                                showToast(R.string.shipping_data_error)
+                                back()
+                                return@observe
+                            }
                             addressSelected(response.dataResponse.body()!![0])
                         } else errorCode(response.dataResponse.code())
                     } else errorConnection(response.throwable!!)
@@ -121,6 +126,11 @@ class ShoppingAddressScheduleFragment : BaseCardFragment() {
                 else -> {
                     if (response.dataResponse != null) {
                         if (response.dataResponse.isSuccessful) {
+                            if(response.dataResponse.body()!!.isEmpty()){
+                                showToast(R.string.shipping_data_error)
+                                back()
+                                return@observe
+                            }
                             adapter.items = response.dataResponse.body()!!
                         } else errorCode(response.dataResponse.code())
                     } else errorConnection(response.throwable!!)
@@ -140,6 +150,27 @@ class ShoppingAddressScheduleFragment : BaseCardFragment() {
                 else -> {
                     if (response.dataResponse != null) {
                         if (response.dataResponse.isSuccessful) {
+                            if(response.dataResponse.body()!!.isEmpty()){
+                                showToast(R.string.shipping_data_error)
+                                back()
+                                return@observe
+                            }
+                            var enableDate = false
+
+                            val schedule = response.dataResponse.body()!!
+                            for (sch in schedule) {
+                                if(sch.status == 1){
+                                    enableDate = true
+                                    break
+                                }
+                            }
+
+                            if(!enableDate){
+                                showToast(R.string.shipping_data_error)
+                                back()
+                                return@observe
+                            }
+
                             val cal = Calendar.getInstance()
                             var items  = mutableListOf<DateDeliveryModel>()
 
@@ -150,7 +181,6 @@ class ShoppingAddressScheduleFragment : BaseCardFragment() {
                                 val valueToSearchMonth = cal.get(Calendar.MONTH) + 1
                                 val valueToSearchYear = cal.get(Calendar.YEAR)
 
-                                val schedule = response.dataResponse.body()!!
                                 for (sch in schedule) {
                                     if (valueToSearch == sch.weekDayNumber) {
                                         if (sch.status == 1) {
