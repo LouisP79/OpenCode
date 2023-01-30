@@ -5,6 +5,7 @@ import com.quickstore.data.cart.CartWebServices
 import com.quickstore.data.category.CategoryWebServices
 import com.quickstore.data.country.CountryWebServices
 import com.quickstore.data.onBoarding.OnBoardingWebServices
+import com.quickstore.data.order.OrderWebServices
 import com.quickstore.data.product.ProductWebServices
 import com.quickstore.data.timeDelivery.TimeDeliveryWebServices
 import com.quickstore.data.token.TokenWebServices
@@ -21,12 +22,12 @@ val repositoryModule = module {
     single { provideOnBoardingRepository(get()) }
     single { provideRegisterRepository(get(), get(), get()) }
     single { provideLoginRepository(get(), get()) }
-    single { provideMainRepository(get(), get(), get(), get(), get(), get(), get(), get()) }
+    single { provideMainRepository(get(), get(), get(), get(), get(), get(), get(), get(), get()) }
     single { provideRecoverPasswordRepository(get()) }
 }
 
 fun provideOnBoardingRepository(onBoardingWebServices: OnBoardingWebServices): OnBoardingRepository = OnBoardingRepository(onBoardingWebServices)
 fun provideRegisterRepository(userWebServices: UserWebServices, tokenWebServices: TokenWebServices, countryWebServices: CountryWebServices): RegisterRepository = RegisterRepository(userWebServices, tokenWebServices, countryWebServices)
 fun provideLoginRepository(tokenWebServices: TokenWebServices, userWebServices: UserWebServices): LoginRepository = LoginRepository(tokenWebServices, userWebServices)
-fun provideMainRepository(productWebServices: ProductWebServices, cartWebServices: CartWebServices, categoryWebServices: CategoryWebServices, userWebServices: UserWebServices, addressWebServices: AddressWebServices, countryWebServices: CountryWebServices, timeDeliveryWebServices: TimeDeliveryWebServices, weekDayDeliveryWebServices: WeekDayDeliveryWebServices): MainRepository = MainRepository(productWebServices, cartWebServices, categoryWebServices, userWebServices, addressWebServices, countryWebServices, timeDeliveryWebServices, weekDayDeliveryWebServices)
+fun provideMainRepository(productWebServices: ProductWebServices, cartWebServices: CartWebServices, categoryWebServices: CategoryWebServices, userWebServices: UserWebServices, addressWebServices: AddressWebServices, countryWebServices: CountryWebServices, timeDeliveryWebServices: TimeDeliveryWebServices, weekDayDeliveryWebServices: WeekDayDeliveryWebServices, orderWebServices: OrderWebServices): MainRepository = MainRepository(productWebServices, cartWebServices, categoryWebServices, userWebServices, addressWebServices, countryWebServices, timeDeliveryWebServices, weekDayDeliveryWebServices, orderWebServices)
 fun provideRecoverPasswordRepository(userWebServices: UserWebServices): RecoverPasswordRepository = RecoverPasswordRepository(userWebServices)

@@ -13,6 +13,9 @@ import com.quickstore.data.category.CategoryWebServices
 import com.quickstore.data.category.model.CategoryModel
 import com.quickstore.data.country.CountryWebServices
 import com.quickstore.data.country.model.CountryModel
+import com.quickstore.data.order.OrderWebServices
+import com.quickstore.data.order.model.OrderModel
+import com.quickstore.data.order.request.OrderRequest
 import com.quickstore.data.product.ProductWebServices
 import com.quickstore.data.product.model.ProductModel
 import com.quickstore.data.timeDelivery.TimeDeliveryWebServices
@@ -30,7 +33,8 @@ import retrofit2.Response
 class MainRepository constructor(private val productWebServices: ProductWebServices, private val cartWebServices: CartWebServices,
                                  private val categoryWebServices: CategoryWebServices, private val userWebServices: UserWebServices,
                                  private val addressWebServices: AddressWebServices, private val countryWebServices: CountryWebServices,
-                                 private val timeDeliveryWebServices: TimeDeliveryWebServices, private val weekDayDeliveryWebServices: WeekDayDeliveryWebServices) {
+                                 private val timeDeliveryWebServices: TimeDeliveryWebServices, private val weekDayDeliveryWebServices: WeekDayDeliveryWebServices,
+                                 private val orderWebServices: OrderWebServices) {
 
     fun getProductList(token: String, page: Int, searchQuery: String = "", categoryId: Long = 0L): LiveData<RepoResponse<Pageable<ProductModel>>>{
         val data = MutableLiveData<RepoResponse<Pageable<ProductModel>>>()
@@ -298,6 +302,40 @@ class MainRepository constructor(private val productWebServices: ProductWebServi
                 }
 
                 override fun onFailure(call: Call<Void>, t: Throwable) {
+                    data.value = RepoResponse.respond(null, t)
+                }
+            })
+
+        return data
+    }
+
+    fun createOrder(token: String, orderRequest: OrderRequest): LiveData<RepoResponse<Void>>{
+        val data = MutableLiveData<RepoResponse<Void>>()
+
+        orderWebServices.creteOrder(token, orderRequest)
+            .enqueue(object: Callback<Void>{
+                override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                    data.value = RepoResponse.respond(response, null)
+                }
+
+                override fun onFailure(call: Call<Void>, t: Throwable) {
+                    data.value = RepoResponse.respond(null, t)
+                }
+            })
+
+        return data
+    }
+
+    fun listOrder(token: String): LiveData<RepoResponse<OrderModel>>{
+        val data = MutableLiveData<RepoResponse<OrderModel>>()
+
+        orderWebServices.listOrder(token)
+            .enqueue(object: Callback<OrderModel>{
+                override fun onResponse(call: Call<OrderModel>, response: Response<OrderModel>) {
+                    data.value = RepoResponse.respond(response, null)
+                }
+
+                override fun onFailure(call: Call<OrderModel>, t: Throwable) {
                     data.value = RepoResponse.respond(null, t)
                 }
             })
