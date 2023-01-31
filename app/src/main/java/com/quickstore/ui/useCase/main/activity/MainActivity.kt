@@ -1,10 +1,9 @@
 package com.quickstore.ui.useCase.main.activity
 
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
+import android.content.*
+import android.net.Uri
 import android.os.Bundle
+import com.quickstore.BuildConfig
 import com.quickstore.R
 import com.quickstore.firebaseCloudMessaging.ACTION_KICK_USER
 import com.quickstore.ui.base.activity.BaseActivity
@@ -14,6 +13,7 @@ import com.quickstore.ui.useCase.main.fragment.profile.ProfileFragment
 import com.quickstore.ui.useCase.main.fragment.shopping.ShoppingFragment
 import com.quickstore.ui.useCase.onboarding.activity.OnBoardingActivity
 import kotlinx.android.synthetic.main.activity_main.*
+
 
 const val HOME = "H"
 const val SHOPPING = "S"
@@ -100,6 +100,18 @@ class MainActivity : BaseActivity() {
                     true
                 }
                 else -> false
+            }
+        }
+        whatsapp.setOnClickListener {
+            val msj = getString(R.string.whatsapp_auto_msg)
+            val numeroTel = BuildConfig.WHATSAPP_NUMBER
+            val intent = Intent(Intent.ACTION_VIEW)
+            val uri = "whatsapp://send?phone=$numeroTel&text=$msj"
+            intent.data = Uri.parse(uri)
+            try {
+                startActivity(intent)
+            } catch (ex: ActivityNotFoundException) {
+                showToastShort(R.string.install_whatsapp_error)
             }
         }
     }

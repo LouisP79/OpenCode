@@ -48,6 +48,7 @@ android {
             buildConfigField "String", "CLIENT_ID", environmentsProperties['CLIENT_ID_RELEASE']
             buildConfigField "String", "CLIENT_SECRET", environmentsProperties['CLIENT_SECRET_RELEASE']
             buildConfigField "String", "STOREAGE_FOLDER", environmentsProperties['STOREAGE_FOLDER_RELEASE']
+            buildConfigField "String", "WHATSAPP_NUMBER", environmentsProperties['WHATSAPP_NUMBER']
         }
         debug{
             debuggable true
@@ -59,6 +60,7 @@ android {
             buildConfigField "String", "CLIENT_ID", environmentsProperties['CLIENT_ID_DEBUG']
             buildConfigField "String", "CLIENT_SECRET", environmentsProperties['CLIENT_SECRET_DEBUG']
             buildConfigField "String", "STOREAGE_FOLDER", environmentsProperties['STOREAGE_FOLDER_DEBUG']
+            buildConfigField "String", "WHATSAPP_NUMBER", environmentsProperties['WHATSAPP_NUMBER']
         }
     }
     productFlavors {

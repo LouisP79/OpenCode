@@ -110,6 +110,8 @@
     <string name="order_created_msg">We will notify you as soon as your order has been approved.</string>
     <string name="order_created_msg2">For any questions you can contact us through the Whatsapp icon</string>
     <string name="delivery_complete_day">Delivery Date</string>
+    <string name="install_whatsapp_error">You must install Whatsapp</string>
+    <string name="whatsapp_auto_msg">Hi, I have a question, could you help me?</string>
     <string name="loading_delivery_time">Loading delivery time…</string>
     <string name="loading_delivery_day">Loading delivery day…</string>
     <string name="loading_categories">Loading categories…</string>

@@ -114,4 +114,6 @@
     <string name="order_created_msg">Te notificaremos en lo que tu orden haya sido aprobada.</string>
     <string name="order_created_msg2">Para cualquier consulta puedes comunicarte con nosotros a traves del icono de Whatsapp.</string>
     <string name="delivery_complete_day">Fecha de entrega</string>
+    <string name="install_whatsapp_error">Debe instalar Whatsapp</string>
+    <string name="whatsapp_auto_msg">¡Hola!, tengo una consulta, ¿Podrías ayudarme?</string>
 </resources>
