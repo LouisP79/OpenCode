@@ -48,8 +48,16 @@ abstract class BaseActivity : AppCompatActivity() {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
 
+    fun showToastShort(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
     fun showToast(message: Int) {
         Toast.makeText(this, getString(message), Toast.LENGTH_LONG).show()
+    }
+
+    fun showToastShort(message: Int) {
+        Toast.makeText(this, getString(message), Toast.LENGTH_SHORT).show()
     }
 
     fun errorCode(code: Int){

@@ -78,7 +78,7 @@ class ProductDetailFragment : BaseCardFragment() {
                         if (response.dataResponse != null) {
                             if (response.dataResponse.isSuccessful) {
                                 listener?.invoke()
-                                showToast(R.string.add_cart_success)
+                                showToastShort(R.string.add_cart_success)
                                 back()
                             } else errorCode(response.dataResponse.code())
                         } else errorConnection(response.throwable!!)

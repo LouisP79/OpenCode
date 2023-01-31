@@ -14,6 +14,7 @@ import com.quickstore.data.category.model.CategoryModel
 import com.quickstore.data.country.CountryWebServices
 import com.quickstore.data.country.model.CountryModel
 import com.quickstore.data.order.OrderWebServices
+import com.quickstore.data.order.model.OrderIdModel
 import com.quickstore.data.order.model.OrderModel
 import com.quickstore.data.order.request.OrderRequest
 import com.quickstore.data.product.ProductWebServices
@@ -309,16 +310,16 @@ class MainRepository constructor(private val productWebServices: ProductWebServi
         return data
     }
 
-    fun createOrder(token: String, orderRequest: OrderRequest): LiveData<RepoResponse<Void>>{
-        val data = MutableLiveData<RepoResponse<Void>>()
+    fun createOrder(token: String, orderRequest: OrderRequest): LiveData<RepoResponse<OrderIdModel>>{
+        val data = MutableLiveData<RepoResponse<OrderIdModel>>()
 
         orderWebServices.creteOrder(token, orderRequest)
-            .enqueue(object: Callback<Void>{
-                override fun onResponse(call: Call<Void>, response: Response<Void>) {
+            .enqueue(object: Callback<OrderIdModel>{
+                override fun onResponse(call: Call<OrderIdModel>, response: Response<OrderIdModel>) {
                     data.value = RepoResponse.respond(response, null)
                 }
 
-                override fun onFailure(call: Call<Void>, t: Throwable) {
+                override fun onFailure(call: Call<OrderIdModel>, t: Throwable) {
                     data.value = RepoResponse.respond(null, t)
                 }
             })

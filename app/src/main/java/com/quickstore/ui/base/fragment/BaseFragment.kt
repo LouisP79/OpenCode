@@ -37,7 +37,9 @@ abstract class BaseFragment : Fragment() {
     }
 
     fun showToast(message: String) = (activity as BaseActivity).showToast(message)
+    fun showToastShort(message: String) = (activity as BaseActivity).showToastShort(message)
     fun showToast(message: Int) = (activity as BaseActivity).showToast(message)
+    fun showToastShort(message: Int) = (activity as BaseActivity).showToastShort(message)
     fun unknownError(t: Throwable?) = (activity as BaseActivity).unknownError(t)
     fun errorCode(code: Int) = (activity as BaseActivity).errorCode(code)
     fun errorConnection(t: Throwable) = (activity as BaseActivity).errorConnection(t)

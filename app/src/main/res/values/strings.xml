@@ -47,6 +47,8 @@
 
     <string name="phone">Mobile</string>
     <string name="delivery_time">Delivery time</string>
+    <string name="order_number">Order Nº %d received</string>
+
     <string name="delivery_day">Delivery day</string>
     <string name="address_selected">Address selected</string>
     <string name="all_your_addresses">Meeting points and approved addresses</string>
@@ -83,6 +85,8 @@
     <string name="home">Home</string>
     <string name="other">Other</string>
     <string name="order">Order</string>
+    <string name="continue_buying">Continue buying</string>
+
     <string name="create_order_error">You must select a valid address, day and time</string>
     <string name="shipping_data_error">For now we are closed, try again later</string>
 
@@ -103,6 +107,9 @@
     <string name="empty_shopping_list_sub_msg">Start adding products from the store and view them here</string>
     <string name="loading_products">Loading products…</string>
     <string name="loading_addresses">Loading addresses…</string>
+    <string name="order_created_msg">We will notify you as soon as your order has been approved.</string>
+    <string name="order_created_msg2">For any questions you can contact us through the Whatsapp icon</string>
+    <string name="delivery_complete_day">Delivery Date</string>
     <string name="loading_delivery_time">Loading delivery time…</string>
     <string name="loading_delivery_day">Loading delivery day…</string>
     <string name="loading_categories">Loading categories…</string>

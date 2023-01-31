@@ -9,6 +9,7 @@ import com.quickstore.data.cart.model.CartModel
 import com.quickstore.data.cart.request.AddCartRequest
 import com.quickstore.data.category.model.CategoryModel
 import com.quickstore.data.country.model.CountryModel
+import com.quickstore.data.order.model.OrderIdModel
 import com.quickstore.data.order.model.OrderModel
 import com.quickstore.data.order.request.OrderRequest
 import com.quickstore.data.product.model.ProductModel
@@ -77,7 +78,7 @@ class MainViewModel constructor(private val mainRepository: MainRepository): Vie
         return mainRepository.deleteAddress(token, idAddress)
     }
 
-    fun createOrder(token: String, orderRequest: OrderRequest): LiveData<RepoResponse<Void>>{
+    fun createOrder(token: String, orderRequest: OrderRequest): LiveData<RepoResponse<OrderIdModel>>{
         return mainRepository.createOrder(token, orderRequest)
     }
 

@@ -74,12 +74,7 @@ class MainActivity : BaseActivity() {
         navView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_home -> {
-                    supportFragmentManager.beginTransaction()
-                        .hide(profileFragment)
-                        .hide(shoppingFragment)
-                        .show(homeFragment)
-                        .commit()
-                    menuChange(HOME)
+                    callMain()
                     true
                 }
                 R.id.navigation_shopping -> {
@@ -107,6 +102,16 @@ class MainActivity : BaseActivity() {
                 else -> false
             }
         }
+    }
+
+    fun callMain() {
+        supportFragmentManager.beginTransaction()
+            .hide(profileFragment)
+            .hide(shoppingFragment)
+            .show(homeFragment)
+            .commit()
+        menuChange(HOME)
+        navView.menu.findItem(R.id.navigation_home).isChecked = true
     }
 
     private fun setup() {

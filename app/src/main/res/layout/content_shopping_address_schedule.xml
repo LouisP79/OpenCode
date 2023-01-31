@@ -170,7 +170,7 @@
         tools:listitem="@layout/item_delivery_time"
         tools:itemCount="2"/>
 
-    <Button
+    <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
         android:id="@+id/next"
         style="?borderlessButtonStyle"
         android:layout_width="match_parent"
@@ -178,12 +178,18 @@
         android:background="@drawable/selector_button_blue"
         android:layout_marginStart="@dimen/default_margin_start_end_button"
         android:layout_marginEnd="@dimen/default_margin_start_end_button"
-        android:layout_marginTop="@dimen/default_margin_top_textInputLayout"
-        android:layout_marginBottom="@dimen/default_text_size_button"
+        android:layout_marginTop="@dimen/default_margin_top_button"
+        android:layout_marginBottom="@dimen/default_margin_bottom_button"
+        android:layout_gravity="center"
         android:text="@string/order"
         android:textStyle="bold"
         android:textColor="@color/colorPrimary"
         android:textSize="@dimen/default_text_size_button"
-        android:elevation="@dimen/default_elevation_button"/>
+        android:elevation="@dimen/default_elevation_button"
+        app:finalCornerAngle="@dimen/circular_progress_button_dialog_signing_final_initial_angle"
+        app:initialCornerAngle="@dimen/circular_progress_button_dialog_signing_final_initial_angle"
+        app:spinning_bar_color="@color/colorPrimary"
+        app:spinning_bar_padding="@dimen/circular_progress_button_dialog_signing_final_bar_padding"
+        app:spinning_bar_width="@dimen/circular_progress_button_dialog_signing_final_bar_width"/>
 
 </LinearLayout>

@@ -88,6 +88,7 @@
     <string name="home">Casa</string>
     <string name="other">Otro</string>
     <string name="order">Pedir</string>
+    <string name="continue_buying">Continuar comprando</string>
     <string name="create_order_error">Debe seleccionar una dirección, un día y un horario válido</string>
     <string name="shipping_data_error">Por ahora nos encontramos cerrados, intente más tarde</string>
     <string name="str_register_validate_tag">Ingrese una etiqueta para la dirección</string>
@@ -102,6 +103,7 @@
     <string name="loading_delivery_time">Cargando tiempo de entrega…</string>
     <string name="loading_delivery_day">Cargando día de entrega…</string>
     <string name="delivery_time">Horario de entrega</string>
+    <string name="order_number">Orden Nº %d recibida</string>
     <string name="delivery_day">Día de entrega</string>
     <string name="address_selected">Dirección seleccionada</string>
     <string name="view_all_address">Ver todas las direcciones</string>
@@ -109,4 +111,7 @@
     <string name="select_address">Seleccionar Dirección</string>
     <string name="all_your_addresses">Puntos de encuentro y direcciones aprobadas</string>
     <string name="loading_addresses">Cargando Direcciones…</string>
+    <string name="order_created_msg">Te notificaremos en lo que tu orden haya sido aprobada.</string>
+    <string name="order_created_msg2">Para cualquier consulta puedes comunicarte con nosotros a traves del icono de Whatsapp.</string>
+    <string name="delivery_complete_day">Fecha de entrega</string>
 </resources>

@@ -7,6 +7,7 @@ import com.quickstore.data.cart.model.CartItemsModel
 import com.quickstore.data.cart.model.CartModel
 import com.quickstore.data.cart.request.AddCartRequest
 import com.quickstore.ui.base.fragment.BaseFragment
+import com.quickstore.ui.useCase.main.activity.MainActivity
 import com.quickstore.ui.useCase.main.adapter.ShoppingCartAdapter
 import com.quickstore.ui.useCase.main.viewModel.MainViewModel
 import kotlinx.android.synthetic.main.content_shopping.*
@@ -61,7 +62,9 @@ class ShoppingFragment : BaseFragment() {
         }
         next.setOnClickListener{
             if(adapter.itemCount > 0) {
-                val shoppingAddressFragment = ShoppingAddressScheduleFragment.newInstance()
+                val shoppingAddressFragment = ShoppingAddressScheduleFragment.newInstance(adapter.items)
+                shoppingAddressFragment.setOnRefreshClickListener { resetShoppingList() }
+                shoppingAddressFragment.setOnBackClickListener { (activity as MainActivity).callMain() }
                 addFragmentWithEffect(shoppingAddressFragment)
             }else showToast(R.string.cart_items_zero)
         }

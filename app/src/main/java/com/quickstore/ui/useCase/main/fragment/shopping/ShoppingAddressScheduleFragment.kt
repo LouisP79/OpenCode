@@ -5,6 +5,9 @@ import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import com.quickstore.R
 import com.quickstore.data.address.model.AddressModel
+import com.quickstore.data.cart.model.CartItemsModel
+import com.quickstore.data.order.request.OrderDetailRequest
+import com.quickstore.data.order.request.OrderRequest
 import com.quickstore.ui.base.fragment.BaseCardFragment
 import com.quickstore.ui.useCase.main.adapter.ShoppingDayDeliveryAdapter
 import com.quickstore.ui.useCase.main.adapter.ShoppingTimeDeliveryAdapter
@@ -16,12 +19,23 @@ import kotlinx.android.synthetic.main.content_shopping_address_schedule.*
 import kotlinx.android.synthetic.main.fragment_shopping_address_schedule.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.util.*
+import kotlin.collections.ArrayList
 
+const val ITEMS_CART = "items_cart"
 class ShoppingAddressScheduleFragment : BaseCardFragment() {
 
     companion object{
-        fun newInstance() = ShoppingAddressScheduleFragment()
+        fun newInstance(itemsCart: List<CartItemsModel>): ShoppingAddressScheduleFragment{
+            val fragment = ShoppingAddressScheduleFragment()
+            val bundle = Bundle()
+            bundle.putParcelableArrayList(ITEMS_CART, itemsCart as ArrayList<CartItemsModel>)
+            fragment.arguments = bundle
+            return fragment
+        }
     }
+
+    private var listener: (()->Unit)? = null
+    private var backListener: (()->Unit)? = null
 
     override val layoutResourceId: Int
         get() = R.layout.fragment_shopping_address_schedule
@@ -29,7 +43,8 @@ class ShoppingAddressScheduleFragment : BaseCardFragment() {
     private val viewModel: MainViewModel by viewModel()
     private lateinit var adapter: ShoppingTimeDeliveryAdapter
     private lateinit var adapterDay: ShoppingDayDeliveryAdapter
-    private var idAddressSelected: Long = -1
+    private var meetingPointTagSelected = ""
+    private var meetingPointAddressSelected = ""
     private var timeDeliverySelected = ""
     private var dateDeliverySelected = ""
 
@@ -77,7 +92,7 @@ class ShoppingAddressScheduleFragment : BaseCardFragment() {
         }
         next.setOnClickListener {
             if(validate()){
-
+                restCreateOrder()
             }
         }
     }
@@ -86,6 +101,37 @@ class ShoppingAddressScheduleFragment : BaseCardFragment() {
         for(i in parentFragmentManager.fragments.size - 1 downTo 0){
             if(parentFragmentManager.fragments[i] is ProfileFragment){
                 (parentFragmentManager.fragments[i] as ProfileFragment).updateNewAddress(newAddress)
+            }
+        }
+    }
+
+    private fun restCreateOrder(){
+        next.startAnimation()
+        val itemsCart = requireArguments().getParcelableArrayList<CartItemsModel>(ITEMS_CART) as List<CartItemsModel>
+        val itemRequest = mutableListOf<OrderDetailRequest>()
+        for(it in itemsCart){
+            itemRequest.add(OrderDetailRequest(it.product.description,
+                                                it.product.image,
+                                                it.product.name,
+                                                it.product.price,
+                                                it.quantity))
+        }
+        val request = OrderRequest(dateDeliverySelected, timeDeliverySelected, meetingPointTagSelected, meetingPointAddressSelected,  itemRequest)
+        viewModel.createOrder(applicationPreferences.getBearerToken()!!, request).observe(viewLifecycleOwner
+        ) { response ->
+            when (response) {
+                null -> unknownError(null)
+                else -> {
+                    if (response.dataResponse != null) {
+                        if (response.dataResponse.isSuccessful) {
+                            listener?.invoke()
+                            val orderCreatedFragment = OrderCreatedFragment.newInstance(dateDeliverySelected,timeDeliverySelected, response.dataResponse.body()!!.orderId)
+                            orderCreatedFragment.setOnBackClickListener { backListener?.invoke() }
+                            addFragmentWithEffect(orderCreatedFragment)
+                        } else errorCode(response.dataResponse.code())
+                    } else errorConnection(response.throwable!!)
+                    next.revertAnimation()
+                }
             }
         }
     }
@@ -172,7 +218,7 @@ class ShoppingAddressScheduleFragment : BaseCardFragment() {
                             }
 
                             val cal = Calendar.getInstance()
-                            var items  = mutableListOf<DateDeliveryModel>()
+                            val items  = mutableListOf<DateDeliveryModel>()
 
                             while (items.size < 3) {
                                 cal.add(Calendar.DAY_OF_YEAR, 1)
@@ -218,7 +264,8 @@ class ShoppingAddressScheduleFragment : BaseCardFragment() {
     }
 
     private fun addressSelected(address: AddressModel){
-        idAddressSelected = address.id
+        meetingPointTagSelected = address.tag
+        meetingPointAddressSelected = address.address
         addressTag.text = address.tag
         addressReference.text = address.address
     }
@@ -226,7 +273,10 @@ class ShoppingAddressScheduleFragment : BaseCardFragment() {
     private fun validate(): Boolean{
         var evaluate = true
 
-        if(idAddressSelected == -1L)
+        if(meetingPointTagSelected.isEmpty())
+            evaluate = false
+
+        if(meetingPointAddressSelected.isEmpty())
             evaluate = false
 
         if(timeDeliverySelected.isEmpty())
@@ -239,6 +289,14 @@ class ShoppingAddressScheduleFragment : BaseCardFragment() {
             showToast(R.string.create_order_error)
 
         return evaluate
+    }
+
+    fun setOnRefreshClickListener(listener: ()->Unit){
+        this.listener = listener
+    }
+
+    fun setOnBackClickListener(listener: ()->Unit){
+        this.backListener = listener
     }
 
 }
