@@ -53,10 +53,10 @@ class AddressAdapter: RecyclerView.Adapter<AddressAdapter.ViewHolder>() {
             if(radioVisibility){
                 radio.visibility = View.VISIBLE
                 itemContainer.setOnClickListener {
-                    clearSelection()
-                    item.selected = true
-                    notifyDataSetChanged()
-                    selectedListener?.invoke(item)
+                   callClick(item)
+                }
+                radio.setOnClickListener {
+                    callClick(item)
                 }
             } else radio.visibility = View.GONE
 
@@ -64,6 +64,13 @@ class AddressAdapter: RecyclerView.Adapter<AddressAdapter.ViewHolder>() {
                 delete.visibility = View.VISIBLE
                 delete.setOnClickListener { deleteListener?.invoke(item.id, posi) }
             } else delete.visibility = View.GONE
+        }
+
+        private fun callClick(item: AddressModel) {
+            clearSelection()
+            item.selected = true
+            notifyDataSetChanged()
+            selectedListener?.invoke(item)
         }
     }
 
