@@ -14,6 +14,8 @@
 
     <string name="search_hint">Search a product…</string>
     <string name="add">Add</string>
+    <string name="details">Details</string>
+
     <string name="subtotal_label">Sub-Total:</string>
     <string name="delivery_label">Delivery:</string>
     <string name="total_label">Total:</string>
@@ -50,6 +52,7 @@
     <string name="phone">Mobile</string>
     <string name="delivery_time">Delivery time</string>
     <string name="order_number">Order Nº %d received</string>
+    <string name="order_number2">Order Nº %d</string>
     <string name="product_number">%d Product(s)</string>
 
     <string name="delivery_day">Delivery day</string>
@@ -152,7 +155,9 @@
     <string name="blank_coin" translatable="false">$%,.2f</string>
     <string name="blank_double" translatable="false">%,.2f</string>
     <string name="blank_ss" translatable="false">%s %s</string>
+    <string name="blank_ssc" translatable="false">%s, %s</string>
     <string name="blank_sgs" translatable="false">%s - %s</string>
+    <string name="blank_sgx" translatable="false">%s x %s</string>
     <string name="blank_countries" translatable="false">%s - (+%s)</string>
     <string name="blank_phone_number" translatable="false">+%s%s</string>
 

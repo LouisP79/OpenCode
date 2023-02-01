@@ -9,12 +9,11 @@ import com.quickstore.data.order.model.OrderModel
 import com.quickstore.ui.base.fragment.BaseFragment
 import com.quickstore.ui.useCase.main.activity.MainActivity
 import com.quickstore.ui.useCase.main.adapter.RecordAdapter
+import com.quickstore.ui.useCase.main.fragment.shopping.OrderCreatedFragment
 import com.quickstore.ui.useCase.main.viewModel.MainViewModel
-import com.quickstore.util.listener.EndlessRecyclerViewScrollListener
 import kotlinx.android.synthetic.main.content_record.*
 import kotlinx.android.synthetic.main.content_record.emptyList
 import kotlinx.android.synthetic.main.content_record.swipeRefresh
-import kotlinx.android.synthetic.main.content_shopping.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class RecordFragment : BaseFragment() {
@@ -74,7 +73,11 @@ class RecordFragment : BaseFragment() {
 
     private fun addListener() {
         swipeRefresh.setOnRefreshListener {resetRecordList()}
-        adapter.setOnRecordClickListener { (activity as MainActivity).showWhatsapp() }
+        adapter.setOnRecordClickListener {
+            val recordDetailFragment = RecordDetailFragment.newInstance(it)
+            addFragmentWithEffect(recordDetailFragment)
+            (activity as MainActivity).hideWhatsapp()
+        }
 
         record.addOnScrollListener(object: OnScrollListener(){
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {

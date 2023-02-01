@@ -49,6 +49,7 @@
     <string name="title_profile">Perfil</string>
     <string name="search_hint">Buscar producto…</string>
     <string name="add">Agregar</string>
+    <string name="details">Detalles</string>
     <string name="categories">Categorías</string>
     <string name="empty_product_list">Aún no se han cargado productos</string>
     <string name="empty_category_list">Aún no se han cargado categorías</string>
@@ -109,6 +110,7 @@
     <string name="loading_delivery_day">Cargando día de entrega…</string>
     <string name="delivery_time">Horario de entrega</string>
     <string name="order_number">Orden Nº %d recibida</string>
+    <string name="order_number2">Orden Nº %d</string>
     <string name="product_number">%d Producto(s)</string>
     <string name="delivery_day">Día de entrega</string>
     <string name="address_selected">Dirección seleccionada</string>

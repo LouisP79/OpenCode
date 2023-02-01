@@ -33,7 +33,7 @@ class RecordAdapter: RecyclerView.Adapter<RecordAdapter.ViewHolder>() {
         fun bind(item: OrderModel) = with(itemView) {
             date.text = item.date
             addressTag.text = item.deliveryTag
-            orderNumber.text = context.getString(R.string.order_number,item.id)
+            orderNumber.text = context.getString(R.string.order_number2,item.id)
             productsCount.text = context.getString(R.string.product_number,item.details.size)
             total.text = context.getString(R.string.blank_coin, item.total)
             when(item.status){
