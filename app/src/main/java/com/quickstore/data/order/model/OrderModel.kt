@@ -9,11 +9,23 @@ class OrderModel {
     @field:JsonProperty
     var id: Long = 0
 
+    @field:JsonProperty
+    var date: String = ""
+
     @field:JsonProperty("delivery_date")
     var deliveryDate: String = ""
 
     @field:JsonProperty("delivery_time")
     var deliveryTime: String = ""
+
+    @field:JsonProperty("delivery_cost")
+    var deliveryCost: Double = 0.0
+
+    @field:JsonProperty("meeting_point_tag")
+    var deliveryTag: String = ""
+
+    @field:JsonProperty("meeting_point_address")
+    var deliveryAddress: String = ""
 
     @field:JsonProperty
     var status: Int = 0

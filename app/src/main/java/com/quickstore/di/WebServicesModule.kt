@@ -4,6 +4,7 @@ import com.quickstore.data.address.AddressWebServices
 import com.quickstore.data.cart.CartWebServices
 import com.quickstore.data.category.CategoryWebServices
 import com.quickstore.data.country.CountryWebServices
+import com.quickstore.data.deliveryCost.DeliveryCostWebServices
 import com.quickstore.data.firebaseToken.FirebaseTokenWebServices
 import com.quickstore.data.onBoarding.OnBoardingWebServices
 import com.quickstore.data.order.OrderWebServices
@@ -28,6 +29,7 @@ val webServiceModule = module {
     single { provideTimeDeliveryServices(get()) }
     single { provideWeekDayDeliveryServices(get()) }
     single { provideOrderServices(get()) }
+    single { provideDeliveryCostServices(get()) }
 }
 
 fun provideTokenServices(retrofit: Retrofit): TokenWebServices = retrofit.create(TokenWebServices::class.java)
@@ -42,4 +44,5 @@ fun provideCountryServices(retrofit: Retrofit): CountryWebServices = retrofit.cr
 fun provideTimeDeliveryServices(retrofit: Retrofit): TimeDeliveryWebServices = retrofit.create(TimeDeliveryWebServices::class.java)
 fun provideWeekDayDeliveryServices(retrofit: Retrofit): WeekDayDeliveryWebServices = retrofit.create(WeekDayDeliveryWebServices::class.java)
 fun provideOrderServices(retrofit: Retrofit): OrderWebServices = retrofit.create(OrderWebServices::class.java)
+fun provideDeliveryCostServices(retrofit: Retrofit): DeliveryCostWebServices = retrofit.create(DeliveryCostWebServices::class.java)
 

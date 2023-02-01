@@ -53,6 +53,7 @@
     <string name="empty_product_list">Aún no se han cargado productos</string>
     <string name="empty_category_list">Aún no se han cargado categorías</string>
     <string name="loading_products">Cargando productos…</string>
+    <string name="loading_records">Cargando historia…</string>
     <string name="loading_categories">Cargando categorías…</string>
     <string name="product">Producto</string>
     <string name="add_cart_success">El producto se agregó al carrito de compras</string>
@@ -96,14 +97,19 @@
     <string name="str_register_validate_reference">Ingrese una referencia</string>
     <string name="create_address_success">La dirección está pendiente por aprobación</string>
     <string name="empty_shopping_list">Tu carrito de compras esta vacío</string>
+    <string name="empty_record_list">Aún no tienes ordenes</string>
     <string name="empty_shopping_list_sub_msg">Empieza a agregar productos de la tienda y visualízalos aquí</string>
-    <string name="subtotal_label">SUBTOTAL:</string>
+    <string name="empty_record_list_sub_msg">Empieza a comprar y visualizar tus ordenes aquí</string>
+    <string name="subtotal_label">Sub-Total:</string>
+    <string name="delivery_label">Delivery:</string>
+    <string name="total_label">Total:</string>
     <string name="process_purchase">Procesar Compra</string>
     <string name="title_shopping_address">Dirección de entrega</string>
     <string name="loading_delivery_time">Cargando tiempo de entrega…</string>
     <string name="loading_delivery_day">Cargando día de entrega…</string>
     <string name="delivery_time">Horario de entrega</string>
     <string name="order_number">Orden Nº %d recibida</string>
+    <string name="product_number">%d Producto(s)</string>
     <string name="delivery_day">Día de entrega</string>
     <string name="address_selected">Dirección seleccionada</string>
     <string name="view_all_address">Ver todas las direcciones</string>
@@ -116,4 +122,8 @@
     <string name="delivery_complete_day">Fecha de entrega</string>
     <string name="install_whatsapp_error">Debe instalar Whatsapp</string>
     <string name="whatsapp_auto_msg">¡Hola!, tengo una consulta, ¿Podrías ayudarme?</string>
+    <string name="pending">Pendiente</string>
+    <string name="passed">Aprobado</string>
+    <string name="delivered">Entregado</string>
+    <string name="canceled">Anulado</string>
 </resources>

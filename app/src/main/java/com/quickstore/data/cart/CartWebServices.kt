@@ -3,6 +3,7 @@ package com.quickstore.data.cart
 import com.quickstore.data.RestConstant
 import com.quickstore.data.cart.model.CartModel
 import com.quickstore.data.cart.request.AddCartRequest
+import io.reactivex.Observable
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -18,7 +19,7 @@ interface CartWebServices {
                 @Query(PRODUCT_ID) productId: Long): Call<Void>
 
     @GET(RestConstant.ENDPOINT_LIST_CART)
-    fun listCart(@Header("Authorization") token:  String): Call<CartModel>
+    fun listCart(@Header("Authorization") token:  String): Observable<CartModel>
 
     @DELETE(RestConstant.ENDPOINT_DELETE_PRODUCT_CART)
     fun deleteProductCart(@Header("Authorization") token:  String,

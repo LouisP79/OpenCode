@@ -3,6 +3,7 @@ package com.quickstore.ui.useCase.main.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.quickstore.data.Pageable
+import com.quickstore.data.RestConstant
 import com.quickstore.data.address.AddressWebServices
 import com.quickstore.data.address.model.AddressModel
 import com.quickstore.data.address.request.AddressRequest
@@ -13,6 +14,8 @@ import com.quickstore.data.category.CategoryWebServices
 import com.quickstore.data.category.model.CategoryModel
 import com.quickstore.data.country.CountryWebServices
 import com.quickstore.data.country.model.CountryModel
+import com.quickstore.data.deliveryCost.DeliveryCostWebServices
+import com.quickstore.data.deliveryCost.model.DeliveryCostModel
 import com.quickstore.data.order.OrderWebServices
 import com.quickstore.data.order.model.OrderIdModel
 import com.quickstore.data.order.model.OrderModel
@@ -21,12 +24,17 @@ import com.quickstore.data.product.ProductWebServices
 import com.quickstore.data.product.model.ProductModel
 import com.quickstore.data.timeDelivery.TimeDeliveryWebServices
 import com.quickstore.data.timeDelivery.model.TimeDeliveryModel
+import com.quickstore.data.token.model.TokenModel
 import com.quickstore.data.user.UserWebServices
+import com.quickstore.data.user.model.UserModel
 import com.quickstore.data.user.request.ChangePwdRequest
 import com.quickstore.data.user.request.UpdateUserInfoRequest
 import com.quickstore.data.weekDayDelivery.WeekDayDeliveryWebServices
 import com.quickstore.data.weekDayDelivery.model.WeekDayDeliveryModel
 import com.quickstore.util.repository.RepoResponse
+import com.quickstore.util.repository.RepoRxResponse
+import io.reactivex.rxkotlin.subscribeBy
+import io.reactivex.schedulers.Schedulers
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -35,7 +43,7 @@ class MainRepository constructor(private val productWebServices: ProductWebServi
                                  private val categoryWebServices: CategoryWebServices, private val userWebServices: UserWebServices,
                                  private val addressWebServices: AddressWebServices, private val countryWebServices: CountryWebServices,
                                  private val timeDeliveryWebServices: TimeDeliveryWebServices, private val weekDayDeliveryWebServices: WeekDayDeliveryWebServices,
-                                 private val orderWebServices: OrderWebServices) {
+                                 private val orderWebServices: OrderWebServices, private val deliveryCostWebServices: DeliveryCostWebServices) {
 
     fun getProductList(token: String, page: Int, searchQuery: String = "", categoryId: Long = 0L): LiveData<RepoResponse<Pageable<ProductModel>>>{
         val data = MutableLiveData<RepoResponse<Pageable<ProductModel>>>()
@@ -140,19 +148,29 @@ class MainRepository constructor(private val productWebServices: ProductWebServi
         return data
     }
 
-    fun listCart(token: String): LiveData<RepoResponse<CartModel>>{
-        val data = MutableLiveData<RepoResponse<CartModel>>()
+    fun listCart(token: String): LiveData<RepoRxResponse<CartModel, DeliveryCostModel>>{
+        val data = MutableLiveData<RepoRxResponse<CartModel, DeliveryCostModel>>()
+        val repo = RepoRxResponse<CartModel, DeliveryCostModel>()
 
-        cartWebServices.listCart(token)
-            .enqueue(object: Callback<CartModel>{
-                override fun onResponse(call: Call<CartModel>, response: Response<CartModel>) {
-                    data.value = RepoResponse.respond(response, null)
-                }
+        repo.disposable = cartWebServices.listCart(token)
+            .subscribeOn(Schedulers.io())
+            .flatMap { response ->
+                repo.flatMapResponse = response
 
-                override fun onFailure(call: Call<CartModel>, t: Throwable) {
-                    data.value = RepoResponse.respond(null, t)
+                deliveryCostWebServices.deliveryCost(token)
+                    .subscribeOn(Schedulers.io())
+            }
+            .observeOn(Schedulers.computation())
+            .subscribeBy(
+                onNext = { response ->
+                    repo.subscribeResponse = response
+                    data.postValue(repo)
+                },
+                onError = {
+                    repo.throwable = it
+                    data.postValue(repo)
                 }
-            })
+            )
 
         return data
     }
@@ -327,16 +345,16 @@ class MainRepository constructor(private val productWebServices: ProductWebServi
         return data
     }
 
-    fun listOrder(token: String): LiveData<RepoResponse<OrderModel>>{
-        val data = MutableLiveData<RepoResponse<OrderModel>>()
+    fun listOrder(token: String): LiveData<RepoResponse<List<OrderModel>>>{
+        val data = MutableLiveData<RepoResponse<List<OrderModel>>>()
 
         orderWebServices.listOrder(token)
-            .enqueue(object: Callback<OrderModel>{
-                override fun onResponse(call: Call<OrderModel>, response: Response<OrderModel>) {
+            .enqueue(object: Callback<List<OrderModel>>{
+                override fun onResponse(call: Call<List<OrderModel>>, response: Response<List<OrderModel>>) {
                     data.value = RepoResponse.respond(response, null)
                 }
 
-                override fun onFailure(call: Call<OrderModel>, t: Throwable) {
+                override fun onFailure(call: Call<List<OrderModel>>, t: Throwable) {
                     data.value = RepoResponse.respond(null, t)
                 }
             })

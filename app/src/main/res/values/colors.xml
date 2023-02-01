@@ -6,6 +6,7 @@
     <color name="colorAccentDark">#022a96</color>
 
     <color name="colorWhatsapp">#25d366</color>
+    <color name="colorcancel">#D32525</color>
     <color name="colorText">#242424</color>
     <color name="colorIndicatorSelected">#494949</color>
     <color name="colorIndicator">#52494949</color>

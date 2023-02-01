@@ -9,6 +9,7 @@ import com.quickstore.data.cart.model.CartModel
 import com.quickstore.data.cart.request.AddCartRequest
 import com.quickstore.data.category.model.CategoryModel
 import com.quickstore.data.country.model.CountryModel
+import com.quickstore.data.deliveryCost.model.DeliveryCostModel
 import com.quickstore.data.order.model.OrderIdModel
 import com.quickstore.data.order.model.OrderModel
 import com.quickstore.data.order.request.OrderRequest
@@ -19,6 +20,7 @@ import com.quickstore.data.user.request.UpdateUserInfoRequest
 import com.quickstore.data.weekDayDelivery.model.WeekDayDeliveryModel
 import com.quickstore.ui.useCase.main.repository.MainRepository
 import com.quickstore.util.repository.RepoResponse
+import com.quickstore.util.repository.RepoRxResponse
 
 class MainViewModel constructor(private val mainRepository: MainRepository): ViewModel(){
 
@@ -38,7 +40,7 @@ class MainViewModel constructor(private val mainRepository: MainRepository): Vie
         return mainRepository.decreaseCart(token, productId)
     }
 
-    fun listCart(token: String): LiveData<RepoResponse<CartModel>>{
+    fun listCart(token: String): LiveData<RepoRxResponse<CartModel, DeliveryCostModel>>{
         return mainRepository.listCart(token)
     }
 
@@ -82,7 +84,7 @@ class MainViewModel constructor(private val mainRepository: MainRepository): Vie
         return mainRepository.createOrder(token, orderRequest)
     }
 
-    fun listOrder(token: String): LiveData<RepoResponse<OrderModel>>{
+    fun listOrder(token: String): LiveData<RepoResponse<List<OrderModel>>>{
         return mainRepository.listOrder(token)
     }
 

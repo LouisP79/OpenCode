@@ -14,6 +14,6 @@ interface OrderWebServices {
                 @Body request: OrderRequest): Call<OrderIdModel>
 
     @GET(RestConstant.ENDPOINT_ORDER_BY_USER_LIST)
-    fun listOrder(@Header("Authorization") token:  String): Call<OrderModel>
+    fun listOrder(@Header("Authorization") token:  String): Call<List<OrderModel>>
 
 }

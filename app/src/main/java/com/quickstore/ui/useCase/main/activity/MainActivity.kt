@@ -10,6 +10,7 @@ import com.quickstore.ui.base.activity.BaseActivity
 import com.quickstore.ui.useCase.login.activity.LoginActivity
 import com.quickstore.ui.useCase.main.fragment.home.HomeFragment
 import com.quickstore.ui.useCase.main.fragment.profile.ProfileFragment
+import com.quickstore.ui.useCase.main.fragment.record.RecordFragment
 import com.quickstore.ui.useCase.main.fragment.shopping.ShoppingFragment
 import com.quickstore.ui.useCase.onboarding.activity.OnBoardingActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -27,6 +28,7 @@ class MainActivity : BaseActivity() {
 
     private lateinit var homeFragment: HomeFragment
     private lateinit var shoppingFragment: ShoppingFragment
+    private lateinit var recordFragment: RecordFragment
     private lateinit var profileFragment: ProfileFragment
     private var broadcast: BroadcastNotifierMain? = null
 
@@ -81,12 +83,19 @@ class MainActivity : BaseActivity() {
                     supportFragmentManager.beginTransaction()
                         .hide(profileFragment)
                         .hide(homeFragment)
+                        .hide(recordFragment)
                         .show(shoppingFragment)
                         .commit()
                     menuChange(SHOPPING)
                     true
                 }
                 R.id.navigation_record -> {
+                    supportFragmentManager.beginTransaction()
+                        .hide(profileFragment)
+                        .hide(homeFragment)
+                        .hide(shoppingFragment)
+                        .show(recordFragment)
+                        .commit()
                     menuChange(RECORD)
                     true
                 }
@@ -94,6 +103,7 @@ class MainActivity : BaseActivity() {
                     supportFragmentManager.beginTransaction()
                         .hide(homeFragment)
                         .hide(shoppingFragment)
+                        .hide(recordFragment)
                         .show(profileFragment)
                         .commit()
                     menuChange(PROFILE)
@@ -116,19 +126,33 @@ class MainActivity : BaseActivity() {
         }
     }
 
+    fun showWhatsapp(){
+        whatsapp.show()
+    }
+
+    fun hideWhatsapp(){
+        whatsapp.hide()
+    }
+
     fun callMain() {
         supportFragmentManager.beginTransaction()
             .hide(profileFragment)
             .hide(shoppingFragment)
+            .hide(recordFragment)
             .show(homeFragment)
             .commit()
         menuChange(HOME)
         navView.menu.findItem(R.id.navigation_home).isChecked = true
     }
 
+    fun refreshRecords(){
+        recordFragment.resetRecordList()
+    }
+
     private fun setup() {
         homeFragment = HomeFragment.newInstance()
         shoppingFragment = ShoppingFragment.newInstance()
+        recordFragment = RecordFragment.newInstance()
         profileFragment = ProfileFragment.newInstance()
 
         supportFragmentManager.beginTransaction()
@@ -136,6 +160,8 @@ class MainActivity : BaseActivity() {
             .hide(profileFragment)
             .add(R.id.containerFragment, shoppingFragment)
             .hide(shoppingFragment)
+            .add(R.id.containerFragment, recordFragment)
+            .hide(recordFragment)
             .add(R.id.containerFragment, homeFragment)
             .commit()
 
@@ -155,6 +181,7 @@ class MainActivity : BaseActivity() {
             if(listener.isNotEmpty())
                 listener[listener.size - 1].invoke()
         }
+        showWhatsapp()
     }
 
     fun addOnNavigationItemChange(listener: (()->Unit)){

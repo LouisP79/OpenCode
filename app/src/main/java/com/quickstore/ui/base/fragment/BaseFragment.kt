@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat
 import com.quickstore.R
 import com.quickstore.preferences.ApplicationPreferences
 import com.quickstore.ui.base.activity.BaseActivity
+import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.fragment_home.*
 import org.koin.android.ext.android.inject
 
@@ -18,6 +19,7 @@ abstract class BaseFragment : Fragment() {
     val applicationPreferences: ApplicationPreferences by inject()
 
     protected abstract val layoutResourceId: Int
+    lateinit var compositeDisposable: CompositeDisposable
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -27,6 +29,12 @@ abstract class BaseFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         swipeRefresh?.setColorSchemeColors(ContextCompat.getColor(requireContext(), R.color.colorAccent))
+        compositeDisposable = CompositeDisposable()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        compositeDisposable.dispose()
     }
 
     fun addFragmentWithEffect(fragment: Fragment){

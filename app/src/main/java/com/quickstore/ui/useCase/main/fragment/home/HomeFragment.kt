@@ -3,6 +3,7 @@ package com.quickstore.ui.useCase.main.fragment.home
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.arlib.floatingsearchview.FloatingSearchView.OnSearchListener
 import com.arlib.floatingsearchview.suggestions.model.SearchSuggestion
 import com.quickstore.R
@@ -15,6 +16,8 @@ import com.quickstore.ui.useCase.main.model.SuggestionModel
 import com.quickstore.ui.useCase.main.viewModel.MainViewModel
 import com.quickstore.util.listener.EndlessRecyclerViewScrollListener
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_home.emptyList
+import kotlinx.android.synthetic.main.fragment_home.swipeRefresh
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.util.*
 
@@ -116,6 +119,7 @@ class HomeFragment : BaseFragment() {
             val fragment = ProductDetailFragment.newInstance(it)
             addFragmentWithEffect(fragment)
             fragment.setOnAddProductListener { listener?.invoke() }
+            (activity as MainActivity).showWhatsapp()
         }
 
         //###########################################FLOATINGSEARCH
@@ -148,6 +152,17 @@ class HomeFragment : BaseFragment() {
             reloadList()
         }
         //###########################################FLOATINGSEARCH
+
+        products.addOnScrollListener(object: RecyclerView.OnScrollListener(){
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (dy <= 0) {
+                    (activity as MainActivity).showWhatsapp()
+                } else {
+                    (activity as MainActivity).hideWhatsapp()
+                }
+            }
+        })
     }
 
     private fun onSearch(query: String){

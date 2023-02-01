@@ -22,13 +22,15 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 const val ITEMS_CART = "items_cart"
+const val DELIVERY_COST = "delivery_cost"
 class ShoppingAddressScheduleFragment : BaseCardFragment() {
 
     companion object{
-        fun newInstance(itemsCart: List<CartItemsModel>): ShoppingAddressScheduleFragment{
+        fun newInstance(itemsCart: List<CartItemsModel>, deliveryCost: Double): ShoppingAddressScheduleFragment{
             val fragment = ShoppingAddressScheduleFragment()
             val bundle = Bundle()
             bundle.putParcelableArrayList(ITEMS_CART, itemsCart as ArrayList<CartItemsModel>)
+            bundle.putDouble(DELIVERY_COST, deliveryCost)
             fragment.arguments = bundle
             return fragment
         }
@@ -116,7 +118,8 @@ class ShoppingAddressScheduleFragment : BaseCardFragment() {
                                                 it.product.price,
                                                 it.quantity))
         }
-        val request = OrderRequest(dateDeliverySelected, timeDeliverySelected, meetingPointTagSelected, meetingPointAddressSelected,  itemRequest)
+
+        val request = OrderRequest(getDate(), dateDeliverySelected, timeDeliverySelected, requireArguments().getDouble(DELIVERY_COST), meetingPointTagSelected, meetingPointAddressSelected,  itemRequest)
         viewModel.createOrder(applicationPreferences.getBearerToken()!!, request).observe(viewLifecycleOwner
         ) { response ->
             when (response) {
@@ -261,6 +264,34 @@ class ShoppingAddressScheduleFragment : BaseCardFragment() {
             }
             loadingDeliveryDay.visibility = View.GONE
         }
+    }
+
+    private fun getDate(): String{
+        val cal = Calendar.getInstance()
+        val weekDay = cal.get(Calendar.DAY_OF_WEEK)
+        var dayName = ""
+        when (weekDay) {
+            1 -> dayName = "Domingo"
+            2 -> dayName = "Lunes"
+            3 -> dayName = "Martes"
+            4 -> dayName = "Miércoles"
+            5 -> dayName = "Jueves"
+            6 -> dayName = "Viernes"
+            7 -> dayName = "Sábado"
+        }
+        val valueToSearchDay = cal.get(Calendar.DAY_OF_MONTH)
+        val valueToSearchMonth = cal.get(Calendar.MONTH) + 1
+        val valueToSearchYear = cal.get(Calendar.YEAR)
+        dayName = if(valueToSearchDay < 10 && valueToSearchMonth < 10)
+            "$dayName 0$valueToSearchDay/0$valueToSearchMonth/$valueToSearchYear"
+        else if(valueToSearchDay < 10)
+            "$dayName 0$valueToSearchDay/$valueToSearchMonth/$valueToSearchYear"
+        else if(valueToSearchMonth < 10)
+            "$dayName $valueToSearchDay/0$valueToSearchMonth/$valueToSearchYear"
+        else
+            "$dayName $valueToSearchDay/$valueToSearchMonth/$valueToSearchYear"
+
+        return dayName
     }
 
     private fun addressSelected(address: AddressModel){

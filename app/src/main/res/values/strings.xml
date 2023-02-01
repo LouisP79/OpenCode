@@ -14,7 +14,9 @@
 
     <string name="search_hint">Search a product…</string>
     <string name="add">Add</string>
-    <string name="subtotal_label">SUBTOTAL:</string>
+    <string name="subtotal_label">Sub-Total:</string>
+    <string name="delivery_label">Delivery:</string>
+    <string name="total_label">Total:</string>
 
     <string name="alredy">OK</string>
     <string name="ok">OK</string>
@@ -48,6 +50,7 @@
     <string name="phone">Mobile</string>
     <string name="delivery_time">Delivery time</string>
     <string name="order_number">Order Nº %d received</string>
+    <string name="product_number">%d Product(s)</string>
 
     <string name="delivery_day">Delivery day</string>
     <string name="address_selected">Address selected</string>
@@ -104,8 +107,11 @@
     <string name="empty_product_list">No products yet</string>
     <string name="empty_category_list">No categories yet</string>
     <string name="empty_shopping_list">Your shopping cart is empty</string>
+    <string name="empty_record_list">You have not orders yet</string>
     <string name="empty_shopping_list_sub_msg">Start adding products from the store and view them here</string>
+    <string name="empty_record_list_sub_msg">Start shopping and show your orders here</string>
     <string name="loading_products">Loading products…</string>
+    <string name="loading_records">Loading records…</string>
     <string name="loading_addresses">Loading addresses…</string>
     <string name="order_created_msg">We will notify you as soon as your order has been approved.</string>
     <string name="order_created_msg2">For any questions you can contact us through the Whatsapp icon</string>
@@ -115,6 +121,11 @@
     <string name="loading_delivery_time">Loading delivery time…</string>
     <string name="loading_delivery_day">Loading delivery day…</string>
     <string name="loading_categories">Loading categories…</string>
+
+    <string name="pending">Pending</string>
+    <string name="passed">Passed</string>
+    <string name="delivered">Delivered</string>
+    <string name="canceled">Canceled</string>
 
     <string name="str_register_validate_name">Enter your name</string>
     <string name="str_register_validate_tag">Enter a address tag</string>

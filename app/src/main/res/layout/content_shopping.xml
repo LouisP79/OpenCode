@@ -106,19 +106,69 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="100dp"
+                    android:gravity="end"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorTextSecondary"
                     android:text="@string/subtotal_label" />
 
                 <TextView
                     android:id="@+id/subTotal"
-                    android:layout_width="wrap_content"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
+                    android:gravity="start"
                     android:textColor="@color/colorText"
                     android:paddingStart="@dimen/item_product_text_margin_start_end"
                     android:paddingEnd="@dimen/item_product_text_margin_start_end"
                     tools:text="S/ 120.00" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:gravity="end"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorTextSecondary"
+                    android:text="@string/delivery_label" />
+
+                <TextView
+                    android:id="@+id/delivery"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorText"
+                    android:gravity="start"
+                    android:paddingStart="@dimen/item_product_text_margin_start_end"
+                    android:paddingEnd="@dimen/item_product_text_margin_start_end"
+                    tools:text="S/ 20.00" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:gravity="end"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorTextSecondary"
+                    android:text="@string/total_label" />
+
+                <TextView
+                    android:id="@+id/total"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorText"
+                    android:gravity="start"
+                    android:paddingStart="@dimen/item_product_text_margin_start_end"
+                    android:paddingEnd="@dimen/item_product_text_margin_start_end"
+                    tools:text="S/ 140.00" />
 
             </LinearLayout>
 
