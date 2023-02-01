@@ -15,6 +15,7 @@ import org.koin.android.ext.android.inject
 private val TAG = MyFirebaseMessagingService::class.java.simpleName
 private const val TOPIC = "quick_store"
 const val ACTION_KICK_USER = "com.quickstore.firebaseCloudMessaging.action.KICK_USER"
+const val ACTION_UPDATE_RECORD = "com.quickstore.firebaseCloudMessaging.action.UPDATE_RECORD"
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
 
@@ -40,6 +41,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         if(remoteMessage.data.containsKey("logout")){
             kickUser()
         }else if(remoteMessage.data.containsKey("title") && remoteMessage.data.containsKey("message")){
+            updateRecordList()
             showNotification(
                 this,
                 remoteMessage.data["title"]!!,
@@ -51,6 +53,12 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     private fun kickUser() {
         val broadcast = Intent()
         broadcast.action = ACTION_KICK_USER
+        sendBroadcast(broadcast)
+    }
+
+    private fun updateRecordList() {
+        val broadcast = Intent()
+        broadcast.action = ACTION_UPDATE_RECORD
         sendBroadcast(broadcast)
     }
 

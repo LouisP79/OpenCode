@@ -32,6 +32,9 @@ class OrderModel() : Parcelable {
     @field:JsonProperty
     var status: Int = 0
 
+    @field:JsonProperty("status_comment")
+    var statusComment: String? = null
+
     @field:JsonProperty("products")
     var details = listOf<OrderDetailModel>()
 
@@ -47,6 +50,7 @@ class OrderModel() : Parcelable {
         deliveryTag = parcel.readString()!!
         deliveryAddress = parcel.readString()!!
         status = parcel.readInt()
+        statusComment = parcel.readString()!!
         details = parcel.createTypedArrayList(OrderDetailModel)!!
         total = parcel.readDouble()
     }
@@ -60,6 +64,7 @@ class OrderModel() : Parcelable {
         parcel.writeString(deliveryTag)
         parcel.writeString(deliveryAddress)
         parcel.writeInt(status)
+        parcel.writeString(statusComment)
         parcel.writeTypedList(details)
         parcel.writeDouble(total)
     }
@@ -77,5 +82,6 @@ class OrderModel() : Parcelable {
             return arrayOfNulls(size)
         }
     }
+
 
 }

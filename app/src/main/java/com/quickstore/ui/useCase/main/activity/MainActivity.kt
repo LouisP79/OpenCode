@@ -6,6 +6,7 @@ import android.os.Bundle
 import com.quickstore.BuildConfig
 import com.quickstore.R
 import com.quickstore.firebaseCloudMessaging.ACTION_KICK_USER
+import com.quickstore.firebaseCloudMessaging.ACTION_UPDATE_RECORD
 import com.quickstore.ui.base.activity.BaseActivity
 import com.quickstore.ui.useCase.login.activity.LoginActivity
 import com.quickstore.ui.useCase.main.fragment.home.HomeFragment
@@ -68,6 +69,7 @@ class MainActivity : BaseActivity() {
         //registerBroadcast
         val filter = IntentFilter()
         filter.addAction(ACTION_KICK_USER)
+        filter.addAction(ACTION_UPDATE_RECORD)
         broadcast = BroadcastNotifierMain()
         registerReceiver(broadcast, filter)
     }
@@ -212,6 +214,8 @@ class MainActivity : BaseActivity() {
             if (ACTION_KICK_USER == intent.action) {
                 showToast(R.string.you_logued_other_device)
                 kickUser()
+            }else if (ACTION_UPDATE_RECORD == intent.action) {
+                recordFragment.resetRecordList()
             }
         }
     }

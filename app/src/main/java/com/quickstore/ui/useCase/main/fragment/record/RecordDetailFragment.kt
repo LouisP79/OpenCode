@@ -54,6 +54,11 @@ class RecordDetailFragment : BaseCardFragment() {
         delivery.text = getString(R.string.blank_coin,order.deliveryCost)
         total.text = getString(R.string.blank_coin,order.total)
 
+        if(!order.statusComment.isNullOrEmpty()){
+            comment.visibility = View.VISIBLE
+            comment.text = order.statusComment
+        }
+
         when(order.status){
             0->{
                 orderStatus.text = getString(R.string.pending)
