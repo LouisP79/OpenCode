@@ -231,7 +231,7 @@ class ShoppingAddressScheduleFragment : BaseCardFragment() {
                                 val valueToSearchYear = cal.get(Calendar.YEAR)
 
                                 for (sch in schedule) {
-                                    if (valueToSearch == sch.weekDayNumber) {
+                                    if (valueToSearch == sch.id) {
                                         if (sch.status == 1) {
                                             var dayName = ""
                                             when (valueToSearch) {

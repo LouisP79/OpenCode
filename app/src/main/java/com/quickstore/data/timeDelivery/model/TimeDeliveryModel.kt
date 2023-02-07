@@ -15,17 +15,22 @@ class TimeDeliveryModel() : Parcelable {
     @field:JsonProperty("time_delivery")
     var timeDelivery: String = ""
 
+    @field:JsonProperty("id_week_day_delivery")
+    var idWeekDayDelivery: Long = 0
+
     var isSelected: Boolean = false
 
     constructor(parcel: Parcel) : this() {
         id = parcel.readLong()
         timeDelivery = parcel.readString()!!
+        idWeekDayDelivery = parcel.readLong()
         isSelected = parcel.readByte() != 0.toByte()
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeLong(id)
         parcel.writeString(timeDelivery)
+        parcel.writeLong(idWeekDayDelivery)
         parcel.writeByte(if (isSelected) 1 else 0)
     }
 

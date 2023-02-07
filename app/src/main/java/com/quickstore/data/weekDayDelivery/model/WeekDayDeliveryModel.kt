@@ -12,9 +12,6 @@ class WeekDayDeliveryModel() : Parcelable {
     @field:JsonProperty
     var id: Int = 0
 
-    @field:JsonProperty("week_day_number")
-    var weekDayNumber: Int = 0
-
     @field:JsonProperty
     var status: Int = 0
 
@@ -22,14 +19,12 @@ class WeekDayDeliveryModel() : Parcelable {
 
     constructor(parcel: Parcel) : this() {
         id = parcel.readInt()
-        weekDayNumber = parcel.readInt()
         status = parcel.readInt()
         isSelected = parcel.readByte() != 0.toByte()
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(id)
-        parcel.writeInt(weekDayNumber)
         parcel.writeInt(status)
         parcel.writeByte(if (isSelected) 1 else 0)
     }
