@@ -3,6 +3,7 @@
 
     <string name="title_home">Home</string>
     <string name="title_categories">Categories</string>
+    <string name="title_login">Login</string>
     <string name="title_edit_profile">Edit Profile</string>
     <string name="title_shopping">Shopping</string>
     <string name="title_shopping_address">Delivery address</string>

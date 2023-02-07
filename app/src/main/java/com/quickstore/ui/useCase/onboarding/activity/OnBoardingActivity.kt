@@ -6,7 +6,7 @@ import android.view.View
 import androidx.viewpager.widget.ViewPager
 import com.quickstore.R
 import com.quickstore.ui.base.activity.BaseActivity
-import com.quickstore.ui.useCase.login.activity.LoginActivity
+import com.quickstore.ui.useCase.main.activity.MainActivity
 import com.quickstore.ui.useCase.onboarding.adapter.OnBoardingPagerAdapter
 import com.quickstore.ui.useCase.onboarding.viewModel.OnBoardingViewModel
 import kotlinx.android.synthetic.main.activity_onboarding.*
@@ -55,7 +55,7 @@ class OnBoardingActivity : BaseActivity() {
             viewPager.currentItem = currentPage
         else {
             applicationPreferences.onBoarding = true
-            startActivity(Intent(this, LoginActivity::class.java))
+            startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
     }

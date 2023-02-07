@@ -3,6 +3,7 @@ package com.quickstore.ui.useCase.main.activity
 import android.content.*
 import android.net.Uri
 import android.os.Bundle
+import android.view.View
 import com.quickstore.BuildConfig
 import com.quickstore.R
 import com.quickstore.firebaseCloudMessaging.ACTION_KICK_USER
@@ -61,17 +62,31 @@ class MainActivity : BaseActivity() {
         if(!applicationPreferences.onBoarding)
             kick(OnBoardingActivity::class.java)
         else if(applicationPreferences.token == null)
-            kick(LoginActivity::class.java)
+            singleSetup()
+        else{
+            setup()
 
-        setup()
+            //registerBroadcast
+            val filter = IntentFilter()
+            filter.addAction(ACTION_KICK_USER)
+            filter.addAction(ACTION_UPDATE_RECORD)
+            broadcast = BroadcastNotifierMain()
+            registerReceiver(broadcast, filter)
+        }
         addListener()
+    }
 
-        //registerBroadcast
-        val filter = IntentFilter()
-        filter.addAction(ACTION_KICK_USER)
-        filter.addAction(ACTION_UPDATE_RECORD)
-        broadcast = BroadcastNotifierMain()
-        registerReceiver(broadcast, filter)
+    private fun singleSetup() {
+        navView.visibility = View.GONE
+        homeFragment = HomeFragment.newInstance()
+
+        supportFragmentManager.beginTransaction()
+            .add(R.id.containerFragment, homeFragment)
+            .commit()
+
+        homeFragment.setOnAddProductListener {
+            shoppingFragment.resetShoppingList()
+        }
     }
 
     private fun addListener() {
@@ -114,6 +129,7 @@ class MainActivity : BaseActivity() {
                 else -> false
             }
         }
+        login.setOnClickListener { kick(LoginActivity::class.java) }
         whatsapp.setOnClickListener {
             val msj = getString(R.string.whatsapp_auto_msg)
             val numeroTel = BuildConfig.WHATSAPP_NUMBER
@@ -152,6 +168,8 @@ class MainActivity : BaseActivity() {
     }
 
     private fun setup() {
+        login.visibility = View.GONE
+        navView.visibility = View.VISIBLE
         homeFragment = HomeFragment.newInstance()
         shoppingFragment = ShoppingFragment.newInstance()
         recordFragment = RecordFragment.newInstance()
@@ -172,7 +190,7 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    private fun kick(clazz: Any) {
+    fun kick(clazz: Any) {
         startActivity(Intent(this, clazz as Class<*>))
         finish()
     }

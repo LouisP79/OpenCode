@@ -75,7 +75,7 @@ class CategoriesFragment : BaseCardFragment() {
 
     private fun restCategory() {
         if(page>1) loadingMoreCategories.visibility = View.VISIBLE
-        viewModel.getCategoryList(applicationPreferences.token!!.accessToken, page)
+        viewModel.getCategoryList(page)
             .observe(viewLifecycleOwner
             ) { response ->
                 when (response) {

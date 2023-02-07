@@ -24,12 +24,12 @@ import com.quickstore.util.repository.RepoRxResponse
 
 class MainViewModel constructor(private val mainRepository: MainRepository): ViewModel(){
 
-    fun getProductList(token: String, page: Int , searchQuery: String = "", categoryId: Long = 0L): LiveData<RepoResponse<Pageable<ProductModel>>>{
-        return mainRepository.getProductList(token, page, searchQuery, categoryId)
+    fun getProductList(page: Int , searchQuery: String = "", categoryId: Long = 0L): LiveData<RepoResponse<Pageable<ProductModel>>>{
+        return mainRepository.getProductList(page, searchQuery, categoryId)
     }
 
-    fun getCategoryList(token: String, page: Int): LiveData<RepoResponse<Pageable<CategoryModel>>>{
-        return mainRepository.getCategoryList(token, page)
+    fun getCategoryList(page: Int): LiveData<RepoResponse<Pageable<CategoryModel>>>{
+        return mainRepository.getCategoryList(page)
     }
 
     fun addCart(token: String, addCartRequest: AddCartRequest): LiveData<RepoResponse<Void>>{

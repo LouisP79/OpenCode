@@ -45,11 +45,11 @@ class MainRepository constructor(private val productWebServices: ProductWebServi
                                  private val timeDeliveryWebServices: TimeDeliveryWebServices, private val weekDayDeliveryWebServices: WeekDayDeliveryWebServices,
                                  private val orderWebServices: OrderWebServices, private val deliveryCostWebServices: DeliveryCostWebServices) {
 
-    fun getProductList(token: String, page: Int, searchQuery: String = "", categoryId: Long = 0L): LiveData<RepoResponse<Pageable<ProductModel>>>{
+    fun getProductList(page: Int, searchQuery: String = "", categoryId: Long = 0L): LiveData<RepoResponse<Pageable<ProductModel>>>{
         val data = MutableLiveData<RepoResponse<Pageable<ProductModel>>>()
 
         if(searchQuery.isNotEmpty() && categoryId != 0L){
-            productWebServices.productList(token,page, searchQuery, categoryId)
+            productWebServices.productList(page, searchQuery, categoryId)
                 .enqueue(object: Callback<Pageable<ProductModel>>{
                     override fun onResponse(call: Call<Pageable<ProductModel>>, response: Response<Pageable<ProductModel>>) {
                         data.value = RepoResponse.respond(response, null)
@@ -60,7 +60,7 @@ class MainRepository constructor(private val productWebServices: ProductWebServi
                     }
                 })
         }else if(searchQuery.isNotEmpty()){
-            productWebServices.productList(token, page, searchQuery)
+            productWebServices.productList(page, searchQuery)
                 .enqueue(object: Callback<Pageable<ProductModel>>{
                     override fun onResponse(call: Call<Pageable<ProductModel>>, response: Response<Pageable<ProductModel>>) {
                         data.value = RepoResponse.respond(response, null)
@@ -71,7 +71,7 @@ class MainRepository constructor(private val productWebServices: ProductWebServi
                     }
                 })
         }else if (categoryId != 0L){
-            productWebServices.productList(token, page, categoryId)
+            productWebServices.productList(page, categoryId)
                 .enqueue(object: Callback<Pageable<ProductModel>>{
                     override fun onResponse(call: Call<Pageable<ProductModel>>, response: Response<Pageable<ProductModel>>) {
                         data.value = RepoResponse.respond(response, null)
@@ -82,7 +82,7 @@ class MainRepository constructor(private val productWebServices: ProductWebServi
                     }
                 })
         }else{
-            productWebServices.productList(token, page)
+            productWebServices.productList(page)
                 .enqueue(object: Callback<Pageable<ProductModel>>{
                     override fun onResponse(call: Call<Pageable<ProductModel>>, response: Response<Pageable<ProductModel>>) {
                         data.value = RepoResponse.respond(response, null)
@@ -97,10 +97,10 @@ class MainRepository constructor(private val productWebServices: ProductWebServi
         return data
     }
 
-    fun getCategoryList(token: String, page: Int): LiveData<RepoResponse<Pageable<CategoryModel>>>{
+    fun getCategoryList(page: Int): LiveData<RepoResponse<Pageable<CategoryModel>>>{
         val data = MutableLiveData<RepoResponse<Pageable<CategoryModel>>>()
 
-        categoryWebServices.categoryList(token, page)
+        categoryWebServices.categoryList(page)
             .enqueue(object: Callback<Pageable<CategoryModel>>{
                 override fun onResponse(call: Call<Pageable<CategoryModel>>, response: Response<Pageable<CategoryModel>>) {
                     data.value = RepoResponse.respond(response, null)

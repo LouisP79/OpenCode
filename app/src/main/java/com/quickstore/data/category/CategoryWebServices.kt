@@ -13,8 +13,7 @@ const val SIZE = "size"
 interface CategoryWebServices {
 
     @GET(RestConstant.ENDPOINT_CATEGORY_LIST)
-    fun categoryList(@Header("Authorization") token:  String,
-                     @Query(PAGE) page: Int,
+    fun categoryList(@Query(PAGE) page: Int,
                      @Query(SIZE) size: Int = 20): Call<Pageable<CategoryModel>>
 
 }

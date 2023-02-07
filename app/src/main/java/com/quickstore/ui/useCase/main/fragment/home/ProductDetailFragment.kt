@@ -10,6 +10,8 @@ import com.quickstore.data.RestConstant
 import com.quickstore.data.cart.request.AddCartRequest
 import com.quickstore.data.product.model.ProductModel
 import com.quickstore.ui.base.fragment.BaseCardFragment
+import com.quickstore.ui.useCase.login.activity.LoginActivity
+import com.quickstore.ui.useCase.main.activity.MainActivity
 import com.quickstore.ui.useCase.main.viewModel.MainViewModel
 import com.quickstore.util.core.glide
 import kotlinx.android.synthetic.main.content_product_detail.*
@@ -64,7 +66,12 @@ class ProductDetailFragment : BaseCardFragment() {
     }
 
     private fun addListener() {
-        send2Cart.setOnClickListener { restAddCart() }
+        send2Cart.setOnClickListener {
+            if(applicationPreferences.token == null)
+                (activity as MainActivity).kick(LoginActivity::class.java)
+            else
+                restAddCart()
+        }
     }
 
     private fun restAddCart() {

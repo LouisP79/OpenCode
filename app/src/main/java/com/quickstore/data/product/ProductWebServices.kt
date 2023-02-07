@@ -16,25 +16,21 @@ const val CATEGORY = "category"
 interface ProductWebServices {
 
     @GET(RestConstant.ENDPOINT_PRODUCT_LIST)
-    fun productList(@Header("Authorization") token: String,
-                    @Query(PAGE) page: Int,
+    fun productList(@Query(PAGE) page: Int,
                     @Query(SIZE) size: Int = 20): Call<Pageable<ProductModel>>
 
     @GET(RestConstant.ENDPOINT_PRODUCT_LIST)
-    fun productList(@Header("Authorization") token: String,
-                    @Query(PAGE) page: Int,
+    fun productList(@Query(PAGE) page: Int,
                     @Query(SEARCH_QUERY,) searchQuery: String,
                     @Query(SIZE) size: Int = 20): Call<Pageable<ProductModel>>
 
     @GET(RestConstant.ENDPOINT_PRODUCT_LIST)
-    fun productList(@Header("Authorization") token: String,
-                    @Query(PAGE) page: Int,
+    fun productList(@Query(PAGE) page: Int,
                     @Query(CATEGORY) category: Long,
                     @Query(SIZE) size: Int = 20): Call<Pageable<ProductModel>>
 
     @GET(RestConstant.ENDPOINT_PRODUCT_LIST)
-    fun productList(@Header("Authorization") token: String,
-                    @Query(PAGE) page: Int,
+    fun productList(@Query(PAGE) page: Int,
                     @Query(SEARCH_QUERY) searchQuery: String,
                     @Query(CATEGORY) category: Long,
                     @Query(SIZE) size: Int = 20): Call<Pageable<ProductModel>>

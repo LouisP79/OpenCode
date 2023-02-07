@@ -1,7 +1,9 @@
 package com.quickstore.ui.useCase.main.fragment.home
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.get
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.arlib.floatingsearchview.FloatingSearchView.OnSearchListener
@@ -10,6 +12,7 @@ import com.quickstore.R
 import com.quickstore.data.Pageable
 import com.quickstore.data.product.model.ProductModel
 import com.quickstore.ui.base.fragment.BaseFragment
+import com.quickstore.ui.useCase.login.activity.LoginActivity
 import com.quickstore.ui.useCase.main.activity.MainActivity
 import com.quickstore.ui.useCase.main.adapter.ProductAdapter
 import com.quickstore.ui.useCase.main.model.SuggestionModel
@@ -18,6 +21,7 @@ import com.quickstore.util.listener.EndlessRecyclerViewScrollListener
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.emptyList
 import kotlinx.android.synthetic.main.fragment_home.swipeRefresh
+import kotlinx.android.synthetic.main.fragment_home.view.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.util.*
 
@@ -126,7 +130,8 @@ class HomeFragment : BaseFragment() {
         floatingSearch.setOnMenuItemClickListener {when(it.itemId){
             R.id.menu_categories -> addFragmentWithEffect(
                 categoriesFragment
-            )}}
+            )
+        }}
         floatingSearch.setOnQueryChangeListener{ _, newQuery ->
             if(newQuery.isEmpty()) {
                 floatingSearch.clearSuggestions()
@@ -192,7 +197,7 @@ class HomeFragment : BaseFragment() {
 
     private fun restProduct() {
         if(page>1) loadingMoreProducts.visibility = View.VISIBLE
-        viewModel.getProductList(applicationPreferences.token!!.accessToken, page, searchQuery, categoryId)
+        viewModel.getProductList(page, searchQuery, categoryId)
             .observe(viewLifecycleOwner
             ) { response ->
                 when (response) {
